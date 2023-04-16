@@ -20,11 +20,11 @@ class CardApplyEffectTest extends FunSuite{
   var Cprueba_clima4: ICard = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    Cprueba_mele = new CardUnity("pruebaM","cuerpo a cuerpo",
+    Cprueba_mele = new CardUnity("pruebaM","c",
       2,"No tiene")
-    Cprueba_distancia = new CardUnity("pruebaD","distancia",
+    Cprueba_distancia = new CardUnity("pruebaD","d",
       3, "Refuerzo moral")
-    Cprueba_asedio = new CardUnity("pruebaA","asedio",
+    Cprueba_asedio = new CardUnity("pruebaA","a",
       4, "Vinculo estrecho")
 
     Cprueba_clima1 = new CardWeather("clima1","Escarcha mordiente")
@@ -43,8 +43,8 @@ class CardApplyEffectTest extends FunSuite{
   }
 
   test("Se les puede aplicar el efecto: Vinculo estrecho si tienen el mismo nombre") {
-    val Cprueba_efecto = new CardUnity("pruebaA", "asedio",3)
-    val Cprueba_efecto2 = new CardUnity("pruebaB", "asedio",3)
+    val Cprueba_efecto = new CardUnity("pruebaA", "a",3)
+    val Cprueba_efecto2 = new CardUnity("pruebaB", "a",3)
     Cprueba_efecto.effectApply(Cprueba_asedio)
     Cprueba_efecto2.effectApply(Cprueba_asedio)
 

@@ -6,7 +6,7 @@ import gwent.ICard
 /** An abstract class representing a card
  *
  * @param name Name of the card
- * @param classification Clasiffition of the card
+ * @param classification Classification of the card
  * @param force Force of the card
  * @param effect Effect of the card
  *

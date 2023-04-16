@@ -6,6 +6,6 @@ trait ICard {
   def get_Force(): Int
   def get_Effect(): String
   def get_Classification(): String
-  def get_Requirement(): String
+  def get_effectCode(): String
   def effectApply(oCard: ICard): Unit
 }

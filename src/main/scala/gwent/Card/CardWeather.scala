@@ -18,27 +18,29 @@ import gwent.ICard
  * @see ICard, AbstractCard
  * @author Israel Rodriguez
  * @since 1.0
- * @version 1.1
+ * @version 1.2
  */
 class CardWeather(private val name: String,
                   private val effect: String) extends AbstractCard(name, "Clima", 0, effect) {
 
 
-  /** Returns the requirement needed to apply its effect
+  /** Returns the effect code which provide the information about how to apply its effect
    *
-   * Return "distancia" if its effect if "Niebla impenetrable", "cuerpo a cuerpo" if its
-   * "Escarcha mordiente", "asedio" if its "Lluvia torrencial" and "No tiene" if the effect
+   * The structure of the code if "requirement type-requirement to apply-how modify-how much modify"
+   *
+   * Return "cla-d-sf-1" if its effect if "Niebla impenetrable", "cla-c-sf-1" if its
+   * "Escarcha mordiente", "cla-s-sf-1" if its "Lluvia torrencial" and "all-rf"  if the effect
    * is other like "Clima despejado"
    */
-  override def get_Requirement(): String = {
+  override def get_effectCode(): String = {
     if (effect == "Niebla impenetrable") {
-      "distancia"
+      "cla-d-sf-1"
     } else if (effect == "Escarcha mordiente") {
-      "cuerpo a cuerpo"
+      "cla-c-sf-1"
     } else if (effect == "Lluvia torrencial") {
-      "asedio"
+      "cla-a-sf-1"
     } else {
-      "No tiene"
+      "all-rf"
     }
   }
 

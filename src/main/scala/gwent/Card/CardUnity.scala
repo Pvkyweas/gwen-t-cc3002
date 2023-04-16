@@ -6,7 +6,7 @@ import gwent.ICard
 /** A class representing a unity card
  *
  * @param name Name of the card
- * @param classification Classification of the card
+ * @param classification Classification of the card, a for meele, d for distance, a for siege
  * @param force Force of the card
  * @param effect Effect of the card, by default is "No tiene"
  * @constructor Create a new unity card with the specified name, classification, force and effect, by default
@@ -20,7 +20,7 @@ import gwent.ICard
  * @see ICard, AbstracCard
  * @author Israel Rodriguez
  * @since 1.0
- * @version 1.1
+ * @version 1.2
  */
 class CardUnity(private val name: String,
                 private val classification: String,
@@ -32,19 +32,21 @@ class CardUnity(private val name: String,
    */
   private var prev_force: Int = force
 
-  /** Return the requirement needed to apply an effect
+  /** Return the effect code which provide the information about how to apply its effect
    *
-   *  Return classification of the card if the effect is "Refuerzo moral"
-   *  or the name of the card if the effect is "Vinculo estrecho", if
+   * The structure of the code if "requirement type-requirement to apply-how modify-how much modify"
+   *
+   *  Return "cla-classification-addf-1" if the effect is "Refuerzo moral"
+   *  or "nam-name-mult-2" if the effect is "Vinculo estrecho", if
    *  the card have no effect then return "No tiene"
    *
    * @return the requirement which is classification, name or "No tiene"
    */
-  override def get_Requirement(): String = {
+  override def get_effectCode(): String = {
    if (effect == "Refuerzo moral"){
-     classification
+     s"cla-${classification}-addf-1"
    } else if (effect == "Vinculo estrecho"){
-      name
+     s"nam-${name}-mult-2"
     } else {
      "No tiene"
    }
@@ -59,24 +61,30 @@ class CardUnity(private val name: String,
    *
    */
   override def effectApply(oCard: ICard): Unit = {
+    if (oCard.get_Effect() != "No tiene") {
+      if (oCard.get_Classification() == "Clima"){
+        effectWeather(oCard)
+      }
+      else {
+        effectUnity(oCard)
+      }
+    }
 
   }
 
   /** Apply an unity effect if the requirement is satisfied
    *
-   * @param effect Effect to apply
-   * @param requirement Requirement to satisfy
+   * @param oCard Card with a effect to apply
    */
-  def effectUnity(effect: String, requirement: String): Unit = {
+  def effectUnity(oCard: ICard): Unit = {
 
   }
 
   /** Apply an weather effect if the requirement is satisfied
    *
-   * @param effect Effect to apply
-   * @param requirement Requirement to satisfy
+   * @param oCard Card with a effect to apply
    */
-  def effectWeather(effect: String, requirement: String): Unit = {
+  def effectWeather(oCard: ICard): Unit = {
 
   }
 }

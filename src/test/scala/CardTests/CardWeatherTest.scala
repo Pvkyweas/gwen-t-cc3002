@@ -27,10 +27,10 @@ class CardWeatherTest extends FunSuite  {
     val Cprueba_clima3 = new CardWeather("clima3", "Lluvia Torrencial")
     val Cprueba_clima4 = new CardWeather("clima4", "Clima despejado")
 
-    assertEquals(Cprueba_clima1.get_Requirement(),"cuerpo a cuerpo")
-    assertEquals(Cprueba_clima2.get_Requirement(),"distancia")
-    assertEquals(Cprueba_clima3.get_Requirement(),"asedio")
-    assertEquals(Cprueba_clima4.get_Requirement(),"No tiene")
+    assertEquals(Cprueba_clima1.get_effectCode(),"cla-c-sf-1")
+    assertEquals(Cprueba_clima2.get_effectCode(),"cla-d-sf-1")
+    assertEquals(Cprueba_clima3.get_effectCode(),"cla-a-sf-1")
+    assertEquals(Cprueba_clima4.get_effectCode(),"all-rf")
   }
 
   test("La clasificacion de una carta clima es Clima"){

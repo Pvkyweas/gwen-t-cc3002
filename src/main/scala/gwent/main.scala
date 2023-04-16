@@ -1,7 +1,11 @@
 package cl.uchile.dcc
 package gwent
 
-@main
-def main(): Unit = {
 
+object main{
+  def main(args: Array[String]): Unit = {
+
+  }
 }
+
+
