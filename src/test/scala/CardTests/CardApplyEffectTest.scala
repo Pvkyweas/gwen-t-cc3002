@@ -29,15 +29,15 @@ class CardApplyEffectTest extends FunSuite{
 
     Cprueba_clima1 = new CardWeather("clima1","Escarcha mordiente")
     Cprueba_clima2 = new CardWeather("clima2","Niebla impenetrable")
-    Cprueba_clima3 = new CardWeather("clima3","Lluvia Torrencial")
+    Cprueba_clima3 = new CardWeather("clima3","Lluvia torrencial")
     Cprueba_clima4 = new CardWeather("clima4","Clima despejado")
   }
 
   test("Se les puede aplicar el efecto: Refuerzo moral si son de la misma fila") {
-    val Cprueba_efecto = new CardUnity("prueba","distancia",2)
+    val Cprueba_efecto = new CardUnity("prueba","d",2)
     Cprueba_efecto.effectApply(Cprueba_distancia)
     Cprueba_mele.effectApply(Cprueba_distancia)
-
+    
     assertEquals(Cprueba_efecto.get_Force(), 3)
     assertEquals(Cprueba_mele.get_Force(), 2)
   }

@@ -22,8 +22,7 @@ import gwent.ICard
  */
 class CardWeather(private val name: String,
                   private val effect: String) extends AbstractCard(name, "Clima", 0, effect) {
-
-
+  
   /** Returns the effect code which provide the information about how to apply its effect
    *
    * The structure of the code if "requirement type-requirement to apply-how modify-how much modify"

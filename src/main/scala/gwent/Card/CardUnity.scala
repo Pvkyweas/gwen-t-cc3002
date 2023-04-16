@@ -28,9 +28,12 @@ class CardUnity(private val name: String,
                 private val effect: String = "No tiene") extends AbstractCard(name, classification, force, effect) {
 
   /**
-   *  The force before an effect is applied
+   *  The force before a weather effect is applied
    */
   private var prev_force: Int = force
+
+  /* Returns the force of the card */
+  override def get_Force(): Int = force
 
   /** Return the effect code which provide the information about how to apply its effect
    *
@@ -52,39 +55,55 @@ class CardUnity(private val name: String,
    }
   }
 
-  /** Apply an effect, climatic effect or unity effect
+  /** Apply an effect according to its effect code if the requirement is satisfied
    *
-   * Check if the card has an effect, if it has one, check is it's an unity effect or
-   * climatic effect and use the appropriate method
+   * First, check the requirement type and if is satisfied, if it does, check
+   * how it will be modified and apply the modification.
    *
-   * @param oCard card with the effect to apply
+   * If the modification isn't a weather effect and affect force, save
+   * the actual value of force in prev_force. And, if the weather card is exchanged for another,
+   * then change force's value to the previous one.
    *
+   * @param oCard Card with a effect to apply
    */
   override def effectApply(oCard: ICard): Unit = {
-    if (oCard.get_Effect() != "No tiene") {
-      if (oCard.get_Classification() == "Clima"){
-        effectWeather(oCard)
+    val effect_code = oCard.get_effectCode().split("-")
+    //requirement type-requirement to apply-how modify-how much modify
+
+    // classification requirement
+    if (effect_code(0) == "cla" && effect_code(1).contains(classification)){
+      // addition effect
+      if (effect_code(2) == "addf"){
+        force = force + effect_code(3).toInt
       }
-      else {
-        effectUnity(oCard)
+      // set effect
+      else if (effect_code(2) == "sf") {
+        force = effect_code(3).toInt
+      }
+    }
+    // name requirement
+    else if (effect_code(0) == "nam" && effect_code(1) == name){
+      // multiplication effect
+      if (effect_code(2) == "mult"){
+        force = force * effect_code(3).toInt
+      }
+    }
+    // affect all
+    else if (effect_code(0) == "all") {
+      // reset effect
+      if (effect_code(1) == "rf") {
+        force = prev_force
       }
     }
 
-  }
-
-  /** Apply an unity effect if the requirement is satisfied
-   *
-   * @param oCard Card with a effect to apply
-   */
-  def effectUnity(oCard: ICard): Unit = {
-
-  }
-
-  /** Apply an weather effect if the requirement is satisfied
-   *
-   * @param oCard Card with a effect to apply
-   */
-  def effectWeather(oCard: ICard): Unit = {
+    // when the effect applied is not by a weather card, save the new value of force in prev_force
+    if (oCard.get_Classification() != "Clima") {
+      prev_force = force
+    }
+    // when the weather class is changed the following happens
+    else if (oCard.get_Classification() == "Clima" && !effect_code(1).contains(classification)){
+      force = prev_force
+    }
 
   }
 }

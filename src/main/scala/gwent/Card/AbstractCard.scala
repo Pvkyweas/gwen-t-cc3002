@@ -19,6 +19,7 @@ abstract class AbstractCard(private val name: String,
                             private val classification: String,
                             private var force: Int,
                             private val effect: String) extends ICard{
+  
 
   /* Returns the name of the card */
   def get_Name(): String = name
