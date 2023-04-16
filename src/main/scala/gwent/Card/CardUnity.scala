@@ -1,5 +1,7 @@
 package cl.uchile.dcc
-package gwent
+package gwent.Card
+
+import gwent.ICard
 
 /** A class representing a unity card
  *
@@ -7,57 +9,28 @@ package gwent
  * @param classification Classification of the card
  * @param force Force of the card
  * @param effect Effect of the card, by default is "No tiene"
- *
  * @constructor Create a new unity card with the specified name, classification, force and effect, by default
  *              effect is "No tiene"
- *
  * @example
  * {{{
  *   val unityCard = new CardUnity("example", "exampleType", 2, "exampleEffect")
  *   val nameC = unityCard.get_Name()
  *   println(s" The name of the card is $nameC")
  * }}}
- *
- * @see ICard
- *
+ * @see ICard, AbstracCard
  * @author Israel Rodriguez
  * @since 1.0
- * @version 1.0
+ * @version 1.1
  */
 class CardUnity(private val name: String,
                 private val classification: String,
                 private var force: Int,
-                private val effect: String = "No tiene") extends ICard {
+                private val effect: String = "No tiene") extends AbstractCard(name, classification, force, effect) {
 
   /**
    *  The force before an effect is applied
-   *
    */
   private var prev_force: Int = force
-
-  /** Returns the name of the card
-   *
-   * @return name of the card
-   */
-  def get_Name(): String = name
-
-  /** Returns the force of the card
-   *
-   * @return force of the card
-   */
-  def get_Force(): Int = force
-
-  /** Return the classification of the card
-   *
-   * @return classification of the card
-   */
-  def get_Classification(): String = classification
-
-  /** Return the effect of the card
-   *
-   * @return effect of the card
-   */
-  def get_Effect(): String = effect
 
   /** Return the requirement needed to apply an effect
    *
@@ -67,7 +40,7 @@ class CardUnity(private val name: String,
    *
    * @return the requirement which is classification, name or "No tiene"
    */
-  def get_Requirement(): String = {
+  override def get_Requirement(): String = {
    if (effect == "Refuerzo moral"){
      classification
    } else if (effect == "Vinculo estrecho"){
@@ -79,13 +52,13 @@ class CardUnity(private val name: String,
 
   /** Apply an effect, climatic effect or unity effect
    *
-   * Depending on the effect, check if it satisfy the requirement then if it is satisfied
-   * apply the effect
+   * Check if the card has an effect, if it has one, check is it's an unity effect or
+   * climatic effect and use the appropriate method
    *
-   * @param effect Effect to apply
-   * @param requirement Requirement of the effect
+   * @param oCard card with the effect to apply
+   *
    */
-  def effectApply(effect: String, requirement: String): Unit = {
+  override def effectApply(oCard: ICard): Unit = {
 
   }
 

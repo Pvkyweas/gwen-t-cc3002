@@ -7,5 +7,5 @@ trait ICard {
   def get_Effect(): String
   def get_Classification(): String
   def get_Requirement(): String
-  def effectApply(effect: String, requirement: String): Unit
+  def effectApply(oCard: ICard): Unit
 }
