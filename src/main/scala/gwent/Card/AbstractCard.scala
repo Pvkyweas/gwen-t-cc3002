@@ -27,6 +27,12 @@ abstract class AbstractCard(private val name: String,
   /* Returns the force of the card */
   def get_Force(): Int = force
 
+  /** Set the value force to a new one
+   *
+   * @param newForce the new value of force
+   */
+  def set_Force(newForce: Int): Unit = {force = newForce}
+
   /* Return the effect of the card */
   def get_Effect(): String = effect
 

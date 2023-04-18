@@ -33,7 +33,7 @@ class CardUnityTest extends FunSuite {
 
   test("Deberia poder obtenerse el requisito correcto según el efecto") {
     assertEquals(carta_prueba.get_effectCode(), "cla-tipoPrueba-addf-1") // Para refuerzo moral es la clasificacion
-    assertEquals(carta_prueba2.get_effectCode(), "nam-Prueba2-mult-2") // Para vinculo estrecho es el nombre
+    assertEquals(carta_prueba2.get_effectCode(), "nam-Prueba2-multf-2") // Para vinculo estrecho es el nombre
   }
 
 }

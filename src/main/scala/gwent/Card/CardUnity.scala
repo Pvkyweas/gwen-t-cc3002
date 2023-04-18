@@ -32,15 +32,12 @@ class CardUnity(private val name: String,
    */
   private var prev_force: Int = force
 
-  /* Returns the force of the card */
-  override def get_Force(): Int = force
-
   /** Return the effect code which provide the information about how to apply its effect
    *
    * The structure of the code if "requirement type-requirement to apply-how modify-how much modify"
    *
    *  Return "cla-classification-addf-1" if the effect is "Refuerzo moral"
-   *  or "nam-name-mult-2" if the effect is "Vinculo estrecho", if
+   *  or "nam-name-multf-2" if the effect is "Vinculo estrecho", if
    *  the card have no effect then return "No tiene"
    *
    * @return the requirement which is classification, name or "No tiene"
@@ -49,7 +46,7 @@ class CardUnity(private val name: String,
    if (effect == "Refuerzo moral"){
      s"cla-${classification}-addf-1"
    } else if (effect == "Vinculo estrecho"){
-     s"nam-${name}-mult-2"
+     s"nam-${name}-multf-2"
     } else {
      "No tiene"
    }
@@ -74,25 +71,25 @@ class CardUnity(private val name: String,
     if (effect_code(0) == "cla" && effect_code(1).contains(classification)){
       // addition effect
       if (effect_code(2) == "addf"){
-        force = force + effect_code(3).toInt
+        set_Force(force + effect_code(3).toInt)
       }
       // set effect
       else if (effect_code(2) == "sf") {
-        force = effect_code(3).toInt
+        set_Force(effect_code(3).toInt)
       }
     }
     // name requirement
     else if (effect_code(0) == "nam" && effect_code(1) == name){
       // multiplication effect
-      if (effect_code(2) == "mult"){
-        force = force * effect_code(3).toInt
+      if (effect_code(2) == "multf"){
+        set_Force(force * effect_code(3).toInt)
       }
     }
     // affect all
     else if (effect_code(0) == "all") {
       // reset effect
       if (effect_code(1) == "rf") {
-        force = prev_force
+        set_Force(prev_force)
       }
     }
 
@@ -102,7 +99,7 @@ class CardUnity(private val name: String,
     }
     // when the weather class is changed the following happens
     else if (oCard.get_Classification() == "Clima" && !effect_code(1).contains(classification)){
-      force = prev_force
+      set_Force(prev_force)
     }
 
   }
