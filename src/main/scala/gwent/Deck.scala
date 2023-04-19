@@ -19,7 +19,7 @@ import scala.None
  *
  * @author Israel Rodriguez
  * @since 1.0
- * @version 1.0
+ * @version 1.1
  */
 class Deck extends IDeck{
   private var cards: List[ICard] = List.empty[ICard]
@@ -56,23 +56,31 @@ class Deck extends IDeck{
       None
     }
     else {
-      var firstCard: ICard = cards.head
-      var rest: List[ICard] = cards.tail
+      val firstCard: ICard = cards.head
+      val rest: List[ICard] = cards.tail
       cards = rest
       Some(firstCard)
     }
   }
 
-  /** Draw a card from a the list of cards by it's position
+  /** Draw a card from a the list of cards by its position
    *
    * @param pos The position of the desired card
    * @return An Option of an ICard object
    */
   def draw_Card(pos: Int): Option[ICard] = {
-    Some(cards(pos))
+    if (pos < 0 || pos > cards.size || cards.isEmpty){
+      None
+    }
+    else{
+      val newCard: ICard = cards(pos)
+      val rest: List[ICard] = cards.patch(pos, Nil, 1)
+      cards = rest
+      Some(newCard)
+    }
   }
 
-  /** Shuffle the list of cards changing it's positions
+  /** Shuffle the list of cards changing its positions
    *
    *  Randomly change the order of the cards
    *

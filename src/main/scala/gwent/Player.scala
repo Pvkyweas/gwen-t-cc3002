@@ -45,7 +45,7 @@ class Player(private val name: String,
   def drawCard(num_cards: Int): Unit = {}
 
   /** subtract 1 from the gem counter */
-  def lostRound(): Unit = gem_counter = gem_counter - 1
+  def lostRound(): Unit = {gem_counter = gem_counter - 1}
 
   /** Randomly change the order of the cards in deck */
   def shuffle(): Unit = deck_cards.shuffle()

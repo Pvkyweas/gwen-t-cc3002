@@ -71,9 +71,9 @@ class DeckTest extends FunSuite {
     assertEquals(Mazo_prueba2.get_Size(),2)
   }
 
-  test("No puede jugar una carta de una posicion que no existe") {
-    Mazo_prueba2.draw_Card(-1) // Deberia caerse
-    Mazo_prueba2.draw_Card(10) // Deberia caerse
+  test("No puede jugar una carta de una posicion que no existe, por lo que retornaria None") {
+    assertEquals(Mazo_prueba2.draw_Card(-1), None)
+    assertEquals(Mazo_prueba2.draw_Card(10), None)
   }
 
   test("Un mazo deberia poder barajarse"){
