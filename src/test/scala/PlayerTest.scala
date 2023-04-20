@@ -1,7 +1,8 @@
 package cl.uchile.dcc
 package gwent
 
-import cl.uchile.dcc.gwent.Card.{CardUnity, CardWeather}
+import gwent.Card.{CardUnity, CardWeather}
+import gwent.Deck.{Deck, HandDeck}
 import munit.FunSuite
 
 
@@ -10,7 +11,7 @@ class PlayerTest extends FunSuite {
   var jugador_porDefecto: IPlayer = _
 
   // Mazo
-  var Mazo_prueba: IDeck = _
+  var Mazo_prueba: Deck = _
   var Carta_prueba: ICard = _
   var Carta_prueba2: ICard = _
   var Carta_prueba3: ICard = _
@@ -25,7 +26,7 @@ class PlayerTest extends FunSuite {
     Lista_cartasPrueba = List(Carta_prueba, Carta_prueba2, Carta_prueba3,Carta_pruebaClima)
     Mazo_prueba = new Deck(Lista_cartasPrueba)
 
-    jugador_porDefecto = new Player(name = "jugador", section_board = "abajo", deck_cards = Mazo_prueba, hand_cards = Deck())
+    jugador_porDefecto = new Player(name = "jugador", section_board = "abajo", deck_cards = Mazo_prueba, hand_cards = new HandDeck())
   }
 
   test("Un jugador debe tener un nombre"){
@@ -60,18 +61,22 @@ class PlayerTest extends FunSuite {
   }
 
   test("No puede robar más cartas de las que hay en el mazo") {
-    jugador_porDefecto.drawCard(5) // Deberia caerse
+    jugador_porDefecto.drawCard(5)
+    assertEquals(jugador_porDefecto.numCards_hand(), 4)
   }
 
   test("No puede robar cantidades negativas") {
-    jugador_porDefecto.drawCard(-1) // Deberia caerse
+    jugador_porDefecto.drawCard(-1)
+    assertEquals(jugador_porDefecto.numCards_hand(),0)
   }
   
   test("Puede jugar una carta que tenga en la mano") {
     jugador_porDefecto.drawCard(3)
     assertEquals(jugador_porDefecto.numCards_hand(),3)
-    val carta_jugada: ICard = jugador_porDefecto.playCard(2)
-    // Por como se agregan las cartas, el orden es Carta_prueba3, Carta_prueba2, Carta_prueba y Carta_pruebaClima
+    val carta_jugada: ICard = jugador_porDefecto.playCard(0)
+    // Del mazo se agregan en el orden de Carta_prueba1, ... , Carta_pruebaClima
+    // Luego salen en el orden Carta_pruebaClima, Carta_prueba3, Carta_prueba2
+    // y se agregan en el mismo orden a la mano
     assertEquals(carta_jugada, Carta_pruebaClima)
     assertEquals(jugador_porDefecto.numCards_hand(),2)
   }

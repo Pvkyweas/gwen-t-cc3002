@@ -1,12 +1,16 @@
 package cl.uchile.dcc
-package gwent
 
-import cl.uchile.dcc.gwent.Card.{CardUnity, CardWeather}
+import gwent.Card.{CardUnity, CardWeather}
+import gwent.Deck.Deck
+import gwent.{ICard, IDeck}
+
 import munit.FunSuite
+
+import scala.collection.mutable.ListBuffer
 
 class DeckTest extends FunSuite {
   var Mazo_prueba1: IDeck = _
-  var Mazo_prueba2: IDeck = _
+  var Mazo_prueba2: Deck = _
   var Carta_prueba: ICard = _
   var Carta_prueba2: ICard = _
   var Carta_prueba3: ICard = _
@@ -64,18 +68,6 @@ class DeckTest extends FunSuite {
 
   }
 
-  test("Se puede robar una carta por la posición de esta") {
-    val carta_robada = Mazo_prueba2.draw_Card(2).get
-    // Por como se agregan las cartas, el orden es Carta_prueba3, Carta_prueba2 y Carta_prueba
-    assertEquals(carta_robada,Carta_prueba)
-    assertEquals(Mazo_prueba2.get_Size(),2)
-  }
-
-  test("No puede jugar una carta de una posicion que no existe, por lo que retornaria None") {
-    assertEquals(Mazo_prueba2.draw_Card(-1), None)
-    assertEquals(Mazo_prueba2.draw_Card(10), None)
-  }
-
   test("Un mazo deberia poder barajarse"){
     val Mazo_prueba2 = new Deck(Lista_cartasPrueba)
     val Mazo_prueba3 = new Deck(Lista_cartasPrueba)
@@ -85,6 +77,24 @@ class DeckTest extends FunSuite {
       Mazo_prueba2.draw_Card() != Mazo_prueba3.draw_Card())
 
     assert(comparacion.contains(false))
+  }
+
+  test("Deberia poder robarse más de una carta de un mazo") {
+    val newList: ListBuffer[Option[ICard]] = Mazo_prueba2.draw_multipleCard(2)
+    val expectedList: ListBuffer[Option[ICard]] = ListBuffer(Some(Carta_prueba3), Some(Carta_prueba2))
+    assertEquals(newList, expectedList)
+  }
+
+  test("Si le ingresa un numero negativo a draw_multipleCard entonces retorna una lista con None") {
+    val newList: ListBuffer[Option[ICard]] = Mazo_prueba2.draw_multipleCard(-1)
+    val expectedList: ListBuffer[Option[ICard]] = ListBuffer(None)
+    assertEquals(newList, expectedList)
+  }
+
+  test("Si le ingresa un numero mayor a la cantidad de cartas que tiene, simplemente robara las que haya") {
+    val newList: ListBuffer[Option[ICard]] = Mazo_prueba2.draw_multipleCard(5)
+    val expectedList: ListBuffer[Option[ICard]] = ListBuffer(Some(Carta_prueba3), Some(Carta_prueba2),Some(Carta_prueba))
+    assertEquals(newList, expectedList)
   }
 
 }
