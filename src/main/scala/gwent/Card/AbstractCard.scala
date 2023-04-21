@@ -39,4 +39,13 @@ abstract class AbstractCard(private val name: String,
   /* Return the classification of the card*/
   def get_Classification(): String = classification
 
+  override def equals(obj: Any): Boolean = {
+    if (this.getClass.getName == obj.getClass.getName){
+      val oCard = obj.asInstanceOf[AbstractCard]
+      (this.name == oCard.name && this.force == oCard.force && this.effect == oCard.effect && this.classification == oCard.classification)
+    }
+    else {
+      false
+    }
+  }
 }

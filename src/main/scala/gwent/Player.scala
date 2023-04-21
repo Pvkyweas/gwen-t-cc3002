@@ -33,7 +33,7 @@ class Player(private val name: String,
    * @param pos_card position of the desired card
    * @return an ICard object
    */
-  def playCard(pos_card: Int): ICard = {hand_cards.draw_Card(pos_card).get}
+  def playCard(pos_card: Int): Option[ICard] = {hand_cards.draw_Card(pos_card)}
 
   /** Draw a number of cards from the deck
    *
@@ -62,4 +62,16 @@ class Player(private val name: String,
 
   /** Return the section board of the player */
   def get_Section(): String = section_board
+
+  override def equals(obj: Any): Boolean = {
+    if (this.getClass.getName == obj.getClass.getName) {
+      val oPlayer = obj.asInstanceOf[Player]
+      val equals_params: Boolean = oPlayer.get_Name() == this.get_Name() && oPlayer.get_Section() == this.get_Section() && this.get_gemCounter() == oPlayer.get_gemCounter()
+      val equals_decks: Boolean = this.deck_cards.equals(oPlayer.deck_cards) && this.hand_cards.equals(oPlayer.hand_cards)
+      equals_params && equals_decks
+    }
+    else {
+      false
+    }
+  }
 }

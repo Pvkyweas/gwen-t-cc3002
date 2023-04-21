@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 package gwent.Deck
 
-import gwent.{ICard, IDeck}
+import gwent.ICard
 
 import scala.None
 import scala.collection.mutable
@@ -26,7 +26,7 @@ import scala.util.Random
  * @since 1.0
  * @version 1.1
  */
-class Deck extends IDeck{
+class Deck extends AbstractDeck{
   /* The stack in which the cards will be stored*/
   private val cards: mutable.Stack[ICard] = mutable.Stack()
 
@@ -34,7 +34,7 @@ class Deck extends IDeck{
    *
    * @param List_cards The list of cards
    */
-  def this(List_cards: List[ICard]) = {
+  def this(List_cards: ListBuffer[ICard]) = {
     this()
     for(c <- List_cards) {addCard(c)}
   }
@@ -67,7 +67,7 @@ class Deck extends IDeck{
   }
 
   /** Shuffle the stack of cards changing its positions */
-  override def shuffle(): Unit = {
+  def shuffle(): Unit = {
     Random.shuffle(cards)
   }
 
@@ -100,16 +100,21 @@ class Deck extends IDeck{
       resultList
     }
     else if(!this.isEmpty && numC>0) {
-      for (i <- 1 to this.get_Size()) {
-        val newCard: Option[ICard] = this.draw_Card()
-        resultList += newCard
-      }
-      resultList
+      draw_multipleCard(this.get_Size())
     }
     else {
       val newCard: Option[ICard] = None
       resultList += newCard
       resultList
+    }
+  }
+
+  override def equals(obj: Any): Boolean = {
+    if (this.getClass.getName == obj.getClass.getName) {
+      super.equals(obj)
+    }
+    else {
+      false
     }
   }
 }

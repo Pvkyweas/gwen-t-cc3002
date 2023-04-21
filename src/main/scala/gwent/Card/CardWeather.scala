@@ -44,5 +44,14 @@ class CardWeather(private val name: String,
   }
 
   /** Do nothing because can't apply an effect on a weather card */
-  override def effectApply(ICard: ICard): Unit = {}
+  override def effectApply(ICard: ICard): Unit = {println("Does nothing")}
+
+  override def equals(obj: Any): Boolean = {
+    if (this.getClass.getName == obj.getClass.getName) {
+      super.equals(obj)
+    }
+    else {
+      false
+    }
+  }
 }

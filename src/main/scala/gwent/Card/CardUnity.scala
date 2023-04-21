@@ -103,4 +103,13 @@ class CardUnity(private val name: String,
     }
 
   }
+
+  override def equals(obj: Any): Boolean = {
+    if (this.getClass.getName == obj.getClass.getName) {
+      super.equals(obj)
+    }
+    else {
+      false
+    }
+  }
 }

@@ -2,27 +2,27 @@ package cl.uchile.dcc
 
 import gwent.Card.{CardUnity, CardWeather}
 import gwent.Deck.Deck
-import gwent.{ICard, IDeck}
+import gwent.ICard
 
 import munit.FunSuite
 
 import scala.collection.mutable.ListBuffer
 
 class DeckTest extends FunSuite {
-  var Mazo_prueba1: IDeck = _
+  var Mazo_prueba1: Deck = _
   var Mazo_prueba2: Deck = _
   var Carta_prueba: ICard = _
   var Carta_prueba2: ICard = _
   var Carta_prueba3: ICard = _
   var Carta_pruebaClima: ICard = _
-  var Lista_cartasPrueba: List[ICard]= _
+  var Lista_cartasPrueba: ListBuffer[ICard]= _
 
   override def beforeEach(context: BeforeEach): Unit = {
     Mazo_prueba1 = new Deck()
     Carta_prueba = new CardUnity("Prueba","tipoPrueba",1, "no tiene")
     Carta_prueba2 = new CardUnity("Prueba2","tipoPrueba",2, "no tiene")
     Carta_prueba3 = new CardUnity("Prueba3","tipoPrueba",3, "no tiene")
-    Lista_cartasPrueba = List(Carta_prueba, Carta_prueba2, Carta_prueba3)
+    Lista_cartasPrueba = ListBuffer(Carta_prueba, Carta_prueba2, Carta_prueba3)
     Mazo_prueba2 = new Deck(Lista_cartasPrueba)
     Carta_pruebaClima = new CardWeather("Prueba Clima", "efecto Prueba")
   }

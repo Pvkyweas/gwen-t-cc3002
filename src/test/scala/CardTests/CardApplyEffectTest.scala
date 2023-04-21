@@ -33,6 +33,20 @@ class CardApplyEffectTest extends FunSuite{
     Cprueba_clima4 = new CardWeather("clima4","Clima despejado")
   }
 
+  test("Si se le aplica un efecto a una carta de clima ocurre nada"){
+    assertEquals(Cprueba_clima1.get_Force(), 0)
+    Cprueba_clima1.effectApply(Cprueba_clima4)
+    assertEquals(Cprueba_clima1.get_Force(), 0)
+  }
+
+  test("Si se trata de aplicar el efecto de una carta que no tiene, ocurre nada"){
+    val Cprueba_mele2 = new CardUnity("pruebaM", "c",
+      2)
+    assertEquals(Cprueba_mele2.get_Force(), 2)
+    Cprueba_mele2.effectApply(Cprueba_mele)
+    assertEquals(Cprueba_mele2.get_Force(), 2)
+  }
+
   test("Se les puede aplicar el efecto: Refuerzo moral si son de la misma fila") {
     val Cprueba_efecto = new CardUnity("prueba","d",2)
     Cprueba_efecto.effectApply(Cprueba_distancia)
