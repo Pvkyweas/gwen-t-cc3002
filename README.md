@@ -58,3 +58,13 @@ if (effect_code(0) == "cla" && effect_code(1).contains(classification))
 Es por la misma idea de escalabilidad, ya que si quisiese añadir un efecto con un requisito que afecte a 2 tipos de clasificaciones, solo tendria que poner ambas codificaciones, por ejemplo, si quiero afectar tanto a distancia como asedio, el requisito seria "dc".
 
 pd: perdón por el mucho texto, pero queria que quedara lo más claro posible unu, espero haberlo logrado.
+
+### Implementación Mazos
+
+Decidi hacer clases distintas para representar mazos que contendran las cartas de las manos y las del mazo, esto debido a que presentan las siguientes diferencias:
+
+* En un mazo si importa el orden
+* En un mazo la carta que se saca es la primera a diferencia de la mano, en donde se puede sacar de cualquier posición
+* Tiene sentido barajar un mazo, pero no una mano (dado el tipo de juego)
+
+Para los mazos normales utilice un Stack y para la mano un ListBuffer ya que cumplen con el requerimiento del orden. Decidi no implementar una interface por que una clase abstracta se ajusta mejor a la situación ambas clases no tendrian exactamente los mismos metodos por lo que, al crear un objeto de tipo mazo, si los metodos que quiera utilizar no estan en la interface, no podria llamarlos (o almenos eso me pasaba) entonces, como de todas formas no iba a crear los objetos como un tipo "el nombre de la interface", la clase abstracta termina funcionando mejor.
