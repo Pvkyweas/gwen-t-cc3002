@@ -20,7 +20,7 @@ import scala.util.Random
  *   println(s"deck has $numCards")
  * }}}
  *
- * @see IDeck
+ * @see AbstractDeck
  *
  * @author Israel Rodriguez
  * @since 1.0

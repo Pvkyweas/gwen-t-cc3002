@@ -10,7 +10,7 @@ import scala.util.Random
  *
  * @constructor Create an empty hand deck
  *
- * @see IDeck, Deck
+ * @see AbstractDeck
  *
  * @author Israel Rodriguez
  * @since 1.1

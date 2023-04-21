@@ -5,6 +5,12 @@ import gwent.ICard
 
 import scala.collection.mutable.ListBuffer
 
+/** An abstract class representing a deck and a hand deck.
+ *
+ * @author Israel Rodriguez
+ * @since 1.1
+ * @version 1.0
+ */
 abstract class AbstractDeck{
 
   /** From a list of card, add each card to the deck
