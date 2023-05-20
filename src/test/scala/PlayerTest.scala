@@ -116,7 +116,7 @@ class PlayerTest extends FunSuite {
     val Carta_pruebaClima_2 = new CardWeather("Prueba Clima", "efecto Prueba")
     val Lista_cartasPrueba_2: ListBuffer[ICard] = ListBuffer(Carta_prueba_2, Carta_prueba2_2, Carta_prueba3_2, Carta_pruebaClima_2)
     val Mazo_prueba_2 = new Deck(Lista_cartasPrueba_2)
-    val player_2 = new Player(name = "jugador", section_board = "abajo",gem_counter = 2, deck_cards = Mazo_prueba_2, hand_cards = new HandDeck())
+    val player_2 = new Player(name = "jugador", section_board = "abajo", deck_cards = Mazo_prueba_2, hand_cards = new HandDeck())
     player_2.drawCard(2)
     jugador_porDefecto.drawCard(2)
     assert(jugador_porDefecto.equals(player_2))

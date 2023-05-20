@@ -7,7 +7,6 @@ import gwent.Deck.{Deck, HandDeck}
  *
  * @param name Name of the player
  * @param section_board Section of the player on the board
- * @param gem_counter Amount of gems the player has, by default is 2
  * @param deck_cards Deck of cards
  * @param hand_cards Cards in hand
  * @constructor Creates a new player with the specified parameters
@@ -24,9 +23,10 @@ import gwent.Deck.{Deck, HandDeck}
  */
 class Player(private val name: String,
              private val section_board: String,
-             private var gem_counter: Int = 2,
              private val deck_cards: Deck,
              private val hand_cards: HandDeck) extends IPlayer {
+  /* The number of gems owned by the player*/
+  private var gem_counter: Int = 2
 
   /** Play a card from the hand by its position
    *
