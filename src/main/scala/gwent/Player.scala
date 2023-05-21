@@ -3,6 +3,8 @@ package gwent
 
 import gwent.Deck.{Deck, HandDeck}
 
+import cl.uchile.dcc.gwent.Card.ICard
+
 /** A class representing a player
  *
  * @param name Name of the player

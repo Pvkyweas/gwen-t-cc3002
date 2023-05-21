@@ -1,6 +1,8 @@
 package cl.uchile.dcc
 package gwent
 
+import cl.uchile.dcc.gwent.Card.ICard
+
 trait IPlayer {
   def playCard(pos_card: Int): Option[ICard]
   def drawCard(num_cards: Int): Unit

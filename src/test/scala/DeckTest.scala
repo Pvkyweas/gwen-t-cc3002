@@ -1,9 +1,11 @@
 package cl.uchile.dcc
 
-import gwent.Card.{CardUnity, CardWeather}
 import gwent.Deck.Deck
-import gwent.ICard
 
+import cl.uchile.dcc.gwent.Card.Effect.NoneEffect
+import cl.uchile.dcc.gwent.Card.ICard
+import cl.uchile.dcc.gwent.Card.Unity.{MeleeCard, RangeCard, SiegeCard}
+import cl.uchile.dcc.gwent.Card.Weather.ClearWeatherCard
 import munit.FunSuite
 
 import scala.collection.mutable.ListBuffer
@@ -19,12 +21,12 @@ class DeckTest extends FunSuite {
 
   override def beforeEach(context: BeforeEach): Unit = {
     Mazo_prueba1 = new Deck()
-    Carta_prueba = new CardUnity("Prueba","tipoPrueba",1, "no tiene")
-    Carta_prueba2 = new CardUnity("Prueba2","tipoPrueba",2, "no tiene")
-    Carta_prueba3 = new CardUnity("Prueba3","tipoPrueba",3, "no tiene")
+    Carta_prueba = new MeleeCard("Melee", new NoneEffect(), 3)
+    Carta_prueba2 = new RangeCard("Range", new NoneEffect(), 3)
+    Carta_prueba3 = new SiegeCard("Siege", new NoneEffect(), 3)
     Lista_cartasPrueba = ListBuffer(Carta_prueba, Carta_prueba2, Carta_prueba3)
     Mazo_prueba2 = new Deck(Lista_cartasPrueba)
-    Carta_pruebaClima = new CardWeather("Prueba Clima", "efecto Prueba")
+    Carta_pruebaClima = new ClearWeatherCard("Prueba Clima")
   }
 
   test("Un mazo vacio debe retornar true al usar .isEmpty") {

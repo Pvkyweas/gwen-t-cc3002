@@ -1,9 +1,12 @@
 package cl.uchile.dcc
 package gwent
 
-import gwent.Card.{CardUnity, CardWeather}
 import gwent.Deck.{Deck, HandDeck}
 
+import cl.uchile.dcc.gwent.Card.Effect.NoneEffect
+import cl.uchile.dcc.gwent.Card.ICard
+import cl.uchile.dcc.gwent.Card.Unity.{MeleeCard, RangeCard, SiegeCard}
+import cl.uchile.dcc.gwent.Card.Weather.{AbstractCardWeather, ClearWeatherCard}
 import munit.FunSuite
 
 import scala.collection.mutable.ListBuffer
@@ -22,10 +25,10 @@ class PlayerTest extends FunSuite {
   var Lista_cartasPrueba: ListBuffer[ICard] = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    Carta_prueba = new CardUnity("Prueba", "tipoPrueba", 1, "no tiene")
-    Carta_prueba2 = new CardUnity("Prueba2", "tipoPrueba", 2, "no tiene")
-    Carta_prueba3 = new CardUnity("Prueba3", "tipoPrueba", 3, "no tiene")
-    Carta_pruebaClima = new CardWeather("Prueba Clima", "efecto Prueba")
+    Carta_prueba = new MeleeCard("Melee", new NoneEffect(), 3)
+    Carta_prueba2 = new RangeCard("Range", new NoneEffect(), 3)
+    Carta_prueba3 = new SiegeCard("Siege", new NoneEffect(), 3)
+    Carta_pruebaClima = new ClearWeatherCard("Prueba Clima")
     Lista_cartasPrueba = ListBuffer(Carta_prueba, Carta_prueba2, Carta_prueba3,Carta_pruebaClima)
     Mazo_prueba = new Deck(Lista_cartasPrueba)
 
@@ -118,10 +121,10 @@ class PlayerTest extends FunSuite {
   }
 
   test("equals") {
-    val Carta_prueba_2 = new CardUnity("Prueba", "tipoPrueba", 1, "no tiene")
-    val Carta_prueba2_2 = new CardUnity("Prueba2", "tipoPrueba", 2, "no tiene")
-    val Carta_prueba3_2 = new CardUnity("Prueba3", "tipoPrueba", 3, "no tiene")
-    val Carta_pruebaClima_2 = new CardWeather("Prueba Clima", "efecto Prueba")
+    val Carta_prueba_2 =new MeleeCard("Melee", new NoneEffect(), 1)
+    val Carta_prueba2_2 = new MeleeCard("Melee", new NoneEffect(), 2)
+    val Carta_prueba3_2 = new MeleeCard("Melee", new NoneEffect(), 3)
+    val Carta_pruebaClima_2 = new ClearWeatherCard("Prueba Clima")
     val Lista_cartasPrueba_2: ListBuffer[ICard] = ListBuffer(Carta_prueba_2, Carta_prueba2_2, Carta_prueba3_2, Carta_pruebaClima_2)
     val Mazo_prueba_2 = new Deck(Lista_cartasPrueba_2)
     val player_2 = new Player(name = "jugador", section_board = "abajo", deck_cards = Mazo_prueba_2, hand_cards = new HandDeck())

@@ -1,8 +1,7 @@
 package cl.uchile.dcc
 package gwent.Deck
 
-import gwent.ICard
-
+import cl.uchile.dcc.gwent.Card.ICard
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
 

@@ -1,0 +1,35 @@
+package cl.uchile.dcc
+package gwent.Card.Unity
+import gwent.Card.Effect.IEffect
+
+/** A class representing a siege unity card
+ *
+ * @param name Name of the card
+ * @param force Force of the card
+ * @param effect Effect of the card, it is an IEffect object
+ * @constructor Create a new unity card with the specified name, force and effect, by default
+ *              effect is a noneEffect
+ * @example
+ * {{{
+ *   val unityCard = new SiegeCard("example", 2, new noneEffect())
+ *   val nameC = unityCard.get_Name()
+ *   println(s" The name of the card is $nameC")
+ * }}}
+ * @see ICard, ICardUnity, AbstractUnityCard
+ * @author Israel Rodriguez
+ * @since 1.2.3
+ * @version 1.0
+ */
+class SiegeCard(private val name: String,
+                private val effect: IEffect,
+                private var force: Int) extends AbstractCardUnity(name, effect, force){
+
+  override def equals(obj: Any): Boolean = {
+    if (this.getClass.getName == obj.getClass.getName) {
+      super.equals(obj)
+    }
+    else {
+      false
+    }
+  }
+}
