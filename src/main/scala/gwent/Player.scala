@@ -7,6 +7,7 @@ import gwent.Deck.{Deck, HandDeck}
  *
  * @param name Name of the player
  * @param section_board Section of the player on the board
+ * @param gem_counter Number of gems owned by the player
  * @param deck_cards Deck of cards
  * @param hand_cards Cards in hand
  * @constructor Creates a new player with the specified parameters
@@ -23,11 +24,9 @@ import gwent.Deck.{Deck, HandDeck}
  */
 class Player(private val name: String,
              private val section_board: String,
+             private var gem_counter: Int = 2,
              private val deck_cards: Deck,
              private val hand_cards: HandDeck) extends IPlayer {
-  /* The number of gems owned by the player*/
-  private var gem_counter: Int = 2
-
   /** Play a card from the hand by its position
    *
    * @param pos_card position of the desired card
@@ -43,7 +42,7 @@ class Player(private val name: String,
   def drawCard(num_cards: Int): Unit = {hand_cards.add_multipleCard(deck_cards.draw_multipleCard(num_cards))}
 
   /** subtract 1 from the gem counter */
-  def lostRound(): Unit = {gem_counter = gem_counter - 1}
+  def lostRound(): Unit = {if (gem_counter > 0 ) gem_counter = gem_counter - 1}
 
   /** Randomly change the order of the cards in deck */
   def shuffle(): Unit = deck_cards.shuffle()

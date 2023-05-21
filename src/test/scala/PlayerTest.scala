@@ -49,6 +49,14 @@ class PlayerTest extends FunSuite {
     assertEquals(jugador_porDefecto.get_gemCounter(),1)
   }
 
+  test("Cuando pierde una ronda pierde y no tiene gemas deberia quedarse en 0") {
+    jugador_porDefecto.lostRound()
+    jugador_porDefecto.lostRound()
+    assertEquals(jugador_porDefecto.get_gemCounter(), 0)
+    jugador_porDefecto.lostRound()
+    assertEquals(jugador_porDefecto.get_gemCounter(), 0)
+  }
+
   test("Puede obtener la cantidad de cartas del mazo"){
     assertEquals(jugador_porDefecto.numCards_deck(),4)
   }
