@@ -3,6 +3,8 @@ package gwent.Card.Unity
 
 import gwent.Card.Effect.IEffect
 
+import cl.uchile.dcc.gwent.Board.ISection
+
 /** A class representing a melee unity card
  *
  * @param name Name of the card
@@ -25,6 +27,12 @@ class MeleeCard(private val name: String,
                 private val effect: IEffect,
                 private var force: Int) extends AbstractCardUnity(name, effect, force){
 
+  /** Add this card on melee zone of the section
+   * 
+   * @param Section Section that own the melee zone
+   */
+  override def playOnSection(Section: ISection): Unit = Section.addOnMelee(this)
+  
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {
       super.equals(obj)

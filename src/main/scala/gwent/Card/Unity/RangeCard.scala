@@ -2,6 +2,8 @@ package cl.uchile.dcc
 package gwent.Card.Unity
 import gwent.Card.Effect.IEffect
 
+import cl.uchile.dcc.gwent.Board.ISection
+
 /** A class representing a range unity card
  *
  * @param name Name of the card
@@ -24,6 +26,12 @@ class RangeCard(private val name: String,
                 private val effect: IEffect,
                 private var force: Int) extends AbstractCardUnity(name, effect, force){
 
+  /** Add this card on range zone of the section
+   *
+   * @param Section Section that own the range zone
+   */
+  override def playOnSection(Section: ISection): Unit = Section.addOnRange(this)
+  
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {
       super.equals(obj)

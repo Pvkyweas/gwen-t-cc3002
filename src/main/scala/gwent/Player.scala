@@ -4,11 +4,12 @@ package gwent
 import gwent.Deck.{Deck, HandDeck}
 
 import cl.uchile.dcc.gwent.Card.ICard
+import gwent.Board.Board
 
 /** A class representing a player
  *
  * @param name Name of the player
- * @param section_board Section of the player on the board
+ * @param section_board Section of the player on the board, True for upper section and False for lower
  * @param gem_counter Number of gems owned by the player
  * @param deck_cards Deck of cards
  * @param hand_cards Cards in hand
@@ -22,19 +23,30 @@ import cl.uchile.dcc.gwent.Card.ICard
  * @see IPlayer
  * @author Israel Rodriguez
  * @since 1.0
- * @version 1.1
+ * @version 1.2
  */
 class Player(private val name: String,
-             private val section_board: String,
+             private val section_board: Boolean,
              private var gem_counter: Int = 2,
              private val deck_cards: Deck,
              private val hand_cards: HandDeck) extends IPlayer {
-  /** Play a card from the hand by its position
-   *
+
+  /** Draw a card from the hand by its position and play it in the board
+   * 
    * @param pos_card position of the desired card
-   * @return an ICard object
+   * @param b Board in which the card will be played
    */
-  def playCard(pos_card: Int): Option[ICard] = {hand_cards.draw_Card(pos_card)}
+  def playCard(pos_card: Int, b: Board): Unit = {hand_cards.draw_Card(pos_card).get.playOnBoard(b, section_board)}
+
+  /** Method to obtaing the card in the position 0 in hand deck
+   *
+   * This method is used to test shuffle method
+   *
+   * @return an Option of ICard
+   */
+  def get_HandCard(): Option[ICard] = {
+    hand_cards.draw_Card()
+  }
 
   /** Draw a number of cards from the deck
    *
@@ -62,7 +74,7 @@ class Player(private val name: String,
   def get_Name(): String = name
 
   /** Return the section board of the player */
-  def get_Section(): String = section_board
+  def get_Section(): String = {if (section_board) "Sección superior" else "Sección Inferior"}
 
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {

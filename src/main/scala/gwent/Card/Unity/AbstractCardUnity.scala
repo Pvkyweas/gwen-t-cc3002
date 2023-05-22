@@ -2,9 +2,9 @@ package cl.uchile.dcc
 package gwent.Card.Unity
 
 import gwent.Card.Unity.ICardUnity
-
-import cl.uchile.dcc.gwent.Card.Effect.IEffect
-import cl.uchile.dcc.gwent.Card.ICard
+import gwent.Board.{Board, ISection}
+import gwent.Card.Effect.IEffect
+import gwent.Card.ICard
 
 /** A class representing an abstract unity card
  *
@@ -38,15 +38,24 @@ abstract class AbstractCardUnity(private val name: String,
     this.force = newForce
   }
 
+  /** Method to add this unity card to a zone of the Board
+   *
+   * @param b Board to add the unity card
+   * @param s Section of the player
+   */
+  def playOnBoard(b: Board, s: Boolean): Unit = {b.addCard(this, s)}
+  
+  def playOnSection(Section: ISection): Unit = ???
+
   /** Apply an effect
    */
-  def effectApply(oCard: ICard): Unit = ???
+  def effectApply(oCard: ICard): Unit = {}
 
 
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {
       val oCard = obj.asInstanceOf[AbstractCardUnity]
-      (this.name == oCard.name && this.force == oCard.force && this.effect.equals(oCard.effect))
+      this.name == oCard.name && this.force == oCard.force && this.effect.equals(oCard.effect)
     }
     else {
       false

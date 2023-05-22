@@ -1,5 +1,5 @@
 package cl.uchile.dcc
-package gwent.Card.Board
+package gwent.Board
 
 import cl.uchile.dcc.gwent.Card.ICard
 
