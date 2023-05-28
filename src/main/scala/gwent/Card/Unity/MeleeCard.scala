@@ -23,8 +23,7 @@ import cl.uchile.dcc.gwent.Board.ISection
  * @since 1.2.3
  * @version 1.0
  */
-class MeleeCard(private val name: String,
-                private val effect: IEffect,
+class MeleeCard(private val name: String, private val effect: IEffect,
                 private var force: Int) extends AbstractCardUnity(name, effect, force){
 
   /** Add this card on melee zone of the section

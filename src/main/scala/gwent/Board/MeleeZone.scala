@@ -1,6 +1,8 @@
 package cl.uchile.dcc
 package gwent.Board
 
-class MeleeZone extends AbstractUnityZone{
+import gwent.Card.Unity.MeleeCard
+
+class MeleeZone extends AbstractUnityZone[MeleeCard]{
 
 }

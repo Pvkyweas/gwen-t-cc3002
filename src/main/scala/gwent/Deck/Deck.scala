@@ -56,7 +56,7 @@ class Deck extends AbstractDeck{
    * @return Option whose contain an ICard object or None
    *
    */
-  override def draw_Card(pos: Int = 1): Option[ICard] = {
+  override def draw_Card(pos: Int = 0): Option[ICard] = {
     if (this.isEmpty) {
       None
     }

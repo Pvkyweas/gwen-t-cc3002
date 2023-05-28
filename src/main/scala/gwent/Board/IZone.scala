@@ -3,6 +3,8 @@ package gwent.Board
 
 import cl.uchile.dcc.gwent.Card.ICard
 
-trait IZone {
-def add_Card(Card:ICard): Unit
+import scala.collection.mutable.ListBuffer
+
+trait IZone[C<:ICard] {
+  def add_Card(Card:C): Unit
 }

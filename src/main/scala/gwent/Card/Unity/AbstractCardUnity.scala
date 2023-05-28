@@ -49,7 +49,7 @@ abstract class AbstractCardUnity(private val name: String,
 
   /** Apply an effect
    */
-  def effectApply(oCard: ICard): Unit = {}
+  def effectApply(oCard: ICard): Unit = ???
 
 
   override def equals(obj: Any): Boolean = {

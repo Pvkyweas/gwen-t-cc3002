@@ -20,9 +20,9 @@ class PlayCardOnBoardTest extends FunSuite {
   var Board: Board = _
   var wCard: AbstractCardWeather = _
   var wCard2: AbstractCardWeather = _
-  var mCard: ICardUnity = _
-  var rCard: ICardUnity = _
-  var sCard: ICardUnity = _
+  var mCard: MeleeCard = _
+  var rCard: RangeCard = _
+  var sCard: SiegeCard = _
 
   override def beforeEach(context: BeforeEach): Unit = {
     wCard = new BitingFrostWeatherCard("BitingFrost")
@@ -57,9 +57,9 @@ class PlayCardOnBoardTest extends FunSuite {
     Player1.drawCard(3)
     Player2.drawCard(2)
 
-    assertEquals(Board.get_Melee(section = true), ListBuffer[ICard]()) // No hay cartas en la sección 1 zona melee
-    assertEquals(Board.get_Range(section = false), ListBuffer[ICard]()) // No hay cartas en la sección 2 zona range
-    assertEquals(Board.get_Siege(section = true), ListBuffer[ICard]()) // No hay cartas en la sección 1 zona siege
+    assertEquals(Board.get_Melee(section = true), ListBuffer[MeleeCard]()) // No hay cartas en la sección 1 zona melee
+    assertEquals(Board.get_Range(section = false), ListBuffer[RangeCard]()) // No hay cartas en la sección 2 zona range
+    assertEquals(Board.get_Siege(section = true), ListBuffer[SiegeCard]()) // No hay cartas en la sección 1 zona siege
 
     // Se juegan las cartas de unidad de los jugadores
     Player1.playCard(2, Board)
@@ -68,14 +68,14 @@ class PlayCardOnBoardTest extends FunSuite {
     Player2.playCard(1, Board)
 
     // Se comprueba que se hayan agregado
-    assertEquals(Board.get_Melee(section = true), ListBuffer[ICard](mCard))
-    assertEquals(Board.get_Range(section = false), ListBuffer[ICard](rCard))
-    assertEquals(Board.get_Siege(section = true), ListBuffer[ICard](sCard))
+    assertEquals(Board.get_Melee(section = true), ListBuffer[MeleeCard](mCard))
+    assertEquals(Board.get_Range(section = false), ListBuffer[RangeCard](rCard))
+    assertEquals(Board.get_Siege(section = true), ListBuffer[SiegeCard](sCard))
 
     // Se comprueba que solo se agregaron en la sección correcta
-    assertEquals(Board.get_Melee(section = false), ListBuffer[ICard]())
-    assertEquals(Board.get_Range(section = true), ListBuffer[ICard]())
-    assertEquals(Board.get_Siege(section = false), ListBuffer[ICard]())
+    assertEquals(Board.get_Melee(section = false), ListBuffer[MeleeCard]())
+    assertEquals(Board.get_Range(section = true), ListBuffer[RangeCard]())
+    assertEquals(Board.get_Siege(section = false), ListBuffer[SiegeCard]())
   }
 
 }

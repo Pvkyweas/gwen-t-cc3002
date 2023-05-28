@@ -1,6 +1,8 @@
 package cl.uchile.dcc
 package gwent.Board
 
-class SiegeZone extends AbstractUnityZone{
+import gwent.Card.Unity.SiegeCard
+
+class SiegeZone extends AbstractUnityZone[SiegeCard]{
 
 }

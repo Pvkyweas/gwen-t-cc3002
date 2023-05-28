@@ -63,4 +63,10 @@ class BasicCardTest extends FunSuite {
     assertEquals(clima3.get_Effect(), "Niebla impenetrable")
     assertEquals(clima4.get_Effect(), "Lluvia torrencial")
   }
+
+  test("Equals de las cartas que no se probaron en el test equals de PlayerTest"){
+    assert(!carta_prueba.equals(carta_prueba3))
+    assert(!clima1.equals(carta_prueba))
+    assert(!clima3.equals(clima4))
+  }
 }

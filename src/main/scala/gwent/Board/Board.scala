@@ -3,9 +3,10 @@ package gwent.Board
 
 import gwent.IPlayer
 
-import cl.uchile.dcc.gwent.Card.Unity.ICardUnity
+import cl.uchile.dcc.gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
 import cl.uchile.dcc.gwent.Card.ICard
 import cl.uchile.dcc.gwent.Card.Weather.AbstractCardWeather
+
 import scala.collection.mutable.ListBuffer
 
 /**
@@ -40,16 +41,18 @@ class Board(private val Section1: ISection,
   def addOnW(c: AbstractCardWeather): Unit = {
     wZone.add_Card(c)
   }
-  
+
   /* Returns the card in weather zone */
-  def get_wCard(): ICard = {wZone.getCard}
+  def get_wCard(): AbstractCardWeather = {
+    wZone.getCard
+  }
 
   /** Method to obtain the cards in melee zone in a specific section
    * 
    * @param section Section to get the zone's cards
    * @return ListBuffer[ICard] with cards of the zone
    */
-  def get_Melee(section: Boolean): ListBuffer[ICard] = {
+  def get_Melee(section: Boolean): ListBuffer[MeleeCard] = {
     if (section) {
       Section1.getMeleeCard
     }
@@ -63,7 +66,7 @@ class Board(private val Section1: ISection,
    * @param section Section to get the zone's cards
    * @return ListBuffer[ICard] with cards of the zone
    */
-  def get_Range(section: Boolean): ListBuffer[ICard] = {
+  def get_Range(section: Boolean): ListBuffer[RangeCard] = {
     if (section) {
       Section1.getRangeCard
     }
@@ -77,7 +80,7 @@ class Board(private val Section1: ISection,
    * @param section Section to get the zone's cards
    * @return ListBuffer[ICard] with cards of the zone
    */
-  def get_Siege(section: Boolean): ListBuffer[ICard] = {
+  def get_Siege(section: Boolean): ListBuffer[SiegeCard] = {
     if (section) {
       Section1.getSiegeCard
     }
