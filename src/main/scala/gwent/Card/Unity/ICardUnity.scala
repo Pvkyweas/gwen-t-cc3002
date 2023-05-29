@@ -6,6 +6,6 @@ import gwent.Board.ISection
 
 trait ICardUnity extends ICard {
   def get_Force(): Int
-  def set_Force(newForce: Int): Unit
+  private[Card] def set_Force(newForce: Int): Unit
   def playOnSection(Section: ISection): Unit
 }

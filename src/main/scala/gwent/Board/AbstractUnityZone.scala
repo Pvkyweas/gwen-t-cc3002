@@ -15,7 +15,7 @@ import scala.collection.mutable.ListBuffer
  * @since 1.2.3
  * @version 1.0
  */
-abstract class AbstractUnityZone[C<:ICardUnity](protected val cardsOnZone:ListBuffer[C] = new ListBuffer[C]()) extends IZone[C] {
+abstract class AbstractUnityZone[C<:ICardUnity](private val cardsOnZone:ListBuffer[C] = new ListBuffer[C]()) extends IZone[C] {
 
   /** Add a card to the Zone
    *
