@@ -14,7 +14,7 @@ import scala.util.Random
  * @example
  * {{{
  *   val deck = new Deck()
- *   deck.addCard(new CardClimatic("Example", "None"))
+ *   deck.addCard(new MeleeCard("test", new NoneEffect(), 3))
  *   val numCards = deck.get_Size()
  *   println(s"deck has $numCards")
  * }}}

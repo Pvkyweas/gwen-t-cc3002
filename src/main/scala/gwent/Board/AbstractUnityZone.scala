@@ -5,6 +5,16 @@ import cl.uchile.dcc.gwent.Card.ICard
 import cl.uchile.dcc.gwent.Card.Unity.{ICardUnity, RangeCard}
 
 import scala.collection.mutable.ListBuffer
+
+/** A Class that represent abstract zone for unity cards
+ *
+ * @param cardsOnZone ListBuffer of Unity Cards, will contain only melee, range or siege cards
+ *
+ * @see ICardUnity, IZone
+ * @author Israel Rodriguez
+ * @since 1.2.3
+ * @version 1.0
+ */
 abstract class AbstractUnityZone[C<:ICardUnity](protected val cardsOnZone:ListBuffer[C] = new ListBuffer[C]()) extends IZone[C] {
 
   /** Add a card to the Zone

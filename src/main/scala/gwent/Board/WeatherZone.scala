@@ -5,6 +5,15 @@ import gwent.Card.ICard
 
 import cl.uchile.dcc.gwent.Card.Weather.{AbstractCardWeather, ClearWeatherCard}
 
+/** A class that represent a Zone for weather cards, by default the card in this zone
+ * is a ClearWeather
+ *
+ *
+ * @see IZone, AbstractCardWeather
+ * @author Israel Rodriguez
+ * @since 1.2.3
+ * @version 1.0
+ */
 class WeatherZone extends IZone[AbstractCardWeather]{
   /* Variable that store the active weather card */
   private var cardSlot: AbstractCardWeather = new ClearWeatherCard("Soleado")

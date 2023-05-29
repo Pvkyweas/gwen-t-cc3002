@@ -38,7 +38,7 @@ class Player(private val name: String,
    */
   def playCard(pos_card: Int, b: Board): Unit = {hand_cards.draw_Card(pos_card).get.playOnBoard(b, section_board)}
 
-  /** Method to obtaing the card in the position 0 in hand deck
+  /** Method to obtaining the card in the position 0 in hand deck
    *
    * This method is used to test shuffle method
    *

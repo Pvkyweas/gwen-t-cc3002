@@ -9,11 +9,17 @@ import cl.uchile.dcc.gwent.Card.Weather.AbstractCardWeather
 
 import scala.collection.mutable.ListBuffer
 
-/**
+/** A Class that represent a Board from a card game, its contain two sections, one for each player, and a common
+ * section which represent the weather zone that will contain a weather card.
  *
- * @param Section1
- * @param Section2
- * @param wZone
+ * @param Section1 Section for one of the two players
+ * @param Section2 Section for one of the two players
+ * @param wZone Zone for weather cards, common to both player
+ *
+ * @see ISection, WeatherZone
+ * @author Israel Rodriguez
+ * @since 1.2.3
+ * @version 1.0
  */
 class Board(private val Section1: ISection,
             private val Section2: ISection,
