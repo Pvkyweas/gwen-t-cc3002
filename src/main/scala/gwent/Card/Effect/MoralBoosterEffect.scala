@@ -2,17 +2,19 @@ package cl.uchile.dcc
 package gwent.Card
 package Effect
 
-/** A class that represent an effect that does nothing
+import gwent.Card.ICard
+
+/** A class that represent a Moral Boost effect, its used in unity cards
  *
  * @see IEffect
  * @author Israel Rodriguez
  * @since 1.2.3
  * @version 1.0
  */
-class NoneEffect extends IEffect{
+class MoralBoosterEffect extends IEffect {
 
   /* Returns a string that represent the effect */
-  def get_effect(): String = "No tiene efecto"
+  def get_effect(): String = "Refuerzo Moral"
 
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {
@@ -22,5 +24,4 @@ class NoneEffect extends IEffect{
       false
     }
   }
-
 }

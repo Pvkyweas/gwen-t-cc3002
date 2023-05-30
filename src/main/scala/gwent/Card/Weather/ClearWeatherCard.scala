@@ -1,6 +1,8 @@
 package cl.uchile.dcc
 package gwent.Card.Weather
 
+import gwent.Card.Effect.ClearWeatherEffect
+
 /** A class representing a weather card with Clear weather
  *
  * @param name Name of the card
@@ -16,9 +18,7 @@ package gwent.Card.Weather
  * @since 1.2.3
  * @version 1.0
  */
-class ClearWeatherCard(private val name: String) extends AbstractCardWeather(name){
-
-  override def get_Effect(): String = "Clima despejado"
+class ClearWeatherCard(private val name: String) extends AbstractCardWeather(name, new ClearWeatherEffect()){
   
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {

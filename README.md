@@ -13,53 +13,14 @@ This project's goal is to create a (simplified) clone of the
 
 ---
 
-## Explicación Tarea 1 entrega final
+## Explicación Tarea 2 entrega final
 
-### Implementación efectos de las cartas
+### Jugador
 
-Como mencioné en los commits, decidí cambiar cómo pensaba implementar el funcionamiento de los efectos de las cartas. Originalmente, iba a hacer que comparara el nombre del efecto y el requerimiento correspondiente, por lo que definí un método get_Requirement, pero lo pensé mejor y decidí que la mejor forma de implementarlo era codificando los efectos siguiendo la siguiente estructura:
+El jugador tiene un nombre, un contador de gemas (que no puede bajar de 0), un mazo de cartas de tipo Deck, una mano de cartas de tipo HandDeck y una sección en el tablero, decidi que fuera un booleano ya que solo hay dos jugadores por partida. No hice que cada jugador tuviera su sección de cartas dentro de su variable section. 
 
-* Tipo de requisito-Requisito-Como afecta-Cuanto afecta
 
-Por ejemplo, para el efecto de Escarcha mordiente, el **requisito a cumplir** es ser de una **clasificación especifica**, específicamente, **requiere** que la carta sea **cuerpo a cuerpo** y el **como afecta** a la carta es **estableciendo el valor de fuerza** a **1**, por lo que el código sería cla-c-sf-1.
-
-Creo que hacerlo de esta forma es mejor, ya que en vez de colocar un "if" para cada efecto, coloco uno por cada característica en común que tienen. Si nos fijamos en cómo funcionan los efectos de las cartas de clima, todas (menos Clima despejado) tienen como requisito la clasificación de la carta y el cómo afectan es el mismo. Incluso los efectos de cartas de unidad siguen esta estructura, por lo que no es necesario crear métodos para los efectos de clima y de unidad por separado.
-
-Pero el mayor punto a favor es que es mucho más escalable que la implementación que tenía pensada anteriormente, ya que si quiero añadir un efecto que haga lo mismo que Refuerzo moral pero, en vez de añadir 1, añada 2, el código sigue funcionando sin requerir modificaciones. En caso de querer añadir un efecto que aplique una operación distinta a las implementadas, solo se necesita añadir dentro del "if" correspondiente un bloque que tenga la siguiente forma:
-```
-if (effect_code(2) == "operación deseada"){
-  // Operación en cuestión
-}
-```
-
-La codificación que estoy utilizando ahora mismo es:
-
-**Tipo de requisito**
-* cla: Clasificación de la carta
-* nam: Nombre de la carta
-* all: Afecta a todas las cartas
-
-**Requisito**
-* c: Cuerpo a cuerpo
-* d: Distancia
-* a: Asedio
-* Si el requisito es de tipo nam, aqui iria el nombre de la carta
-
-**Como afecta**
-* sd: Establece el valor de fuerza a un valor especifico
-* addf: Le añade una cantidad a la fuerza
-* rf: Reestablece el valor de fuerza al anterior afectado por una carta de clima
-* multf: Multiplica el valor de la fuerza por una cantidad
-
-No esta demás mencionar que, cuando evaluo el tipo de requisito de clasificación, lo hago de la siguiente forma:
-```
-if (effect_code(0) == "cla" && effect_code(1).contains(classification))
-```
-Es por la misma idea de escalabilidad, ya que si quisiese añadir un efecto con un requisito que afecte a 2 tipos de clasificaciones, solo tendria que poner ambas codificaciones, por ejemplo, si quiero afectar tanto a distancia como asedio, el requisito seria "dc".
-
-pd: perdón por el mucho texto, pero queria que quedara lo más claro posible unu, espero haberlo logrado.
-
-### Implementación Mazos
+### Mazos
 
 Decidi hacer clases distintas para representar mazos que contendran las cartas de las manos y las del mazo, esto debido a que presentan las siguientes diferencias:
 
@@ -68,3 +29,25 @@ Decidi hacer clases distintas para representar mazos que contendran las cartas d
 * Tiene sentido barajar un mazo, pero no una mano (dado el tipo de juego)
 
 Para los mazos normales utilice un Stack y para la mano un ListBuffer ya que cumplen con el requerimiento del orden. Decidi no implementar una interface por que una clase abstracta se ajusta mejor a la situación ambas clases no tendrian exactamente los mismos metodos por lo que, al crear un objeto de tipo mazo, si los metodos que quiera utilizar no estan en la interface, no podria llamarlos (o almenos eso me pasaba) entonces, como de todas formas no iba a crear los objetos como un tipo "el nombre de la interface", la clase abstracta termina funcionando mejor.
+
+### Cartas
+
+Siguiendo el feedback de la tarea 1, cambie como estan implementadas las cartas, ahora estas se separan en cartas de unidad y cartas de clima que no heredan de una misma clase abstracta, si implementan la interfaz ICard.
+
+* Unidad: Estas implementan la interfaz ICardUnity que extiende de ICard e implementa los metodos en cuestión, se divide en 3 tipos de cartas MeleeCard, RangeCard y SiegeCard.
+
+* Clima: Esta hereda de la clase abstracta AbstractCardWeather, no se divide en distintos tipos de cartas de clima como las de unidad, por que este tipo de cartas solo puede ir en una zona y los efectos decidi implementarlos de forma que sean objetos asi que no me hace sentido tener una clase para cada tipo de clima.
+
+### Tablero
+
+Para la implementación del tablero, considere distintas opciones pero decidi que el tablero solo contendria una zona para las cartas de clima y Secciones para cada jugador y la interacción entre estos y el tablero al agregar las cartas seria que el metodo del jugador que hace la acción de jugar una carta deberia de recibir el tablero en el que se debera jugar y la posición de la carta que se quiera jugar.
+
+* Zonas
+   Se pensaron 4 zonas, la de clima y las que contienen cartas de unidad. Para la de clima, como solo puede haber una carta se creo una variable que sea de tipo AbstractWeatherCard, en cuanto a las zonas de unidad (Melee, Range y Siege) estas tendrian un ListBuffer que contenga las cartas. Para las zonas de unidad se creo una clase abstracta AbstracUnityZone que contenga la implementación de los metodos, de esta clase solo heredan MeleeZone, RangeZone y SiegeZone.
+
+* Secciones
+   Para la implementación de las secciones, estas tendrian 3 zonas, una para las cartas cuerpo a cuerpo (melee), una para las rango y otra para las de asedio, tiene metodos especificos para agregar cartas a cada zona, esto se hizo por medio de double dispatch.
+
+### Efectos
+
+Decidi cambiar la implementación de los efectos de las cartas tratando de seguir algún diseño de los mostrados en clases, pero aún no estoy seguro de como hacer la implementación. Lo que si he decidido (al menos por ahora) es que los efectos sean un objeto de tipo IEffect y no un String o la implementación que habia pensado antes.

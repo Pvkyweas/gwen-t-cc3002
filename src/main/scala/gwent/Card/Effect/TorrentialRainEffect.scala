@@ -1,18 +1,16 @@
 package cl.uchile.dcc
-package gwent.Card
-package Effect
+package gwent.Card.Effect
 
-/** A class that represent an effect that does nothing
+/**  A class that represent a Weather effect: Torrential Rain, its used in weather cards
  *
- * @see IEffect
+ * @see IEffect, TorrentialRainCard
  * @author Israel Rodriguez
  * @since 1.2.3
  * @version 1.0
  */
-class NoneEffect extends IEffect{
-
+class TorrentialRainEffect extends IEffect{
   /* Returns a string that represent the effect */
-  def get_effect(): String = "No tiene efecto"
+  def get_effect(): String = "Lluvia torrencial"
 
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {
@@ -22,5 +20,4 @@ class NoneEffect extends IEffect{
       false
     }
   }
-
 }

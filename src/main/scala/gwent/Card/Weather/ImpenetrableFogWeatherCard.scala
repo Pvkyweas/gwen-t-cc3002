@@ -1,11 +1,12 @@
 package cl.uchile.dcc
 package gwent.Card.Weather
 
+import gwent.Card.Effect.ImpenetrableFogEffect
+
 /** A class representing a weather card with impenetrable Fog weather
  *
  * @param name Name of the card
  * @constructor Create a new unity card with the specified name
- *
  * @example
  * {{{
  *   val weatherCard = new ImpenetrableFogWeatherCard("example")
@@ -17,9 +18,7 @@ package gwent.Card.Weather
  * @since 1.2.3
  * @version 1.0
  */
-class ImpenetrableFogWeatherCard(private val name: String) extends AbstractCardWeather(name){
-
-  override def get_Effect(): String = "Niebla impenetrable"
+class ImpenetrableFogWeatherCard(private val name: String) extends AbstractCardWeather(name, new ImpenetrableFogEffect()){
   
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {
