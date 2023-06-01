@@ -8,14 +8,13 @@ package gwent.Card.Effect
  * @since 1.2.3
  * @version 1.0
  */
-class TorrentialRainEffect extends IEffect{
+class TorrentialRainEffect extends EqualsForEffects with IEffect {
   /* Returns a string that represent the effect */
   def get_effect(): String = "Lluvia torrencial"
 
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {
-      val oEffect = obj.asInstanceOf[IEffect]
-      this.get_effect() == oEffect.get_effect()
+      super.equals(obj)
     } else {
       false
     }

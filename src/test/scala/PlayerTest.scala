@@ -135,5 +135,8 @@ class PlayerTest extends FunSuite {
 
     assert(!Carta_pruebaClima_2.equals(Carta_prueba2_2))
     assert(!Carta_prueba2_2.equals(Carta_pruebaClima_2))
+
+    assert(!Mazo_prueba.equals(new HandDeck()))
+    assert(!(new HandDeck).equals(Mazo_prueba))
   }
 }

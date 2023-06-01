@@ -11,15 +11,14 @@ import gwent.Card.ICard
  * @since 1.2.3
  * @version 1.0
  */
-class MoralBoosterEffect extends IEffect {
+class MoralBoosterEffect extends EqualsForEffects with IEffect {
 
   /* Returns a string that represent the effect */
   def get_effect(): String = "Refuerzo Moral"
 
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {
-      val oEffect = obj.asInstanceOf[IEffect]
-      this.get_effect() == oEffect.get_effect()
+      super.equals(obj)
     } else {
       false
     }
