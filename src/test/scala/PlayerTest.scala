@@ -8,6 +8,7 @@ import cl.uchile.dcc.gwent.Card.ICard
 import cl.uchile.dcc.gwent.Card.Unity.{MeleeCard, RangeCard, SiegeCard}
 import cl.uchile.dcc.gwent.Card.Weather.{AbstractCardWeather, ClearWeatherCard}
 import munit.FunSuite
+import org.junit.Assert
 
 import scala.collection.mutable.ListBuffer
 
@@ -32,15 +33,21 @@ class PlayerTest extends FunSuite {
     Lista_cartasPrueba = ListBuffer(Carta_prueba, Carta_prueba2, Carta_prueba3,Carta_pruebaClima)
     Mazo_prueba = new Deck(Lista_cartasPrueba)
 
-    jugador_porDefecto = new Player(name = "jugador", section_board = true, deck_cards = Mazo_prueba, hand_cards = new HandDeck())
+    jugador_porDefecto = new Player(name = "jugador", deck_cards = Mazo_prueba, hand_cards = new HandDeck())
   }
 
   test("Un jugador debe tener un nombre"){
     assertEquals(jugador_porDefecto.get_Name(),"jugador")
   }
 
-  test("Un jugador tiene una seccion del tablero"){
-    assertEquals(jugador_porDefecto.get_Section(), "Sección superior")
+  test("Si se quiere saber la seccion de un jugador que no tiene, lanza un error") {
+    val e = Assert.assertThrows(classOf[AssertionError], () => jugador_porDefecto.get_Section())
+    assertEquals("The player doesn't have a Section, add the player to a Board", e.getMessage)
+  }
+
+  test("Si un jugador quiere jugar una carta cuando no tiene tablero, lanza error") {
+    val e = Assert.assertThrows(classOf[AssertionError], () => jugador_porDefecto.playCard(0))
+    assertEquals("The player doesn't have a Board, add the player to a Board", e.getMessage)
   }
 
   test("Un jugador debe tener por defecto 2 gemas") {
@@ -116,7 +123,7 @@ class PlayerTest extends FunSuite {
     val Carta_pruebaClima_2: ICard = new ClearWeatherCard("Prueba Clima")
     val Lista_cartasPrueba_2: ListBuffer[ICard] = ListBuffer(Carta_prueba_2, Carta_prueba2_2, Carta_prueba3_2, Carta_pruebaClima_2)
     val Mazo_prueba_2: Deck = new Deck(Lista_cartasPrueba_2)
-    val player_2 = new Player(name = "jugador", section_board = true, deck_cards = Mazo_prueba_2, hand_cards = new HandDeck())
+    val player_2 = new Player(name = "jugador", deck_cards = Mazo_prueba_2, hand_cards = new HandDeck())
     player_2.drawCard(2)
     jugador_porDefecto.drawCard(2)
     assert(jugador_porDefecto.equals(player_2))

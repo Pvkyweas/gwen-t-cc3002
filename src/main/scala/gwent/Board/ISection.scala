@@ -8,11 +8,12 @@ import cl.uchile.dcc.gwent.Card.ICard
 import scala.collection.mutable.ListBuffer
 
 trait ISection {
-def add_Card(c: ICardUnity): Unit
 def addOnMelee(c: MeleeCard): Unit
 def addOnRange(c: RangeCard): Unit
 def addOnSiege(c: SiegeCard): Unit
 def getRangeCard: ListBuffer[RangeCard]
 def getMeleeCard: ListBuffer[MeleeCard]
 def getSiegeCard: ListBuffer[SiegeCard]
+private[Board] def set_side(s: String): Unit
+def get_side(): String
 }

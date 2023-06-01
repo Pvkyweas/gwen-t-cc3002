@@ -20,11 +20,17 @@ class Section(private val mZone: MeleeZone,
               private val rZone: RangeZone,
               private val sZone: SiegeZone) extends ISection{
 
-  /** this method says to card to add itself
-   * 
-   * @param c card to add
+  /* variable to say which side of the board it is on */
+  private var whichSide: String = "no definido"
+
+  /** Method to specify the side of the section
+   *
+   * @param s new side
    */
-  def add_Card(c: ICardUnity): Unit = c.playOnSection(this)
+  def set_side(s: String): Unit = whichSide = s
+
+  /* Method to return the side of the section */
+  def get_side(): String = whichSide
 
   /** Add a unity card on Melee zone
    * 

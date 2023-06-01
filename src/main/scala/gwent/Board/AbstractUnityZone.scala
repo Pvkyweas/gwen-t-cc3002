@@ -9,6 +9,7 @@ import scala.collection.mutable.ListBuffer
 /** A Class that represent abstract zone for unity cards
  *
  * @param cardsOnZone ListBuffer of Unity Cards, will contain only melee, range or siege cards
+ * @tparam C Type of the Unity Cards that will be in the zone, it can be MeleeCard, RangeCard or SiegeCard
  *
  * @see ICardUnity, IZone
  * @author Israel Rodriguez

@@ -6,6 +6,8 @@ import gwent.Board.{Board, ISection}
 import gwent.Card.Effect.IEffect
 import gwent.Card.ICard
 
+import cl.uchile.dcc.gwent.IPlayer
+
 /** A class representing an abstract unity card
  *
  * @param name Name of the card
@@ -38,12 +40,11 @@ abstract class AbstractCardUnity(private val name: String,
     this.force = newForce
   }
 
-  /** Method to add this unity card to a zone of the Board
+  /** Method to add this unity card to a zone of the Board, the player is who add the card
    *
-   * @param b Board to add the unity card
-   * @param s Section of the player
+   * @param p Player who add the card to board
    */
-  def playOnBoard(b: Board, s: Boolean): Unit = {b.addCard(this, s)}
+  def playYourSelf(p: IPlayer): Unit = {p.playMe(this)}
   
   def playOnSection(Section: ISection): Unit = ???
 

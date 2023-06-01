@@ -25,18 +25,32 @@ class Board(private val Section1: ISection,
             private val Section2: ISection,
             private val wZone: WeatherZone) {
 
-  /** Method to add an unity card to section's player
+  /* Variables that show if a section is taken or not
+  * true if is taken
+  * false if isn't*/
+  private var isSection1Taken: Boolean = false
+  private var isSection2Taken: Boolean = false
+
+  Section1.set_side("Sección superior")
+  Section2.set_side("Sección inferior")
+
+  /** Method to add to a player a not taken section to play
    *
-   * @param c Unity Card to add
-   * @param s Section of the player
+   * @param player who going to add the section
    */
-  def addCard(c: ICardUnity, s: Boolean): Unit = {
-    if (s){
-      Section1.add_Card(c)
+  def addPlayer(player: IPlayer):Unit = {
+    if (!isSection1Taken){
+      player.set_Section(Section1)
+      player.set_Board(this)
+      isSection1Taken = true
+    } else if (!isSection2Taken) {
+      player.set_Section(Section2)
+      player.set_Board(this)
+      isSection2Taken = true
+    } else {
+      throw new AssertionError("The board already has 2 players")
     }
-    else{
-      Section2.add_Card(c)
-    }
+
   }
 
 

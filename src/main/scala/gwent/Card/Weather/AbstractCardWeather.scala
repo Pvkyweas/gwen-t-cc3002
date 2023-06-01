@@ -3,8 +3,9 @@ package gwent.Card.Weather
 
 import gwent.Card.ICard
 import gwent.Board.Board
-
 import gwent.Card.Effect.IEffect
+
+import cl.uchile.dcc.gwent.IPlayer
 
 /** A class representing an abstract weather card
  *
@@ -25,12 +26,17 @@ abstract class AbstractCardWeather(private val name: String,private val effect: 
   /* Apply an effect */
   def effectApply(oCard: ICard): Unit = ???
 
+  /** Method to add this unity card to a zone of the Board, the player is who add the card
+   *
+   * @param p Player who add the card to board
+   */
+  def playYourSelf(p: IPlayer): Unit = {p.playMe(this)}
+
   /** Method to add this weather card to a weather zone of the Board
    * 
    * @param b Board to add the weather card
-   * @param s Section of the player
    */
-  def playOnBoard(b: Board, s: Boolean): Unit = {b.addOnW(this)}
+  def playOnBoard(b: Board): Unit = {b.addOnW(this)}
 
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {

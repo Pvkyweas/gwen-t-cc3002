@@ -22,7 +22,6 @@ class CardApplyEffectTest extends FunSuite{
   override def beforeEach(context: BeforeEach): Unit = {
 
   }
-
   test("Si se le aplica un efecto a una carta de clima ocurre nada"){
 
   }

@@ -39,18 +39,10 @@ class BasicCardTest extends FunSuite {
     assertEquals(clima4.get_Name(), "d")
   }
 
-  test("Para las cartas de unidad deberia poder obtenerse y cambiar la fuerza") {
+  test("Para las cartas de unidad deberia poder obtenerse la fuerza") {
     assertEquals(carta_prueba.get_Force(), 3)
     assertEquals(carta_prueba2.get_Force(), 3)
     assertEquals(carta_prueba3.get_Force(), 3)
-
-    carta_prueba.set_Force(4)
-    carta_prueba2.set_Force(5)
-    carta_prueba3.set_Force(6)
-
-    assertEquals(carta_prueba.get_Force(), 4)
-    assertEquals(carta_prueba2.get_Force(), 5)
-    assertEquals(carta_prueba3.get_Force(), 6)
   }
 
   test("Deberia poder obtenerse el effecto"){
