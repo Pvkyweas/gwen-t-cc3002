@@ -4,6 +4,8 @@ import gwent.Card.Effect.IEffect
 
 import cl.uchile.dcc.gwent.Board.ISection
 
+import scala.collection.mutable.ListBuffer
+
 /** A class representing a range unity card
  *
  * @param name Name of the card
@@ -29,7 +31,10 @@ class RangeCard(private val name: String, private val effect: IEffect,
    *
    * @param Section Section that own the range zone
    */
-  override def playOnSection(Section: ISection): Unit = Section.addOnRange(this)
+  override def playOnSection(Section: ISection): Unit = {
+    Section.addOnRange(this)
+    effect.applyTo(this, Section.getRangeCard)
+  }
   
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {

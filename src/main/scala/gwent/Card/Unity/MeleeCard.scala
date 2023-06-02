@@ -5,6 +5,8 @@ import gwent.Card.Effect.IEffect
 
 import cl.uchile.dcc.gwent.Board.ISection
 
+import scala.collection.mutable.ListBuffer
+
 /** A class representing a melee unity card
  *
  * @param name Name of the card
@@ -30,7 +32,10 @@ class MeleeCard(private val name: String, private val effect: IEffect,
    * 
    * @param Section Section that own the melee zone
    */
-  override def playOnSection(Section: ISection): Unit = Section.addOnMelee(this)
+  override def playOnSection(Section: ISection): Unit = {
+    Section.addOnMelee(this)
+    effect.applyTo(this, Section.getMeleeCard)
+  }
   
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {
