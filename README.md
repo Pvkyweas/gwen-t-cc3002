@@ -66,3 +66,11 @@ Cuando un jugador quiere jugar una carta, se siguen los siguiente pasos:
 
 ![UML](https://github.com/dcc-cc3002/gwen-t-Pvkyweas/assets/112279911/b3011171-5543-4069-a310-382c606444b4)
 
+### Diagrama de estados
+
+![image](https://github.com/dcc-cc3002/gwen-t-Pvkyweas/assets/112279911/27d3470a-c296-4c52-ab7f-ee2c8ba83cc1)
+
+* InicioPartida: Aqui se realizan las acciones que inician la partida, como crear los mazos y robar las 10 cartas.
+* estadoRonda: Se ve si se cumple las condiciones de termino de la partida, indica a cada jugar si perdio la ronda.
+* turnos: Según de quien sea el turno, este podra pasar turno o jugar una carta, cada vez que su turno inicie, se le da la posibilidad de robar hasta 3 cartas.
+* FinPartida: La partida se termina, se indica al ganador y perdedor.
