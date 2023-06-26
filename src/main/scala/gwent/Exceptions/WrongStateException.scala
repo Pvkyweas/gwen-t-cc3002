@@ -1,4 +1,4 @@
 package cl.uchile.dcc
-package gwent.Game
+package gwent.Exceptions
 
 class WrongStateException(msg: String) extends Exception(msg)

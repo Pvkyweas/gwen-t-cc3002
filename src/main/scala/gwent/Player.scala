@@ -8,6 +8,7 @@ import gwent.Board.{Board, ISection}
 
 import cl.uchile.dcc.gwent.Card.Unity.ICardUnity
 import cl.uchile.dcc.gwent.Card.Weather.AbstractCardWeather
+import cl.uchile.dcc.gwent.Exceptions.BoardNotFoundException
 
 import scala.collection.generic.IsSeq
 
@@ -38,6 +39,8 @@ class Player(private val name: String,
   private var section_board: Option[ISection] = None
   private var board: Option[Board] = None
 
+  private def boardNotFoundError(msj: String): Unit = {throw new BoardNotFoundException(msj)}
+
   /** Draw a card from the hand by its position and play it in the board
    *  if the board is not defined, throw an assertionError with this message:
    *  "The player doesn't have a Board, add the player to a Board"
@@ -48,7 +51,7 @@ class Player(private val name: String,
     if (board.isDefined) {
       hand_cards.draw_Card(pos_card).get.playYourSelf(this)
     } else {
-      throw new AssertionError("The player doesn't have a Board, add the player to a Board")
+      boardNotFoundError("The player doesn't have a Board, add the player to a Board")
     }
   }
 
@@ -120,7 +123,8 @@ class Player(private val name: String,
     if (section_board.isDefined){
       section_board.get.get_side()
     } else {
-      throw new AssertionError("The player doesn't have a Section, add the player to a Board")
+      boardNotFoundError("The player doesn't have a Section, add the player to a Board")
+      "No deberia llegar hasta aqui"
     }
   }
 

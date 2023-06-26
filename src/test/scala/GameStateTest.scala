@@ -24,6 +24,9 @@ class GameStateTest extends FunSuite {
     val turnError = Assert.assertThrows(classOf[Exception], () => control.state.startTurns)
     assertEquals("Start can not transition to Turn", turnError.getMessage)
 
+    val passError = Assert.assertThrows(classOf[Exception], () => control.state.passTurn)
+    assertEquals("Start can not transition to Turn or Round", passError.getMessage)
+
     control.startGame
     assert(control.getState == "Round")
   }

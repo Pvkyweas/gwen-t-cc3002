@@ -41,12 +41,12 @@ class PlayerTest extends FunSuite {
   }
 
   test("Si se quiere saber la seccion de un jugador que no tiene, lanza un error") {
-    val e = Assert.assertThrows(classOf[AssertionError], () => jugador_porDefecto.get_Section())
+    val e = Assert.assertThrows(classOf[Exception], () => jugador_porDefecto.get_Section())
     assertEquals("The player doesn't have a Section, add the player to a Board", e.getMessage)
   }
 
   test("Si un jugador quiere jugar una carta cuando no tiene tablero, lanza error") {
-    val e = Assert.assertThrows(classOf[AssertionError], () => jugador_porDefecto.playCard(0))
+    val e = Assert.assertThrows(classOf[Exception], () => jugador_porDefecto.playCard(0))
     assertEquals("The player doesn't have a Board, add the player to a Board", e.getMessage)
   }
 
