@@ -51,9 +51,14 @@ Para la implementación del tablero, considere distintas opciones pero decidi qu
 
 ### Efectos
 
-Decidi que cada uno de los efectos fuera un objeto, estos tienen funciones que reciben una carta (que es la que busca aplicar el efecto) y una lista de cartas melee, rango o asedio. Hice un metodo protegido para asegurarme que en caso de que la carta que busca aplicar el efecto no tenga el efecto, tire un error con el siguiente mensaje: "The Card doesn't have the effect that you want to apply". 
+Para el funcionamiento de los efectos se considero que cada uno de los efectos tendria una expresión de este, esta expresión esta formada por objetos IOperation en donde estas operaciones estan encadenadas una a la otra. Dentro de las operaciones, las que se aplican solo a ciertas lineas especificas fueron hechas siguiendo el patron de diseño de Visitor ya que fue la mejor forma que se me ocurrio de saber si son de una linea o no, para la operación que se aplica a las cartas de la misma linea que la fuente del efecto solo se checkeo que la carta de origen del efecto estuviese en las cartas objetivo puesto que todos los efectos se ejecutan luego de haber añadido la carta.
 
-Tambien hay un efecto que representa el no tener efecto (NoneEffect).
+En cuanto a cuando se aplica el efecto de la carta que se añadió, como mencione antes, este se aplica despues de que la carta es añadida y para que las demás cartas sepan de que una carta fue añadida, se siguio el patrón de diseño Observer, en donde la zona de clima es observada por el tablero, el tablero es observado por las secciones y estas son observadas por las zonas de unidad además estas últimas tambien son observadas por las secciones, de forma que:
+
+* Cuando se añade una carta de clima, la zona de clima le notifica al tablero y este le notifica a las secciones y a su vez, estas notifican a sus zonas de unidad luego cada zona de unidad le dice a sus cartas que ha llegado la hora de aplicar un efecto.
+* Cuando se añade una carta de unidad, cada zona de unidad le notifica a su sección y estas le notifican a todas las zonas de unidad que tenga para luego las zonas de unidad le digan a sus cartas que ha llegado la hora de aplicar un efecto
+
+Tanto los efectos como las operaciones tienen un versión que hace nada, NoneEffect para los efectos y NoOperation para las operaciones.
 
 ### Como se juegan las cartas.
 
