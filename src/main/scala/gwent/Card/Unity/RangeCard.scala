@@ -3,6 +3,7 @@ package gwent.Card.Unity
 import gwent.Card.Effect.IEffect
 
 import cl.uchile.dcc.gwent.Board.ISection
+import cl.uchile.dcc.gwent.Card.Effect.Operations.ICardVisitor
 
 import scala.collection.mutable.ListBuffer
 
@@ -22,7 +23,7 @@ import scala.collection.mutable.ListBuffer
  * @see ICard, ICardUnity, AbstractUnityCard
  * @author Israel Rodriguez
  * @since 1.2.3
- * @version 1.0
+ * @version 1.1
  */
 class RangeCard(private val name: String, private val effect: IEffect,
                 private var force: Int) extends AbstractCardUnity(name, effect, force){
@@ -33,8 +34,14 @@ class RangeCard(private val name: String, private val effect: IEffect,
    */
   override def playOnSection(Section: ISection): Unit = {
     Section.addOnRange(this)
-    effect.applyTo(this, Section.getRangeCard)
   }
+
+  /** Method to accept a visitor object
+   * this be used to apply specific effects to range cards
+   *
+   * @param visitor Visitor object
+   */
+  override def accept(visitor: ICardVisitor): Unit = visitor.visitRange(this)
   
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {

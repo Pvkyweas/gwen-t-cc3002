@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 package gwent.Board
 
-import gwent.IPlayer
+import gwent.{IObservable, IObserver, IPlayer, ObserverObservable}
 
 import cl.uchile.dcc.gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
 import cl.uchile.dcc.gwent.Card.ICard
@@ -19,11 +19,11 @@ import scala.collection.mutable.ListBuffer
  * @see ISection, WeatherZone
  * @author Israel Rodriguez
  * @since 1.2.3
- * @version 1.0
+ * @version 1.1
  */
-class Board(private val Section1: ISection,
-            private val Section2: ISection,
-            private val wZone: WeatherZone) {
+class Board(private val Section1: Section,
+            private val Section2: Section,
+            private val wZone: WeatherZone) extends ObserverObservable{
 
   /* Variables that show if a section is taken or not
   * true if is taken
@@ -31,8 +31,14 @@ class Board(private val Section1: ISection,
   private var isSection1Taken: Boolean = false
   private var isSection2Taken: Boolean = false
 
+  // Set the side in each section
   Section1.set_side("Sección superior")
   Section2.set_side("Sección inferior")
+  // Register each section in the observer's list
+  registerObserver(Section1)
+  registerObserver(Section2)
+  // Tells the zone to add it
+  wZone.registerObserver(this)
 
   /** Method to add to a player a not taken section to play
    *
@@ -52,7 +58,6 @@ class Board(private val Section1: ISection,
     }
 
   }
-
 
   /** Method to add a weather card to weather zone
    *

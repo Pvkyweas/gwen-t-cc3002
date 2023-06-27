@@ -2,10 +2,11 @@ package cl.uchile.dcc
 package gwent.Card.Unity
 
 import gwent.Card.Unity.ICardUnity
-import gwent.Board.{Board, ISection, IZone}
+import gwent.Board.{AbstractUnityZone, Board, ISection, IZone}
 import gwent.Card.Effect.IEffect
 import gwent.Card.ICard
 
+import cl.uchile.dcc.gwent.Card.Effect.Operations.ICardVisitor
 import cl.uchile.dcc.gwent.IPlayer
 
 import scala.collection.mutable.ListBuffer
@@ -18,7 +19,7 @@ import scala.collection.mutable.ListBuffer
  * @see ICard, ICardUnity
  * @author Israel Rodriguez
  * @since 1.2.3
- * @version 1.0
+ * @version 1.1
  */
 abstract class AbstractCardUnity(private val name: String,
                                  private val effect: IEffect,
@@ -35,7 +36,9 @@ abstract class AbstractCardUnity(private val name: String,
   def get_Name(): String = name
 
   /* Return the effect of the card */
-  def get_Effect(): String = effect.get_effect()
+  def get_Effect(): String = {
+    effect.get_effect()
+  }
 
   /** Method to obtain the force value or brute_force value
    *
@@ -81,9 +84,8 @@ abstract class AbstractCardUnity(private val name: String,
    * @param p Player who add the card to board
    */
   def playYourSelf(p: IPlayer): Unit = {p.playMe(this)}
-  
-  def playOnSection(Section: ISection): Unit = ???
-  
+
+  def applyYourEffect[C<:ICardUnity](where: AbstractUnityZone[C]): Unit = {effect.apply(this, where.get_Card)}
   
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {

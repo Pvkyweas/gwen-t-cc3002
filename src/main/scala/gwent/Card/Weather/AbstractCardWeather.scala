@@ -2,7 +2,7 @@ package cl.uchile.dcc
 package gwent.Card.Weather
 
 import gwent.Card.ICard
-import gwent.Board.{Board, ISection, IZone, MeleeZone, RangeZone, SiegeZone}
+import gwent.Board.{AbstractUnityZone, Board, ISection, IZone, MeleeZone, RangeZone, SiegeZone}
 import gwent.Card.Effect.IEffect
 
 import cl.uchile.dcc.gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
@@ -16,7 +16,7 @@ import scala.collection.mutable.ListBuffer
  * @see ICard
  * @author Israel Rodriguez
  * @since 1.2.3
- * @version 1.0
+ * @version 1.1
  */
 abstract class AbstractCardWeather(private val name: String,private val effect: IEffect) extends ICard{
 
@@ -38,13 +38,9 @@ abstract class AbstractCardWeather(private val name: String,private val effect: 
    */
   def playOnBoard(b: Board): Unit = {
     b.addOnW(this)
-    effect.applyFromWeatherToMelee(this, b.get_Melee(true))
-    effect.applyFromWeatherToRange(this, b.get_Range(true))
-    effect.applyFromWeatherToSiege(this, b.get_Siege(true))
-    effect.applyFromWeatherToMelee(this, b.get_Melee(false))
-    effect.applyFromWeatherToRange(this, b.get_Range(false))
-    effect.applyFromWeatherToSiege(this, b.get_Siege(false))
   }
+
+  def applyYourEffect[C<:ICardUnity](where: AbstractUnityZone[C]): Unit = {effect.apply(this, where.get_Card)}
 
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {

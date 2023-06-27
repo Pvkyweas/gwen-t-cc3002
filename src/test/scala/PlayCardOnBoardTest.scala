@@ -16,8 +16,8 @@ class PlayCardOnBoardTest extends FunSuite {
 
   var Player1: IPlayer = _
   var Player2: IPlayer = _
-  var Section1: ISection = _
-  var Section2: ISection = _
+  var Section1: Section = _
+  var Section2: Section = _
   var Board: Board = _
   var wCard: AbstractCardWeather = _
   var wCard2: AbstractCardWeather = _

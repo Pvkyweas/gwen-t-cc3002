@@ -47,19 +47,6 @@ class CardApplyEffectTest extends FunSuite{
   var Sprueba: ISection = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    // Unidad
-    Cprueba_melee = new MeleeCard("m1", new NoneEffect(), 2)
-    Cprueba_distancia = new RangeCard("d1", new NoneEffect(), 3)
-    Cprueba_asedio = new SiegeCard("a1", new NoneEffect(), 4)
-    Cprueba_melee2 = new MeleeCard("m2", Eunity_MB, 3)
-    Cprueba_distancia2 = new RangeCard("d2", Eunity_MB, 4)
-    Cprueba_asedio2 = new SiegeCard("a2", Eunity_MB, 5)
-    Cprueba_melee_CB = new MeleeCard("m1", Eunity_CB, 3)
-
-    lista_melee = ListBuffer(Cprueba_melee, Cprueba_melee2, Cprueba_melee_CB)
-    lista_distancia = ListBuffer(Cprueba_distancia, Cprueba_distancia2)
-    lista_asedio = ListBuffer(Cprueba_asedio, Cprueba_asedio2)
-
     // Clima
     Cprueba_clima1 = new ClearWeatherCard("Soleado")
     Cprueba_clima2 = new TorrentialRainWeatherCard("Lluvia Torrencial")
@@ -75,12 +62,24 @@ class CardApplyEffectTest extends FunSuite{
     Eclima_IF = new ImpenetrableFogEffect()
     Enone = new NoneEffect()
 
+    // Unidad
+    Cprueba_melee = new MeleeCard("m1", new NoneEffect(), 2)
+    Cprueba_distancia = new RangeCard("d1", new NoneEffect(), 3)
+    Cprueba_asedio = new SiegeCard("a1", new NoneEffect(), 4)
+    Cprueba_melee2 = new MeleeCard("m2", Eunity_MB, 3)
+    Cprueba_distancia2 = new RangeCard("d2", Eunity_MB, 4)
+    Cprueba_asedio2 = new SiegeCard("a2", Eunity_MB, 5)
+    Cprueba_melee_CB = new MeleeCard("m1", Eunity_CB, 3)
+
+    lista_melee = ListBuffer(Cprueba_melee, Cprueba_melee2, Cprueba_melee_CB)
+    lista_distancia = ListBuffer(Cprueba_distancia, Cprueba_distancia2)
+    lista_asedio = ListBuffer(Cprueba_asedio, Cprueba_asedio2)
   }
 
   test("NoneEffect hace nada"){
-    Enone.applyTo(Cprueba_melee, lista_melee)
-    Enone.applyTo(Cprueba_distancia, lista_distancia)
-    Enone.applyTo(Cprueba_asedio, lista_asedio)
+    Enone.apply(Cprueba_melee, lista_melee)
+    Enone.apply(Cprueba_distancia, lista_distancia)
+    Enone.apply(Cprueba_asedio, lista_asedio)
 
     assertEquals(Cprueba_melee.get_Force(), 2)
     assertEquals(Cprueba_melee2.get_Force(), 3)
@@ -94,9 +93,9 @@ class CardApplyEffectTest extends FunSuite{
   }
 
   test("MoralBooster suma 1 a la fuerza de las cartas de la misma linea") {
-    Eunity_MB.applyTo(Cprueba_melee2, lista_melee)
-    Eunity_MB.applyTo(Cprueba_distancia2, lista_distancia)
-    Eunity_MB.applyTo(Cprueba_asedio2, lista_asedio)
+    Eunity_MB.apply(Cprueba_melee2, lista_melee)
+    Eunity_MB.apply(Cprueba_distancia2, lista_distancia)
+    Eunity_MB.apply(Cprueba_asedio2, lista_asedio)
 
     assertEquals(Cprueba_melee.get_Force(), 3)
     assertEquals(Cprueba_melee2.get_Force(), 3) // <= Esta carta es la que aplica el efecto
@@ -110,7 +109,7 @@ class CardApplyEffectTest extends FunSuite{
   }
 
   test("CloseBond duplica la fuerza de las cartas con mismo nombre en la linea") {
-    Eunity_CB.applyTo(Cprueba_melee_CB, lista_melee)
+    Eunity_CB.apply(Cprueba_melee_CB, lista_melee)
 
     assertEquals(Cprueba_melee.get_Force(), 4)
     assertEquals(Cprueba_melee2.get_Force(), 3) // <= Esta carta tiene otro nombre
@@ -118,9 +117,9 @@ class CardApplyEffectTest extends FunSuite{
   }
 
   test("TorrentialRain establece a 1 la fuerza de las cartas asedio") {
-    Eclima_TR.applyFromWeatherToMelee(Cprueba_clima2, lista_melee)
-    Eclima_TR.applyFromWeatherToRange(Cprueba_clima2, lista_distancia)
-    Eclima_TR.applyFromWeatherToSiege(Cprueba_clima2, lista_asedio)
+    Eclima_TR.apply(Cprueba_clima2, lista_melee)
+    Eclima_TR.apply(Cprueba_clima2, lista_distancia)
+    Eclima_TR.apply(Cprueba_clima2, lista_asedio)
 
     assertEquals(Cprueba_melee.get_Force(), 2)
     assertEquals(Cprueba_melee2.get_Force(), 3)
@@ -134,9 +133,9 @@ class CardApplyEffectTest extends FunSuite{
   }
 
   test("BitingFrost establece a 1 la fuerza de las cartas melee") {
-    Eclima_BF.applyFromWeatherToMelee(Cprueba_clima3, lista_melee)
-    Eclima_BF.applyFromWeatherToRange(Cprueba_clima3, lista_distancia)
-    Eclima_BF.applyFromWeatherToSiege(Cprueba_clima3, lista_asedio)
+    Eclima_BF.apply(Cprueba_clima3, lista_melee)
+    Eclima_BF.apply(Cprueba_clima3, lista_distancia)
+    Eclima_BF.apply(Cprueba_clima3, lista_asedio)
 
     assertEquals(Cprueba_melee.get_Force(), 1)
     assertEquals(Cprueba_melee2.get_Force(), 1)
@@ -149,9 +148,9 @@ class CardApplyEffectTest extends FunSuite{
     assertEquals(Cprueba_asedio2.get_Force(), 5)
   }
   test("ImpenetrableFog establece a 1 la fuerza de las cartas rango") {
-    Eclima_IF.applyFromWeatherToMelee(Cprueba_clima4, lista_melee)
-    Eclima_IF.applyFromWeatherToRange(Cprueba_clima4, lista_distancia)
-    Eclima_IF.applyFromWeatherToSiege(Cprueba_clima4, lista_asedio)
+    Eclima_IF.apply(Cprueba_clima4, lista_melee)
+    Eclima_IF.apply(Cprueba_clima4, lista_distancia)
+    Eclima_IF.apply(Cprueba_clima4, lista_asedio)
 
     assertEquals(Cprueba_melee.get_Force(), 2)
     assertEquals(Cprueba_melee2.get_Force(), 3)
@@ -166,9 +165,9 @@ class CardApplyEffectTest extends FunSuite{
 
   test("Si las cartas estan afectadas por un clima, ClearWeather les quita el efecto, si no, hace nada") {
     // Se prueba que no haga nada
-    Eclima_CW.applyFromWeatherToMelee(Cprueba_clima1, lista_melee)
-    Eclima_CW.applyFromWeatherToRange(Cprueba_clima1, lista_distancia)
-    Eclima_CW.applyFromWeatherToSiege(Cprueba_clima1, lista_asedio)
+    Eclima_CW.apply(Cprueba_clima1, lista_melee)
+    Eclima_CW.apply(Cprueba_clima1, lista_distancia)
+    Eclima_CW.apply(Cprueba_clima1, lista_asedio)
 
     assertEquals(Cprueba_melee.get_Force(), 2)
     assertEquals(Cprueba_melee2.get_Force(), 3)
@@ -181,14 +180,14 @@ class CardApplyEffectTest extends FunSuite{
     assertEquals(Cprueba_asedio2.get_Force(), 5)
 
     // Se prueba colocando un efecto de clima cualquiera
-    Eclima_BF.applyFromWeatherToMelee(Cprueba_clima3, lista_melee)
-    Eclima_BF.applyFromWeatherToRange(Cprueba_clima3, lista_distancia)
-    Eclima_BF.applyFromWeatherToSiege(Cprueba_clima3, lista_asedio)
+    Eclima_BF.apply(Cprueba_clima3, lista_melee)
+    Eclima_BF.apply(Cprueba_clima3, lista_distancia)
+    Eclima_BF.apply(Cprueba_clima3, lista_asedio)
 
     // Se vuelve a colocar Clima despejado
-    Eclima_CW.applyFromWeatherToMelee(Cprueba_clima1, lista_melee)
-    Eclima_CW.applyFromWeatherToRange(Cprueba_clima1, lista_distancia)
-    Eclima_CW.applyFromWeatherToSiege(Cprueba_clima1, lista_asedio)
+    Eclima_CW.apply(Cprueba_clima1, lista_melee)
+    Eclima_CW.apply(Cprueba_clima1, lista_distancia)
+    Eclima_CW.apply(Cprueba_clima1, lista_asedio)
 
     // Se comprueba que los valores sean los originales
     assertEquals(Cprueba_melee.get_Force(), 2)
@@ -204,60 +203,60 @@ class CardApplyEffectTest extends FunSuite{
 
   test("Si se aplican los efectos en el siguiente orden: Cualquiera de clima(menos CW), MB o CB, CW el valor de fuerza " +
     "final es como si no se hubiera colocado el primer efecto"){
-    Eclima_BF.applyFromWeatherToMelee(Cprueba_clima3, lista_melee)
+    Eclima_BF.apply(Cprueba_clima3, lista_melee)
     assertEquals(Cprueba_melee.get_Force(), 1)
-    Eunity_MB.applyTo(Cprueba_melee2, lista_melee)
+    Eunity_MB.apply(Cprueba_melee2, lista_melee)
     assertEquals(Cprueba_melee.get_Force(), 1)
-    Eclima_CW.applyFromWeatherToMelee(Cprueba_clima1, lista_melee)
+    Eclima_CW.apply(Cprueba_clima1, lista_melee)
     assertEquals(Cprueba_melee.get_Force(), 3)
   }
 
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: NoneEffect"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Enone.applyTo(Cprueba_melee2, lista_melee))
+    val e = Assert.assertThrows(classOf[AssertionError], () => Enone.apply(Cprueba_melee2, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
   }
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: MoralBooster"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Eunity_MB.applyTo(Cprueba_melee, lista_melee))
+    val e = Assert.assertThrows(classOf[AssertionError], () => Eunity_MB.apply(Cprueba_melee, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
 
   }
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: CloseBond"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Eunity_CB.applyTo(Cprueba_melee2, lista_melee))
+    val e = Assert.assertThrows(classOf[AssertionError], () => Eunity_CB.apply(Cprueba_melee2, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
 
   }
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: ClearWeather"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Eclima_CW.applyFromWeatherToMelee(Cprueba_clima2, lista_melee))
+    val e = Assert.assertThrows(classOf[AssertionError], () => Eclima_CW.apply(Cprueba_clima2, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
 
   }
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: TorrentialRain"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Eclima_TR.applyFromWeatherToMelee(Cprueba_clima3, lista_melee))
+    val e = Assert.assertThrows(classOf[AssertionError], () => Eclima_TR.apply(Cprueba_clima3, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
 
   }
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: BitingFrost"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Eclima_BF.applyFromWeatherToMelee(Cprueba_clima4, lista_melee))
+    val e = Assert.assertThrows(classOf[AssertionError], () => Eclima_BF.apply(Cprueba_clima4, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
 
   }
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: ImpenetrableFog"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Eclima_IF.applyFromWeatherToMelee(Cprueba_clima1, lista_melee))
+    val e = Assert.assertThrows(classOf[AssertionError], () => Eclima_IF.apply(Cprueba_clima1, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
   }
 
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: NoneEffect - Clima a melee"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Enone.applyFromWeatherToMelee(Cprueba_clima1, lista_melee))
+    val e = Assert.assertThrows(classOf[AssertionError], () => Enone.apply(Cprueba_clima1, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
   }
 
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: NoneEffect - Clima a range") {
-    val e = Assert.assertThrows(classOf[AssertionError], () => Enone.applyFromWeatherToRange(Cprueba_clima1, lista_distancia))
+    val e = Assert.assertThrows(classOf[AssertionError], () => Enone.apply(Cprueba_clima1, lista_distancia))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
   }
 
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: NoneEffect - Clima a asedio") {
-    val e = Assert.assertThrows(classOf[AssertionError], () => Enone.applyFromWeatherToSiege(Cprueba_clima1, lista_asedio))
+    val e = Assert.assertThrows(classOf[AssertionError], () => Enone.apply(Cprueba_clima1, lista_asedio))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
   }
 

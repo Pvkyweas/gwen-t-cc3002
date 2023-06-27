@@ -4,24 +4,33 @@ import gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
 
 import scala.collection.mutable.ListBuffer
 import cl.uchile.dcc.gwent.Card.ICard
+import cl.uchile.dcc.gwent.{IObservable, IObserver, Observable, ObserverObservable}
 
 /** A class that represent a Section in which 3 different zones can be found
  *
  * @param mZone Zone for melee cards, it has to be a MeleeZone
  * @param rZone Zone for range cards, it has to be a RangeZone
  * @param sZone Zone for siege cards, it has to be a SiegeZone
- *
  * @see ISection, WeatherZone
  * @author Israel Rodriguez
  * @since 1.2.3
- * @version 1.0
+ * @version 1.1
  */
 class Section(private val mZone: MeleeZone,
               private val rZone: RangeZone,
-              private val sZone: SiegeZone) extends ISection{
+              private val sZone: SiegeZone) extends ObserverObservable with ISection{
 
   /* variable to say which side of the board it is on */
   private var whichSide: String = "no definido"
+  
+  // Register all zones to the observer's list
+  registerObserver(mZone)
+  registerObserver(rZone)
+  registerObserver(sZone)
+  // Tells to all zones to register this section to its observer
+  mZone.registerObserver(this)
+  rZone.registerObserver(this)
+  sZone.registerObserver(this)
 
   /** Method to specify the side of the section
    *
@@ -36,19 +45,28 @@ class Section(private val mZone: MeleeZone,
    * 
    * @param c Card to add
    */
-  def addOnMelee(c: MeleeCard): Unit = mZone.add_Card(c)
+  def addOnMelee(c: MeleeCard): Unit = {
+    mZone.add_Card(c)
+    notifyCardAdded(c)
+  }
 
   /** Add a unity card on Range zone
    *
    * @param c Card to add
    */
-  def addOnRange(c: RangeCard): Unit = rZone.add_Card(c)
+  def addOnRange(c: RangeCard): Unit = {
+    rZone.add_Card(c)
+    notifyCardAdded(c)
+  }
 
   /** Add a unity card on Siege zone
    *
    * @param c Card to add
    */
-  def addOnSiege(c: SiegeCard): Unit = sZone.add_Card(c)
+  def addOnSiege(c: SiegeCard): Unit = {
+    sZone.add_Card(c)
+    notifyCardAdded(c)
+  }
   
   /* Returns a listbuffer with melee cards */
   def getMeleeCard: ListBuffer[MeleeCard] = {mZone.get_Card}
