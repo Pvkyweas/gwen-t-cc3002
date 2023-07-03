@@ -23,7 +23,7 @@ import scala.collection.mutable.ListBuffer
  */
 class Board(private val Section1: Section,
             private val Section2: Section,
-            private val wZone: WeatherZone) extends ObserverObservable{
+            private val wZone: WeatherZone){
 
   /* Variables that show if a section is taken or not
   * true if is taken
@@ -34,11 +34,9 @@ class Board(private val Section1: Section,
   // Set the side in each section
   Section1.set_side("Sección superior")
   Section2.set_side("Sección inferior")
-  // Register each section in the observer's list
-  registerObserver(Section1)
-  registerObserver(Section2)
   // Tells the zone to add it
-  wZone.registerObserver(this)
+  wZone.registerObserver(Section1)
+  wZone.registerObserver(Section2)
 
   /** Method to add to a player a not taken section to play
    *
