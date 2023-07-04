@@ -1,7 +1,9 @@
 package cl.uchile.dcc
-package gwent
+package gwent.Observer_Observable
 
-import cl.uchile.dcc.gwent.Card.ICard
+import gwent.Card.ICard
+
+import cl.uchile.dcc.gwent.Observer_Observable.Notifications.INotification
 
 import scala.collection.mutable.ListBuffer
 
@@ -23,10 +25,10 @@ class Observable extends IObservable {
 
   /** Method to notify to all observers that a card was added
    *
-   * @param card the added card
+   * @param content the added card
    */
-  def notifyCardAdded(card: ICard): Unit = {
-    observers.foreach((s: IObserver) => s.getNotification(this, card))
+  def notify(content: INotification): Unit = {
+    observers.foreach((s: IObserver) => s.getNotification(content))
   }
 
 }

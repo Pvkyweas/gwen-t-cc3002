@@ -4,7 +4,8 @@ import gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
 
 import scala.collection.mutable.ListBuffer
 import cl.uchile.dcc.gwent.Card.ICard
-import cl.uchile.dcc.gwent.{IObservable, IObserver, Observable, ObserverObservable}
+import cl.uchile.dcc.gwent.Observer_Observable.Notifications.AddCardNotification
+import cl.uchile.dcc.gwent.Observer_Observable.{IObservable, IObserver, Observable, ObserverObservable}
 
 /** A class that represent a Section in which 3 different zones can be found
  *
@@ -47,7 +48,7 @@ class Section(private val mZone: MeleeZone,
    */
   def addOnMelee(c: MeleeCard): Unit = {
     mZone.add_Card(c)
-    notifyCardAdded(c)
+    notify(new AddCardNotification(c))
   }
 
   /** Add a unity card on Range zone
@@ -56,7 +57,7 @@ class Section(private val mZone: MeleeZone,
    */
   def addOnRange(c: RangeCard): Unit = {
     rZone.add_Card(c)
-    notifyCardAdded(c)
+    notify(new AddCardNotification(c))
   }
 
   /** Add a unity card on Siege zone
@@ -65,7 +66,7 @@ class Section(private val mZone: MeleeZone,
    */
   def addOnSiege(c: SiegeCard): Unit = {
     sZone.add_Card(c)
-    notifyCardAdded(c)
+    notify(new AddCardNotification(c))
   }
   
   /* Returns a listbuffer with melee cards */

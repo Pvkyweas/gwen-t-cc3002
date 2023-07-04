@@ -3,7 +3,8 @@ package gwent.Board
 
 import cl.uchile.dcc.gwent.Card.ICard
 import cl.uchile.dcc.gwent.Card.Unity.{ICardUnity, RangeCard}
-import cl.uchile.dcc.gwent.{IObservable, IObserver, Observable, ObserverObservable}
+import cl.uchile.dcc.gwent.Observer_Observable.Notifications.{AddCardNotification, INotification}
+import cl.uchile.dcc.gwent.Observer_Observable.{IObservable, IObserver, Observable, ObserverObservable}
 
 import scala.collection.mutable.ListBuffer
 
@@ -15,18 +16,17 @@ import scala.collection.mutable.ListBuffer
  * @see ICardUnity, IZone
  * @author Israel Rodriguez
  * @since 1.2.3
- * @version 1.1
+ * @version 1.2
  */
 abstract class AbstractUnityZone[C<:ICardUnity](private val cardsOnZone:ListBuffer[C] = new ListBuffer[C]()) extends ObserverObservable with IZone[C]{
 
   /** Method to handle the received notification
    *  When a card is added in the board, this notification is received
-   *  so the zone tells to the new card to apply its effect in the zone
+   *  and the zone says to the notification to read to it
    *
-   * @param whoNotify from who is the notification
-   * @param content the content of the notification
+   * @param content the notification
    */
-  override def getNotification(whoNotify: IObservable, content: ICard): Unit = {content.applyYourEffect(this)}
+  override def getNotification(content: INotification): Unit = {content.readAboutCard(this)}
 
   /** Add a card to the Zone and notify to its observer
    *
@@ -34,7 +34,7 @@ abstract class AbstractUnityZone[C<:ICardUnity](private val cardsOnZone:ListBuff
    */
   def add_Card(Card: C): Unit = {
     cardsOnZone.addOne(Card)
-    notifyCardAdded(Card)
+    notify(new AddCardNotification(Card))
   }
 
   /** Method to obtain the cards on Zone

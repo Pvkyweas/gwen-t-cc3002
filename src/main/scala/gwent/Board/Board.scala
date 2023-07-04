@@ -1,11 +1,12 @@
 package cl.uchile.dcc
 package gwent.Board
 
-import gwent.{IObservable, IObserver, IPlayer, ObserverObservable}
+import gwent.IPlayer
 
 import cl.uchile.dcc.gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
 import cl.uchile.dcc.gwent.Card.ICard
 import cl.uchile.dcc.gwent.Card.Weather.AbstractCardWeather
+import cl.uchile.dcc.gwent.Observer_Observable.{IObservable, IObserver, ObserverObservable}
 
 import scala.collection.mutable.ListBuffer
 

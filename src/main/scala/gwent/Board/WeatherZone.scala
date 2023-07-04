@@ -4,7 +4,8 @@ package gwent.Board
 import gwent.Card.ICard
 
 import cl.uchile.dcc.gwent.Card.Weather.{AbstractCardWeather, ClearWeatherCard}
-import cl.uchile.dcc.gwent.{IObservable, IObserver, Observable}
+import cl.uchile.dcc.gwent.Observer_Observable.Notifications.AddCardNotification
+import cl.uchile.dcc.gwent.Observer_Observable.{IObservable, IObserver, Observable}
 
 /** A class that represent a Zone for weather cards, by default the card in this zone
  * is a ClearWeather
@@ -25,7 +26,7 @@ class WeatherZone extends Observable with IZone[AbstractCardWeather]{
    */
   def add_Card(Card: AbstractCardWeather): Unit = {
     cardSlot = Card
-    notifyCardAdded(Card)
+    notify(new AddCardNotification(Card))
   }
 
   /* This method returns the card in cardSlot */
