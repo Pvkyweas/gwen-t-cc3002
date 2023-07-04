@@ -6,6 +6,7 @@ import cl.uchile.dcc.gwent.Board.AbstractUnityZone
 import cl.uchile.dcc.gwent.Card.Effect.Operations.{IOperation, NoOperation}
 import cl.uchile.dcc.gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
 import cl.uchile.dcc.gwent.Card.Weather.AbstractCardWeather
+import cl.uchile.dcc.gwent.Exceptions.CardHasNotThisEffectException
 
 import scala.collection.mutable.ListBuffer
 
@@ -20,7 +21,7 @@ abstract class Effects extends IEffect {
   /**
    * Method that returns the error when a cards try to apply an effect that it doesn't have
    */
-  protected def error(): Unit = {throw new AssertionError("The Card doesn't have the effect that you want to apply")}
+  protected def error(): Unit = {throw new CardHasNotThisEffectException("The Card doesn't have the effect that you want to apply")}
 
   /** Method to check if the cards has the effect that wants to apply
    *

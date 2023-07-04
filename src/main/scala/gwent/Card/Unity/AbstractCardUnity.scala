@@ -85,6 +85,11 @@ abstract class AbstractCardUnity(private val name: String,
    */
   def playYourSelf(p: IPlayer): Unit = {p.playMe(this)}
 
+  /** Method to apply the effect of the card on a specific zone
+   *
+   * @param where Zone to apply the effect
+   * @tparam C Type of the cards on the zone, it can be MeleeCard, RangeCard or SiegeCard
+   */
   def applyYourEffect[C<:ICardUnity](where: AbstractUnityZone[C]): Unit = {effect.apply(this, where.get_Card)}
   
   override def equals(obj: Any): Boolean = {

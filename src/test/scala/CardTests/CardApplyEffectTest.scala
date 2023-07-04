@@ -212,51 +212,51 @@ class CardApplyEffectTest extends FunSuite{
   }
 
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: NoneEffect"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Enone.apply(Cprueba_melee2, lista_melee))
+    val e = Assert.assertThrows(classOf[Exception], () => Enone.apply(Cprueba_melee2, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
   }
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: MoralBooster"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Eunity_MB.apply(Cprueba_melee, lista_melee))
+    val e = Assert.assertThrows(classOf[Exception], () => Eunity_MB.apply(Cprueba_melee, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
 
   }
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: CloseBond"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Eunity_CB.apply(Cprueba_melee2, lista_melee))
+    val e = Assert.assertThrows(classOf[Exception], () => Eunity_CB.apply(Cprueba_melee2, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
 
   }
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: ClearWeather"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Eclima_CW.apply(Cprueba_clima2, lista_melee))
+    val e = Assert.assertThrows(classOf[Exception], () => Eclima_CW.apply(Cprueba_clima2, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
 
   }
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: TorrentialRain"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Eclima_TR.apply(Cprueba_clima3, lista_melee))
+    val e = Assert.assertThrows(classOf[Exception], () => Eclima_TR.apply(Cprueba_clima3, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
 
   }
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: BitingFrost"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Eclima_BF.apply(Cprueba_clima4, lista_melee))
+    val e = Assert.assertThrows(classOf[Exception], () => Eclima_BF.apply(Cprueba_clima4, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
 
   }
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: ImpenetrableFog"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Eclima_IF.apply(Cprueba_clima1, lista_melee))
+    val e = Assert.assertThrows(classOf[Exception], () => Eclima_IF.apply(Cprueba_clima1, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
   }
 
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: NoneEffect - Clima a melee"){
-    val e = Assert.assertThrows(classOf[AssertionError], () => Enone.apply(Cprueba_clima1, lista_melee))
+    val e = Assert.assertThrows(classOf[Exception], () => Enone.apply(Cprueba_clima1, lista_melee))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
   }
 
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: NoneEffect - Clima a range") {
-    val e = Assert.assertThrows(classOf[AssertionError], () => Enone.apply(Cprueba_clima1, lista_distancia))
+    val e = Assert.assertThrows(classOf[Exception], () => Enone.apply(Cprueba_clima1, lista_distancia))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
   }
 
   test("No se puede aplicar un efecto si la carta que busca aplicar el efecto no lo tiene: NoneEffect - Clima a asedio") {
-    val e = Assert.assertThrows(classOf[AssertionError], () => Enone.apply(Cprueba_clima1, lista_asedio))
+    val e = Assert.assertThrows(classOf[Exception], () => Enone.apply(Cprueba_clima1, lista_asedio))
     assertEquals("The Card doesn't have the effect that you want to apply", e.getMessage)
   }
 
