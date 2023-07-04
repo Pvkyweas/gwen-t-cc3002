@@ -11,7 +11,7 @@ import cl.uchile.dcc.gwent.Observer_Observable.IObserver
  *
  * @param content The card that was added and want to notify
  */
-class AddCardNotification(content: ICard) extends INotification {
+class AddCardNotification(content: ICard) extends AbstractNotification {
 
   /** Used to apply the effect of the content to a zone that received this notification
    * This Method calls the method applyYourEffect of the content
@@ -19,5 +19,5 @@ class AddCardNotification(content: ICard) extends INotification {
    * @param zone Zone to apply the effect and who receive the notification
    * @tparam C Type of the Zone
    */
-  def readAboutCard[C <: ICardUnity](zone: AbstractUnityZone[C]): Unit = {content.applyYourEffect(zone)}
+  override def readAboutCard[C <: ICardUnity](zone: AbstractUnityZone[C]): Unit = {content.applyYourEffect(zone)}
 }

@@ -4,8 +4,10 @@ package gwent.Game
 import gwent.Game.State.{GameState, StartState}
 
 import cl.uchile.dcc.gwent.IPlayer
+import cl.uchile.dcc.gwent.Observer_Observable.IObserver
+import cl.uchile.dcc.gwent.Observer_Observable.Notifications.INotification
 
-class GameController() {
+class GameController() extends IObserver{
   var state: GameState = new StartState(this)
 
   val deckFactory: DeckFactory = new DeckFactory()
@@ -25,4 +27,9 @@ class GameController() {
   def passTurn: Unit = {state.passTurn}
 
   def startTuns: Unit = {state.startTurns}
+
+  def playerLoss(whoLoss: IPlayer): Unit = {}
+
+  // Observer's method
+  def getNotification(content: INotification): Unit = {content.readAboutWhoLoss(this)}
 }

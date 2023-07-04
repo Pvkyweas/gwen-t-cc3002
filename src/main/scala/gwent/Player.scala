@@ -9,6 +9,8 @@ import gwent.Board.{Board, ISection}
 import cl.uchile.dcc.gwent.Card.Unity.ICardUnity
 import cl.uchile.dcc.gwent.Card.Weather.AbstractCardWeather
 import cl.uchile.dcc.gwent.Exceptions.BoardNotFoundException
+import cl.uchile.dcc.gwent.Observer_Observable.Notifications.NoGemsNotification
+import cl.uchile.dcc.gwent.Observer_Observable.Observable
 
 import scala.collection.generic.IsSeq
 
@@ -33,7 +35,7 @@ import scala.collection.generic.IsSeq
 class Player(private val name: String,
              private var gem_counter: Int = 2,
              private val deck_cards: Deck,
-             private val hand_cards: HandDeck) extends IPlayer {
+             private val hand_cards: HandDeck) extends Observable with IPlayer {
 
   /* Section in which the player will play their cards*/
   private var section_board: Option[ISection] = None
@@ -97,8 +99,15 @@ class Player(private val name: String,
       hand_cards.add_multipleCard(deck_cards.draw_multipleCard(num_cards))
   }
 
-  /** subtract 1 from the gem counter, if the gem_counter is 0 then does nothing */
-  def lostRound(): Unit = {if (gem_counter > 0 ) gem_counter = gem_counter - 1}
+  /** subtract 1 from the gem counter, if the gem_counter is 0 then notify to the game controller */
+  def lostRound(): Unit = {
+    if (gem_counter > 0 ) {
+      gem_counter = gem_counter - 1
+      if (gem_counter == 0) {
+        notify(new NoGemsNotification(this))
+      }
+    }
+  }
 
   /** Randomly change the order of the cards in deck */
   def shuffle(): Unit = deck_cards.shuffle()
