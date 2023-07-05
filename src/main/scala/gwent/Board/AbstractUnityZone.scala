@@ -39,8 +39,9 @@ abstract class AbstractUnityZone[C<:ICardUnity](private val cardsOnZone:ListBuff
 
   /** Method to obtain the cards on Zone
    *
-   * @return ListBuffer[ICard] with the cards
+   * @return ListBuffer[ICard] with the cards, is a copy of the original
    */
-  def get_Card: ListBuffer[C] = cardsOnZone
-
+  def get_Card: ListBuffer[C] = {
+    ListBuffer(cardsOnZone.toList: _*)
+  }
 }
