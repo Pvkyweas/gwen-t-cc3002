@@ -11,6 +11,5 @@ trait ICardUnity extends ICard {
   private[Card] def set_Force(newForce: Int): Unit
   private[Card] def set_affectedByW(isAffectedNow: Boolean): Unit
   private[Card] def reset():Unit
-  def playOnSection(Section: ISection): Unit
   def accept(visitor: ICardVisitor): Unit
 }

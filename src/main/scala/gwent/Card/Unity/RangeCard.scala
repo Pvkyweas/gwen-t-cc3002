@@ -28,12 +28,12 @@ import scala.collection.mutable.ListBuffer
 class RangeCard(private val name: String, private val effect: IEffect,
                 private var force: Int) extends AbstractCardUnity(name, effect, force){
 
-  /** Add this card on range zone of the section
+  /** Method to add this unity card to a zone of the Board, the section is who add the card
    *
-   * @param Section Section that own the range zone
+   * @param s Section in which the card will be added
    */
-  override def playOnSection(Section: ISection): Unit = {
-    Section.addOnRange(this)
+  def playYourSelf(s: ISection): Unit = {
+    s.addOnRange(this)
   }
 
   /** Method to accept a visitor object

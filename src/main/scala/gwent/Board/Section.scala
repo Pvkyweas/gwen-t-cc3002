@@ -4,22 +4,28 @@ import gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
 
 import scala.collection.mutable.ListBuffer
 import cl.uchile.dcc.gwent.Card.ICard
+import cl.uchile.dcc.gwent.Card.Weather.ICardWeather
 import cl.uchile.dcc.gwent.Observer_Observable.Notifications.AddCardNotification
 import cl.uchile.dcc.gwent.Observer_Observable.{IObservable, IObserver, Observable, ObserverObservable}
 
 /** A class that represent a Section in which 3 different zones can be found
  *
- * @param mZone Zone for melee cards, it has to be a MeleeZone
- * @param rZone Zone for range cards, it has to be a RangeZone
- * @param sZone Zone for siege cards, it has to be a SiegeZone
  * @see ISection, WeatherZone
  * @author Israel Rodriguez
  * @since 1.2.3
  * @version 1.1
  */
-class Section(private val mZone: MeleeZone,
-              private val rZone: RangeZone,
-              private val sZone: SiegeZone) extends ObserverObservable with ISection{
+class Section() extends ObserverObservable with ISection{
+
+  /* Zone for melee cards, it has to be a MeleeZone*/
+  private val mZone: MeleeZone = new MeleeZone()
+  /* Zone for range cards, it has to be a RangeZone*/
+  private val rZone: RangeZone = new RangeZone()
+  /* Zone for siege cards, it has to be a SiegeZone*/
+  private val sZone: SiegeZone = new SiegeZone()
+
+  /* Zone for weather cards, it's set by the board*/
+  private var wZone: Option[WeatherZone] = None
 
   /* variable to say which side of the board it is on */
   private var whichSide: String = "no definido"
@@ -32,6 +38,12 @@ class Section(private val mZone: MeleeZone,
   mZone.registerObserver(this)
   rZone.registerObserver(this)
   sZone.registerObserver(this)
+
+  /** Method to set the weather zone, its private on Board package
+   *
+   * @param z The weather zone to be set
+   */
+  def set_wZone(z: WeatherZone): Unit = wZone = Some(z)
 
   /** Method to specify the side of the section
    *
@@ -68,6 +80,12 @@ class Section(private val mZone: MeleeZone,
     sZone.add_Card(c)
     notify(new AddCardNotification(c))
   }
+
+  /** Add a card on Weather zone
+   * 
+   * @param c Card to add
+   */
+  def addOnWeather(c: ICardWeather): Unit = {wZone.get.add_Card(c)}
   
   /* Returns a listbuffer with melee cards */
   def getMeleeCard: ListBuffer[MeleeCard] = {mZone.get_Card}

@@ -16,8 +16,6 @@ class PlayCardOnBoardTest extends FunSuite {
 
   var Player1: IPlayer = _
   var Player2: IPlayer = _
-  var Section1: Section = _
-  var Section2: Section = _
   var Board: Board = _
   var wCard: ICardWeather = _
   var wCard2: ICardWeather = _
@@ -33,9 +31,8 @@ class PlayCardOnBoardTest extends FunSuite {
     sCard = new SiegeCard("s", new NoneEffect(), 3)
     Player1 = new Player(name = "jugador1", deck_cards = new Deck(ListBuffer[ICard](mCard, sCard, wCard)), hand_cards = new HandDeck())
     Player2 = new Player(name = "jugador2", deck_cards = new Deck(ListBuffer[ICard](rCard, wCard2)), hand_cards = new HandDeck())
-    Section1 = new Section(new MeleeZone(), new RangeZone(), new SiegeZone())
-    Section2 = new Section(new MeleeZone(), new RangeZone(), new SiegeZone())
-    Board = new Board(Section1= Section1, Section2 = Section2, wZone = new WeatherZone)
+    
+    Board = new Board()
 
     // Se añaden los jugadores al tablero
     Board.addPlayer(Player1)

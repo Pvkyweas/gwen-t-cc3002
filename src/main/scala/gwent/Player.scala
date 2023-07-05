@@ -39,7 +39,6 @@ class Player(private val name: String,
 
   /* Section in which the player will play their cards*/
   private var section_board: Option[ISection] = None
-  private var board: Option[Board] = None
 
   private def boardNotFoundError(msj: String): Unit = {throw new BoardNotFoundException(msj)}
 
@@ -50,34 +49,11 @@ class Player(private val name: String,
    * @param pos_card position of the desired card
    */
   def playCard(pos_card: Int): Unit = {
-    if (board.isDefined) {
-      hand_cards.draw_Card(pos_card).get.playYourSelf(this)
+    if (section_board.isDefined) {
+      hand_cards.draw_Card(pos_card).get.playYourSelf(section_board.get)
     } else {
       boardNotFoundError("The player doesn't have a Board, add the player to a Board")
     }
-  }
-
-  /** Method to add a card, if the card is a weather card then is added to a weather zone, in other hand, if is a
-   * unity card then is added to a section
-   *
-   * @param c Card to add
-   * @tparam C Type of the card, it has to be subtype of ICardUnity
-   *
-   * @see ICardUnity
-   */
-  def playMe[C<:ICardUnity](c: C): Unit = {
-    section_board.foreach((s: ISection) => c.playOnSection(s))
-  }
-
-  /** Method to add a card, if the card is a weather card then is added to a weather zone, in other hand, if is a
-   * unity card then is added to a section
-   *
-   * @param c Card to add
-   * @tparam C Type of the card, it has to be subtype of ICardWeather
-   * @see ICardWeather
-   */
-  def playMe[C<: ICardWeather](c: C): Unit = {
-    board.foreach((b: Board) => c.playOnBoard(b))
   }
 
   /** Method to obtaining the card in the position 0 in hand deck
@@ -143,14 +119,6 @@ class Player(private val name: String,
    */
   def set_Section(newSection: ISection): Unit = {
     section_board = Some(newSection)
-  }
-
-  /** Set the board in which the player will play
-   *
-   * @param newBoard Board in which the player will play
-   */
-  def set_Board(newBoard: Board): Unit = {
-    board = Some(newBoard)
   }
 
   override def equals(obj: Any): Boolean = {

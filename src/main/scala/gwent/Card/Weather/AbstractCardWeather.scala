@@ -26,20 +26,17 @@ abstract class AbstractCardWeather(private val name: String, private val effect:
   /* Return the effect of the card */
   def get_Effect(): String = effect.get_effect()
 
-  /** Method to add this unity card to a zone of the Board, the player is who add the card
+  /** Method to add this unity card to a zone of the Board, the section is who add the card
    *
-   * @param p Player who add the card to board
+   * @param s Section in which the card will be added
    */
-  def playYourSelf(p: IPlayer): Unit = {p.playMe(this)}
+  def playYourSelf(s: ISection): Unit = {s.addOnWeather(this)}
 
-  /** Method to add this weather card to a weather zone of the Board
-   * 
-   * @param b Board to add the weather card
+  /** Method to apply the effect of the card on a specific zone
+   *
+   * @param where Zone to apply the effect
+   * @tparam C Type of the cards on the zone, it can be MeleeCard, RangeCard or SiegeCard
    */
-  def playOnBoard(b: Board): Unit = {
-    b.addOnW(this)
-  }
-
   def applyYourEffect[C<:ICardUnity](where: AbstractUnityZone[C]): Unit = {effect.apply(this, where.get_Card)}
 
   override def equals(obj: Any): Boolean = {

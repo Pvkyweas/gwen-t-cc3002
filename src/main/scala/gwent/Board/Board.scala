@@ -13,18 +13,24 @@ import scala.collection.mutable.ListBuffer
 /** A Class that represent a Board from a card game, its contain two sections, one for each player, and a common
  * section which represent the weather zone that will contain a weather card.
  *
- * @param Section1 Section for one of the two players
- * @param Section2 Section for one of the two players
- * @param wZone Zone for weather cards, common to both player
  *
  * @see ISection, WeatherZone
  * @author Israel Rodriguez
  * @since 1.2.3
  * @version 1.1
  */
-class Board(private val Section1: Section,
-            private val Section2: Section,
-            private val wZone: WeatherZone){
+class Board(){
+
+  /* Section for one of the two players, will be use for the player 1*/
+  private val Section1: Section = new Section()
+  /* Section for one of the two players, will be use for the player 2*/
+  private val Section2: Section = new Section()
+  /* Zone for weather cards, common to both player*/
+  private val wZone: WeatherZone = new WeatherZone()
+
+  /* The weather zone is set in both section, both has the same*/
+  Section1.set_wZone(wZone)
+  Section2.set_wZone(wZone)
 
   /* Variables that show if a section is taken or not
   * true if is taken
@@ -46,11 +52,9 @@ class Board(private val Section1: Section,
   def addPlayer(player: IPlayer):Unit = {
     if (!isSection1Taken){
       player.set_Section(Section1)
-      player.set_Board(this)
       isSection1Taken = true
     } else if (!isSection2Taken) {
       player.set_Section(Section2)
-      player.set_Board(this)
       isSection2Taken = true
     } else {
       throw new AssertionError("The board already has 2 players")
@@ -112,6 +116,4 @@ class Board(private val Section1: Section,
       Section2.getSiegeCard
     }
   }
-
-
 }

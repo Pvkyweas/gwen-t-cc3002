@@ -79,12 +79,6 @@ abstract class AbstractCardUnity(private val name: String,
     affectedByW = false
   }
 
-  /** Method to add this unity card to a zone of the Board, the player is who add the card
-   *
-   * @param p Player who add the card to board
-   */
-  def playYourSelf(p: IPlayer): Unit = {p.playMe(this)}
-
   /** Method to apply the effect of the card on a specific zone
    *
    * @param where Zone to apply the effect
