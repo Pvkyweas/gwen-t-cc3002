@@ -4,7 +4,7 @@ package gwent.Card.Effect
 import gwent.Card.Unity.{MeleeCard, RangeCard, SiegeCard}
 
 import cl.uchile.dcc.gwent.Card.Effect.Operations.{ResetForce, SetForce, ToSiege}
-import cl.uchile.dcc.gwent.Card.Weather.AbstractCardWeather
+import cl.uchile.dcc.gwent.Card.Weather.ICardWeather
 
 import scala.collection.mutable.ListBuffer
 

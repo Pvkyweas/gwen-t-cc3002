@@ -5,7 +5,7 @@ import gwent.IPlayer
 
 import cl.uchile.dcc.gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
 import cl.uchile.dcc.gwent.Card.ICard
-import cl.uchile.dcc.gwent.Card.Weather.AbstractCardWeather
+import cl.uchile.dcc.gwent.Card.Weather.ICardWeather
 import cl.uchile.dcc.gwent.Observer_Observable.{IObservable, IObserver, ObserverObservable}
 
 import scala.collection.mutable.ListBuffer
@@ -62,12 +62,12 @@ class Board(private val Section1: Section,
    *
    * @param c weather card to add
    */
-  def addOnW(c: AbstractCardWeather): Unit = {
+  def addOnW(c: ICardWeather): Unit = {
     wZone.add_Card(c)
   }
 
   /* Returns the card in weather zone */
-  def get_wCard(): AbstractCardWeather = {
+  def get_wCard(): ICardWeather = {
     wZone.getCard
   }
 

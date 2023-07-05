@@ -5,12 +5,12 @@ import cl.uchile.dcc.gwent.Card.ICard
 import gwent.Board.{Board, ISection}
 
 import cl.uchile.dcc.gwent.Card.Unity.ICardUnity
-import cl.uchile.dcc.gwent.Card.Weather.AbstractCardWeather
+import cl.uchile.dcc.gwent.Card.Weather.ICardWeather
 
 trait IPlayer {
   def playCard(pos_card: Int): Unit
   def playMe[C<:ICardUnity](c: C): Unit
-  def playMe[C<: AbstractCardWeather](c: C): Unit
+  def playMe[C<: ICardWeather](c: C): Unit
   def drawCard(num_cards: Int): Unit
   def lostRound(): Unit
   def shuffle():Unit

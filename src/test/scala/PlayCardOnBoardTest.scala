@@ -7,7 +7,7 @@ import scala.collection.mutable.ListBuffer
 import cl.uchile.dcc.gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
 import cl.uchile.dcc.gwent.Card.ICard
 import cl.uchile.dcc.gwent.Card.Effect.NoneEffect
-import cl.uchile.dcc.gwent.Card.Weather.{AbstractCardWeather, BitingFrostWeatherCard, ClearWeatherCard, TorrentialRainWeatherCard}
+import cl.uchile.dcc.gwent.Card.Weather.{ICardWeather, BitingFrostWeatherCard, ClearWeatherCard, TorrentialRainWeatherCard}
 import cl.uchile.dcc.gwent.Deck.{Deck, HandDeck}
 import munit.FunSuite
 import org.junit.Assert
@@ -19,8 +19,8 @@ class PlayCardOnBoardTest extends FunSuite {
   var Section1: Section = _
   var Section2: Section = _
   var Board: Board = _
-  var wCard: AbstractCardWeather = _
-  var wCard2: AbstractCardWeather = _
+  var wCard: ICardWeather = _
+  var wCard2: ICardWeather = _
   var mCard: MeleeCard = _
   var rCard: RangeCard = _
   var sCard: SiegeCard = _

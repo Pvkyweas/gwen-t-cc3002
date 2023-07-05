@@ -18,7 +18,7 @@ import scala.collection.mutable.ListBuffer
  * @since 1.2.3
  * @version 1.1
  */
-abstract class AbstractCardWeather(private val name: String,private val effect: IEffect) extends ICard{
+abstract class AbstractCardWeather(private val name: String, private val effect: IEffect) extends ICardWeather{
 
   /* Return the name of the card*/
   def get_Name(): String = name

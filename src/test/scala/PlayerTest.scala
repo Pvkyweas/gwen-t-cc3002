@@ -6,7 +6,7 @@ import gwent.Deck.{Deck, HandDeck}
 import cl.uchile.dcc.gwent.Card.Effect.NoneEffect
 import cl.uchile.dcc.gwent.Card.ICard
 import cl.uchile.dcc.gwent.Card.Unity.{MeleeCard, RangeCard, SiegeCard}
-import cl.uchile.dcc.gwent.Card.Weather.{AbstractCardWeather, ClearWeatherCard}
+import cl.uchile.dcc.gwent.Card.Weather.{ICardWeather, ClearWeatherCard}
 import munit.FunSuite
 import org.junit.Assert
 

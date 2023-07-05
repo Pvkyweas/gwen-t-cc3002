@@ -7,7 +7,7 @@ import cl.uchile.dcc.gwent.Card.ICard
 import gwent.Board.{Board, ISection}
 
 import cl.uchile.dcc.gwent.Card.Unity.ICardUnity
-import cl.uchile.dcc.gwent.Card.Weather.AbstractCardWeather
+import cl.uchile.dcc.gwent.Card.Weather.ICardWeather
 import cl.uchile.dcc.gwent.Exceptions.BoardNotFoundException
 import cl.uchile.dcc.gwent.Observer_Observable.Notifications.NoGemsNotification
 import cl.uchile.dcc.gwent.Observer_Observable.Observable
@@ -73,10 +73,10 @@ class Player(private val name: String,
    * unity card then is added to a section
    *
    * @param c Card to add
-   * @tparam C Type of the card, it has to be subtype of AbstractCardWeather
-   * @see AbstractCardWeather
+   * @tparam C Type of the card, it has to be subtype of ICardWeather
+   * @see ICardWeather
    */
-  def playMe[C<: AbstractCardWeather](c: C): Unit = {
+  def playMe[C<: ICardWeather](c: C): Unit = {
     board.foreach((b: Board) => c.playOnBoard(b))
   }
 

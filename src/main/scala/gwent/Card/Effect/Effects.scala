@@ -5,7 +5,7 @@ import gwent.Card.ICard
 import cl.uchile.dcc.gwent.Board.AbstractUnityZone
 import cl.uchile.dcc.gwent.Card.Effect.Operations.{IOperation, NoOperation}
 import cl.uchile.dcc.gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
-import cl.uchile.dcc.gwent.Card.Weather.AbstractCardWeather
+import cl.uchile.dcc.gwent.Card.Weather.ICardWeather
 import cl.uchile.dcc.gwent.Exceptions.CardHasNotThisEffectException
 
 import scala.collection.mutable.ListBuffer

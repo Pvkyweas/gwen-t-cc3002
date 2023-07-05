@@ -5,7 +5,7 @@ import cl.uchile.dcc.gwent.Board.ISection
 import cl.uchile.dcc.gwent.Card.Effect.{BitingFrostEffect, ClearWeatherEffect, CloseBondEffect, IEffect, ImpenetrableFogEffect, MoralBoosterEffect, NoneEffect, TorrentialRainEffect}
 import cl.uchile.dcc.gwent.Card.ICard
 import cl.uchile.dcc.gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
-import cl.uchile.dcc.gwent.Card.Weather.{AbstractCardWeather, BitingFrostWeatherCard, ClearWeatherCard, ImpenetrableFogWeatherCard, TorrentialRainWeatherCard}
+import cl.uchile.dcc.gwent.Card.Weather.{ICardWeather, BitingFrostWeatherCard, ClearWeatherCard, ImpenetrableFogWeatherCard, TorrentialRainWeatherCard}
 import munit.FunSuite
 import org.junit.Assert
 import scala.collection.mutable.ListBuffer
@@ -25,10 +25,10 @@ class CardApplyEffectTest extends FunSuite{
   var lista_asedio: ListBuffer[SiegeCard] = _
 
   // Weather Card
-  var Cprueba_clima1: AbstractCardWeather = _
-  var Cprueba_clima2: AbstractCardWeather = _
-  var Cprueba_clima3: AbstractCardWeather = _
-  var Cprueba_clima4: AbstractCardWeather = _
+  var Cprueba_clima1: ICardWeather = _
+  var Cprueba_clima2: ICardWeather = _
+  var Cprueba_clima3: ICardWeather = _
+  var Cprueba_clima4: ICardWeather = _
 
   // Efectos Unidad
   var Eunity_MB: IEffect = _
