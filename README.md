@@ -13,7 +13,7 @@ This project's goal is to create a (simplified) clone of the
 
 ---
 
-## Explicación Tarea 2 entrega final
+## Explicación Tarea
 
 ### Jugador
 
@@ -48,15 +48,18 @@ Para la implementación del tablero, considere distintas opciones pero decidi qu
 
 * Secciones
    Para la implementación de las secciones, estas tendrian 3 zonas, una para las cartas cuerpo a cuerpo (melee), una para las rango y otra para las de asedio, tiene metodos especificos para agregar cartas a cada zona, esto se hizo por medio de double dispatch.
+  Posterior al feedback de la tarea 2, ahora tambien tienen la zona de clima que es unica para ambas secciones y tablero.
 
 ### Efectos
 
 Para el funcionamiento de los efectos se considero que cada uno de los efectos tendria una expresión de este, esta expresión esta formada por objetos IOperation en donde estas operaciones estan encadenadas una a la otra. Dentro de las operaciones, las que se aplican solo a ciertas lineas especificas fueron hechas siguiendo el patron de diseño de Visitor ya que fue la mejor forma que se me ocurrio de saber si son de una linea o no, para la operación que se aplica a las cartas de la misma linea que la fuente del efecto solo se checkeo que la carta de origen del efecto estuviese en las cartas objetivo puesto que todos los efectos se ejecutan luego de haber añadido la carta.
 
-En cuanto a cuando se aplica el efecto de la carta que se añadió, como mencione antes, este se aplica despues de que la carta es añadida y para que las demás cartas sepan de que una carta fue añadida, se siguio el patrón de diseño Observer, en donde la zona de clima es observada por el tablero, el tablero es observado por las secciones y estas son observadas por las zonas de unidad además estas últimas tambien son observadas por las secciones, de forma que:
+En cuanto a cuando se aplica el efecto de la carta que se añadió, como mencione antes, este se aplica despues de que la carta es añadida y para que las demás cartas sepan de que una carta fue añadida, se siguio el patrón de diseño Observer, en donde la zona de clima es observada por las secciones, las secciones son observadas por las zonas de unidad y esta tambien observara a las últimas, de forma que:
 
-* Cuando se añade una carta de clima, la zona de clima le notifica al tablero y este le notifica a las secciones y a su vez, estas notifican a sus zonas de unidad luego cada zona de unidad le dice a sus cartas que ha llegado la hora de aplicar un efecto.
-* Cuando se añade una carta de unidad, cada zona de unidad le notifica a su sección y estas le notifican a todas las zonas de unidad que tenga para luego las zonas de unidad le digan a sus cartas que ha llegado la hora de aplicar un efecto
+* Cuando se añade una carta de clima, la zona de clima le notifica a las secciones y a su vez, estas notifican a sus zonas de unidad luego cada zona de unidad le dice a sus cartas que ha llegado la hora de aplicar un efecto.
+* Cuando se añade una carta de unidad, cada zona de unidad le notifica a su sección y estas le notifican a todas las zonas de unidad que tenga para luego las zonas de unidad le digan a sus cartas que ha llegado la hora de aplicar un efecto.
+
+El tablero es el que hace que las secciones se suscriban a la zona de clima, las secciones se suscriben solas a las zonas de unidad y les indica a las zonas de unidad que se suscriban a las secciones mismas.
 
 Tanto los efectos como las operaciones tienen un versión que hace nada, NoneEffect para los efectos y NoOperation para las operaciones.
 
@@ -75,7 +78,29 @@ Cuando un jugador quiere jugar una carta, se siguen los siguiente pasos:
 
 ![image](https://github.com/dcc-cc3002/gwen-t-Pvkyweas/assets/112279911/27d3470a-c296-4c52-ab7f-ee2c8ba83cc1)
 
-* InicioPartida: Aqui se realizan las acciones que inician la partida, como crear los mazos y robar las 10 cartas.
-* estadoRonda: Se ve si se cumple las condiciones de termino de la partida, indica a cada jugar si perdio la ronda.
-* turnos: Según de quien sea el turno, este podra pasar turno o jugar una carta, cada vez que su turno inicie, se le da la posibilidad de robar hasta 3 cartas.
-* FinPartida: La partida se termina, se indica al ganador y perdedor.
+* InicioPartida: Le indican a cada jugador que robe 10 cartas y da comienzo a la primera ronda.
+* estadoRonda:
+  1. Revisa quien tiene más fuerza en el tablero.
+  2. Quien tenga menos fuerza le indica que perdio la ronda (en caso de empate, ambos pierden).
+  3. Si nadie se queda sin gemas, entonces pasa al turno del primer jugador, en caso contrario pasa a FinPartida.
+* turnos:
+  1. Se permite el robar como maximo 3 cartas, no permite robar cartas tal que los jugadores tengan más de 10 cartas.
+  2. Se pueden jugar cartas o pasar turno, si juega una carta vuelve a iniciar su turno, si pasa turno entonces comienza el turno del siguiente jugador.
+* FinPartida: Se indica quien gana o si hubo empate.
+
+### GameController
+
+El controlador del juego tiene el sistema de estados y esta suscrito al jugador.
+
+### Observadores y notificaciones
+
+Las clases observadores y observables funcionan igual que fueron mencionados en el apartado de los efectos. Los Observadores tienen el metodo getNotification y los Observables Notify y registerObserver, los observers registrados son guardados en una ListBuffer.
+
+Para lo que son las notificaciones, considerando que para reutilizar las clases de observadores y observer creadas, hice que cada notificación fuese un objeto y estas tendrian un metodo para que se "lean" a los observadores, de esta forma me ahorro crear un metodo para cada tipo de notificacion y cada tipo de observador y complejizar el metodo getNotification. Actualmente los unicos observadores que hacen algo con las notificaciones son el GameController y las zonas.
+
+**NOTA**: 
+1. Para lo que son los estados, supongo que la creación de mazos y las cosas que arman la partida (como crear al jugador y el tablero) se realizaran antes al inicio de la partida.
+2. No modifique las zonas de unidad para que fuesen listas dentro de las secciones por que no se si en el futuro las utilizaré para algo y de todas formas ya funcionan bien, además ya 
+   apliqué lo de los observadores que si se deseara añadir un efecto que aplique desde una zona de unidad a otra, seria crear el efecto y ponerlo en una carta. (Claramente no me dio flojera 
+   cambiar la implementación actual).
+3. Quizas si termine cambiando lo del punto 2 si no terminó haciendo nada útil.
