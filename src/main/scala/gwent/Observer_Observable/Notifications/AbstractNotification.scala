@@ -13,5 +13,5 @@ import cl.uchile.dcc.gwent.IPlayer
 abstract class AbstractNotification extends INotification {
   def readAboutCard[C <: ICardUnity](zone: AbstractUnityZone[C]): Unit = {}
 
-  def readAboutWhoLoss(game_controller: GameController): Unit = {}
+  def readToController(game_controller: GameController): Unit = {}
 }

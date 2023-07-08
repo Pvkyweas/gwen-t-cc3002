@@ -10,5 +10,5 @@ import cl.uchile.dcc.gwent.IPlayer
 
 trait INotification {
   def readAboutCard[C <: ICardUnity](zone: AbstractUnityZone[C]): Unit
-  def readAboutWhoLoss(game_controller: GameController): Unit
+  def readToController(game_controller: GameController): Unit
 }

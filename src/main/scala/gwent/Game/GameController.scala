@@ -31,5 +31,5 @@ class GameController() extends IObserver{
   def playerLoss(whoLoss: IPlayer): Unit = {}
 
   // Observer's method
-  def getNotification(content: INotification): Unit = {content.readAboutWhoLoss(this)}
+  def getNotification(content: INotification): Unit = {content.readToController(this)}
 }

@@ -17,5 +17,5 @@ class NoGemsNotification(content: IPlayer) extends AbstractNotification {
    *
    * @param game_controller who has to be notified
    */
-  override def readAboutWhoLoss(game_controller: GameController): Unit = {game_controller.playerLoss(content)}
+  override def readToController(game_controller: GameController): Unit = {game_controller.playerLoss(content)}
 }
