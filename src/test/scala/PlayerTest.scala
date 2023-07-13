@@ -33,7 +33,7 @@ class PlayerTest extends FunSuite {
     Lista_cartasPrueba = ListBuffer(Carta_prueba, Carta_prueba2, Carta_prueba3,Carta_pruebaClima)
     Mazo_prueba = new Deck(Lista_cartasPrueba)
 
-    jugador_porDefecto = new Player(name = "jugador", deck_cards = Mazo_prueba, hand_cards = new HandDeck())
+    jugador_porDefecto = new Player(name = "jugador", deck_cards = Mazo_prueba)
   }
 
   test("Un jugador debe tener un nombre"){
@@ -123,7 +123,7 @@ class PlayerTest extends FunSuite {
     val Carta_pruebaClima_2: ICard = new ClearWeatherCard("Prueba Clima")
     val Lista_cartasPrueba_2: ListBuffer[ICard] = ListBuffer(Carta_prueba_2, Carta_prueba2_2, Carta_prueba3_2, Carta_pruebaClima_2)
     val Mazo_prueba_2: Deck = new Deck(Lista_cartasPrueba_2)
-    val player_2 = new Player(name = "jugador", deck_cards = Mazo_prueba_2, hand_cards = new HandDeck())
+    val player_2 = new Player(name = "jugador", deck_cards = Mazo_prueba_2)
     player_2.drawCard(2)
     jugador_porDefecto.drawCard(2)
     assert(jugador_porDefecto.equals(player_2))

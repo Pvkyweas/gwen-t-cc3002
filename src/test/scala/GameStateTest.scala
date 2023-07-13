@@ -1,51 +1,68 @@
 package cl.uchile.dcc
 
+import cl.uchile.dcc.gwent.Card.ICard
+import cl.uchile.dcc.gwent.Card.Weather.ClearWeatherCard
+import cl.uchile.dcc.gwent.Deck.Deck
 import cl.uchile.dcc.gwent.Game.GameController
 import cl.uchile.dcc.gwent.Game.State.{EndState, GameState, RoundState, StartState, TurnState}
+import cl.uchile.dcc.gwent.{IPlayer, Player}
 import munit.FunSuite
 import org.junit.Assert
+
+import scala.collection.mutable.ListBuffer
 
 class GameStateTest extends FunSuite {
   // Controler
   var control: GameController = _
 
+  // Player for test
+  var player: IPlayer = _
+
+  // Card for test
+  var card: ICard = _
+  var listCard: ListBuffer[ICard] = _
+
   override def beforeEach(context: BeforeEach): Unit ={
-    control = new GameController()
+    card = new ClearWeatherCard("Soleado")
+    listCard = ListBuffer(card,card,card,card,card,card,card,card,card,card)
+    player = new Player("player1", 2, new Deck(listCard))
+    control = new GameController(player)
   }
 
   test("Estado base es StartState"){
     assert(control.getState == "Start")
   }
 
-  test("Start solo transiciona a Round"){
-    val endError = Assert.assertThrows(classOf[Exception], () => control.state.end)
+  test("Start solo transiciona a Round, además el jugador debe tener 10 despues de startGame"){
+    val endError = Assert.assertThrows(classOf[Exception], () => control.endGame)
     assertEquals("Start can not transition to End", endError.getMessage)
 
-    val turnError = Assert.assertThrows(classOf[Exception], () => control.state.startTurns)
+    val turnError = Assert.assertThrows(classOf[Exception], () => control.startTurns)
     assertEquals("Start can not transition to Turn", turnError.getMessage)
 
-    val passError = Assert.assertThrows(classOf[Exception], () => control.state.passTurn)
+    val passError = Assert.assertThrows(classOf[Exception], () => control.passTurn)
     assertEquals("Start can not transition to Turn or Round", passError.getMessage)
 
     control.startGame
     assert(control.getState == "Round")
+    assertEquals(player.numCards_hand(), 10)
   }
 
   test("Round puede transicionar a End"){
     control.startGame
-    control.state.end
+    control.endGame
     assert(control.getState == "End")
   }
 
   test("Round puede transicionar a Turn") {
     control.startGame
-    control.startTuns
+    control.startTurns
     assert(control.getState == "Turn of:") // Supongo que deberia decir de quien es el turno
   }
 
   test("Turn puede transicionar a Turn"){
     control.startGame
-    control.startTuns
+    control.startTurns
     assert(control.getState == "Turn of:")
     control.passTurn
     assert(control.getState == "Turn of:")
@@ -53,7 +70,7 @@ class GameStateTest extends FunSuite {
 
   test("Despues de pasar turno 2 veces se vuelve a round"){
     control.startGame
-    control.startTuns
+    control.startTurns
     control.passTurn
     control.passTurn
     assert(control.getState == "Round")

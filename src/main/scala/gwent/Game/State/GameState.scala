@@ -4,9 +4,13 @@ package gwent.Game.State
 import gwent.Game.GameController
 import cl.uchile.dcc.gwent.Exceptions.{InvalidTransitionException, WrongStateException}
 
+/**
+ *  A class that represent all states of a game controller
+ * @param controller The controller that has this state
+ */
 class GameState(protected val controller: GameController) {
   /* Set the state of the controller to this state*/
-  controller.state = this
+  controller.setState(this)
 
   /** To know which is the current state
    *

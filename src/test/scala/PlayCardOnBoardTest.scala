@@ -29,8 +29,8 @@ class PlayCardOnBoardTest extends FunSuite {
     mCard = new MeleeCard("m", new NoneEffect(), 3)
     rCard = new RangeCard("r", new NoneEffect(), 3)
     sCard = new SiegeCard("s", new NoneEffect(), 3)
-    Player1 = new Player(name = "jugador1", deck_cards = new Deck(ListBuffer[ICard](mCard, sCard, wCard)), hand_cards = new HandDeck())
-    Player2 = new Player(name = "jugador2", deck_cards = new Deck(ListBuffer[ICard](rCard, wCard2)), hand_cards = new HandDeck())
+    Player1 = new Player(name = "jugador1", deck_cards = new Deck(ListBuffer[ICard](mCard, sCard, wCard)))
+    Player2 = new Player(name = "jugador2", deck_cards = new Deck(ListBuffer[ICard](rCard, wCard2)))
     
     Board = new Board()
 
@@ -45,7 +45,7 @@ class PlayCardOnBoardTest extends FunSuite {
   }
 
   test("No se puede añadir un tercer jugador a un tablero"){
-    val p3: IPlayer = new Player("jugador3", deck_cards = new Deck(ListBuffer[ICard](rCard, wCard2)), hand_cards = new HandDeck())
+    val p3: IPlayer = new Player("jugador3", deck_cards = new Deck(ListBuffer[ICard](rCard, wCard2)))
     val e = Assert.assertThrows(classOf[AssertionError], () => Board.addPlayer(p3))
     assertEquals("The board already has 2 players", e.getMessage)
   }

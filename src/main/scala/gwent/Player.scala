@@ -19,7 +19,6 @@ import scala.collection.generic.IsSeq
  * @param name Name of the player
  * @param gem_counter Number of gems owned by the player
  * @param deck_cards Deck of cards
- * @param hand_cards Cards in hand
  * @constructor Creates a new player with the specified parameters
  * @example
  * {{{
@@ -34,8 +33,10 @@ import scala.collection.generic.IsSeq
  */
 class Player(private val name: String,
              private var gem_counter: Int = 2,
-             private val deck_cards: Deck,
-             private val hand_cards: HandDeck) extends Observable with IPlayer {
+             private val deck_cards: Deck) extends Observable with IPlayer {
+
+  /* Cards in hand*/
+  private val hand_cards: HandDeck = new HandDeck()
 
   /* Section in which the player will play their cards*/
   private var section_board: Option[ISection] = None
