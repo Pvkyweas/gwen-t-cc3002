@@ -37,14 +37,11 @@ class GameStateTest extends FunSuite {
     val endError = Assert.assertThrows(classOf[Exception], () => control.endGame)
     assertEquals("Start can not transition to End", endError.getMessage)
 
-    val turnError = Assert.assertThrows(classOf[Exception], () => control.startTurns)
-    assertEquals("Start can not transition to Turn", turnError.getMessage)
-
     val passError = Assert.assertThrows(classOf[Exception], () => control.passTurn)
     assertEquals("Start can not transition to Turn or Round", passError.getMessage)
 
     control.startGame
-    assert(control.getState == "Round")
+    assert(control.getState == "Turn of:")
     assertEquals(player.numCards_hand(), 10)
   }
 
@@ -56,13 +53,11 @@ class GameStateTest extends FunSuite {
 
   test("Round puede transicionar a Turn") {
     control.startGame
-    control.startTurns
     assert(control.getState == "Turn of:") // Supongo que deberia decir de quien es el turno
   }
 
   test("Turn puede transicionar a Turn"){
     control.startGame
-    control.startTurns
     assert(control.getState == "Turn of:")
     control.passTurn
     assert(control.getState == "Turn of:")
@@ -70,7 +65,6 @@ class GameStateTest extends FunSuite {
 
   test("Despues de pasar turno 2 veces se vuelve a round"){
     control.startGame
-    control.startTurns
     control.passTurn
     control.passTurn
     assert(control.getState == "Round")

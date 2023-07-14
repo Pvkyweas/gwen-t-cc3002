@@ -2,7 +2,9 @@ package cl.uchile.dcc
 package gwent.Game.State
 
 import gwent.Game.GameController
+
 import cl.uchile.dcc.gwent.Exceptions.{InvalidTransitionException, WrongStateException}
+import cl.uchile.dcc.gwent.IPlayer
 
 /**
  *  A class that represent all states of a game controller
@@ -26,7 +28,7 @@ class GameState(protected val controller: GameController) {
 
   def passTurn: Unit = {transitionError("Turn or Round")}
 
-  def startTurns: Unit = {transitionError("Turn")}
+  def startTurns(p: IPlayer): Unit = {transitionError("Turn")}
 
   private def transitionError(target: String): Unit = {throw new InvalidTransitionException(target)}
 

@@ -30,8 +30,10 @@ class StartState(controller: GameController) extends GameState(controller){
     controller.initialDraw()
 
     // Starts rounds
-    new RoundState(controller)
+    controller.startTurns
   }
+
+  override def startTurns(p: IPlayer): Unit = {new TurnState(controller, p)}
 
   /**
    * Private method to create a computer player, use the deckfactory to create it's deck
