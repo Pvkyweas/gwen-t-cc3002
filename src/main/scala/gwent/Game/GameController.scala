@@ -103,6 +103,9 @@ class GameController() extends IObserver{
 
   def passTurn: Unit = {state.passTurn}
 
+  /**
+   *  Method to start the turn of the player 1
+   */
   private[Game] def startTurns: Unit = {state.startTurns(player1.get)}
 
   def playerLoss(whoLoss: IPlayer): Unit = {}

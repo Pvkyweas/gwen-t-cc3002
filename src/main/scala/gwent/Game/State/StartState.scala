@@ -33,6 +33,10 @@ class StartState(controller: GameController) extends GameState(controller){
     controller.startTurns
   }
 
+  /**
+   *  Method to transition to TurnState
+   * @param p The player whose turn it is
+   */
   override def startTurns(p: IPlayer): Unit = {new TurnState(controller, p)}
 
   /**
