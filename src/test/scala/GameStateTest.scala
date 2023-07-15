@@ -33,46 +33,63 @@ class GameStateTest extends FunSuite {
     assert(control.getState == "Start")
   }
 
-  test("Start solo transiciona a Round, además el jugador debe tener 10 despues de startGame"){
+  test("Start solo transiciona al turno del primer jugador, además el jugador debe tener 10 despues de startGame"){
     val endError = Assert.assertThrows(classOf[Exception], () => control.endGame)
     assertEquals("Start can not transition to End", endError.getMessage)
 
-    val passError = Assert.assertThrows(classOf[Exception], () => control.passTurn)
-    assertEquals("Start can not transition to Turn or Round", passError.getMessage)
-
     control.startGame
-    assert(control.getState == "Turn of:")
+    assert(control.getState == "Turn of: player1")
     assertEquals(player.numCards_hand(), 10)
   }
 
-  test("Round puede transicionar a End"){
+  test("No se puede iniciar el juego una vez iniciado"){
     control.startGame
-    control.endGame
-    assert(control.getState == "End")
+    val startError = Assert.assertThrows(classOf[Exception], () => control.startGame)
+    assertEquals("Start can not transition to Turn", startError.getMessage)
   }
 
-  test("Round puede transicionar a Turn") {
+  test("Un jugador al jugar una carta, vuelve a tener otro turno"){
     control.startGame
-    assert(control.getState == "Turn of:") // Supongo que deberia decir de quien es el turno
+    assert(control.getState == "Turn of: player1")
+    control.playCard(player)
+    assert(control.getState == "Turn of: player1")
   }
 
-  test("Turn puede transicionar a Turn"){
+  test("Turn transiciona a ComputerTurn"){
     control.startGame
-    assert(control.getState == "Turn of:")
+    assert(control.getState == "Turn of: player1")
     control.passTurn
-    assert(control.getState == "Turn of:")
+    assert(control.getState == "Turn of: Computadora")
   }
 
-  test("Despues de pasar turno 2 veces se vuelve a round"){
+  test("Despues de pasar turno 2 veces el estado será RoundState") {
     control.startGame
     control.passTurn
     control.passTurn
     assert(control.getState == "Round")
   }
 
+  test("Round puede transicionar a End"){
+    control.startGame // -> Pasa al turno 1
+    control.passTurn // -> Pasa al turno 2
+    control.passTurn // -> Pasa a ronda
+    control.endGame // -> pasa a end
+    assert(control.getState == "End")
+  }
+
+  test("Round puede transicionar a Turn") {
+    control.startGame
+    control.passTurn
+    control.passTurn // -> Pasa a ronda
+    control.update() // -> Realiza las acciones de ronda, como ningun debe haber perdido aún debe transicionar a turno
+    assert(control.getState == "Turn of: player1")
+  }
+
   test("Llamar metodos en el estado incorrecto provoca error"){
-    val playCardError = Assert.assertThrows(classOf[Exception], () => control.playCard)
+    val playCardError = Assert.assertThrows(classOf[Exception], () => control.playCard(player))
     assertEquals("Wrong State", playCardError.getMessage)
 
+    val passError = Assert.assertThrows(classOf[Exception], () => control.passTurn)
+    assertEquals("Wrong State", passError.getMessage)
   }
 }

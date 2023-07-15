@@ -99,4 +99,7 @@ class DeckTest extends FunSuite {
     assertEquals(newList, expectedList)
   }
 
+  test("Se puede utilizar equals entre mazos vacios"){
+    assert(Mazo_prueba1.equals(Mazo_prueba1))
+  }
 }

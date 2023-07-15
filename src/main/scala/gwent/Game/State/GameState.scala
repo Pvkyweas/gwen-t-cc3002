@@ -22,13 +22,19 @@ class GameState(protected val controller: GameController) {
 
   def end: Unit = { transitionError("End") }
 
-  def start: Unit = {transitionError("Round")}
+  def start: Unit = {transitionError("Turn")}
 
-  def playCard: Unit = {stateError()}
+  def playCard(p:IPlayer): Unit = {stateError()}
 
-  def passTurn: Unit = {transitionError("Turn or Round")}
+  def passTurn(pNextTurn: Option[IPlayer]): Unit = {stateError()}
 
   def startTurns(p: IPlayer): Unit = {transitionError("Turn")}
+
+  /**
+   * Method for the states that are reached several times,
+   * it serves so that they do the actions that correspond to them
+   */
+  def update(): Unit = {}
 
   private def transitionError(target: String): Unit = {throw new InvalidTransitionException(target)}
 

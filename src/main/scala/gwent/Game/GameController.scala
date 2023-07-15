@@ -97,16 +97,32 @@ class GameController() extends IObserver{
    */
   def startGame: Unit = {state.start}
 
+  /**
+   * Method to end the game, transitions to EndState
+   */
   def endGame: Unit = {state.end}
 
-  def playCard: Unit = {state.playCard}
+  /**
+   * Method to tell to its state that a player has played a card
+   * @param p Player who played a card
+   */
+  def playCard(p: IPlayer): Unit = {state.playCard(p)}
 
-  def passTurn: Unit = {state.passTurn}
+  /**
+   * Method to tell to its state that a player has passed its turn
+   */
+  def passTurn: Unit = {state.passTurn(computer)}
 
   /**
    *  Method to start the turn of the player 1
    */
   private[Game] def startTurns: Unit = {state.startTurns(player1.get)}
+
+  /**
+   * Method for states to carry out the actions that correspond to them
+   * Calls the state's update method
+   */
+  def update(): Unit = {state.update()}
 
   def playerLoss(whoLoss: IPlayer): Unit = {}
 

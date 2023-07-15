@@ -28,32 +28,19 @@ abstract class AbstractDeck{
   def get_Size(): Int = ???
   def draw_Card(pos: Int=0): Option[ICard] = ???
   def isEmpty: Boolean = ???
+  protected def getList(): List[ICard] = ???
 
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {
       val oDeck = obj.asInstanceOf[AbstractDeck]
       if (this.get_Size() == oDeck.get_Size()) {
-        var isEqual: Boolean = true
-        val this_cardList: ListBuffer[Option[ICard]] = ListBuffer()
-        val other_cardList: ListBuffer[Option[ICard]] = ListBuffer()
-        val stop: Int = this.get_Size()
-        for (c <- 1 to stop) {
-          var this_card: ICard = this.draw_Card().get
-          var other_card: ICard = oDeck.draw_Card().get
-          isEqual = isEqual && this_card.equals(other_card)
-
-          this_cardList.prepend(Some(this_card))
-          other_cardList.prepend(Some(other_card))
-        }
-        this.add_multipleCard(this_cardList)
-        oDeck.add_multipleCard(other_cardList)
-        isEqual
-      } else {
+        this.getList() == oDeck.getList()
+      } else{
         false
       }
-    }
-    else {
+    } else {
       false
     }
   }
+
 }

@@ -57,6 +57,17 @@ class HandDeck extends AbstractDeck {
   override def get_Size(): Int = {
     cards.size
   }
+
+  /**
+   * Method to obtain a list with all the cards without modifying the original ListBuffer
+   *
+   * @return List of cards
+   */
+  override protected def getList(): List[ICard] = {
+    val copyList = cards.clone()
+    copyList.toList
+  }
+
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {
       super.equals(obj)

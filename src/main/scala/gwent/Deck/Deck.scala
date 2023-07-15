@@ -108,6 +108,15 @@ class Deck extends AbstractDeck{
     }
   }
 
+  /**
+   *  Method to obtain a list with all the cards without modifying the original Stack
+   * @return List of cards
+   */
+  override protected def getList(): List[ICard] = {
+    val copyStack = cards.clone()
+    copyStack.toList
+  }
+
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {
       super.equals(obj)
