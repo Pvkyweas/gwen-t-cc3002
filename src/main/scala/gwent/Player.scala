@@ -9,7 +9,7 @@ import gwent.Board.{Board, ISection}
 import cl.uchile.dcc.gwent.Card.Unity.ICardUnity
 import cl.uchile.dcc.gwent.Card.Weather.ICardWeather
 import cl.uchile.dcc.gwent.Exceptions.BoardNotFoundException
-import cl.uchile.dcc.gwent.Observer_Observable.Notifications.NoGemsNotification
+import cl.uchile.dcc.gwent.Observer_Observable.Notifications.{CardPlayedNotification, NoGemsNotification, PassTurnNotification}
 import cl.uchile.dcc.gwent.Observer_Observable.Observable
 
 import scala.collection.generic.IsSeq
@@ -52,6 +52,7 @@ class Player(private val name: String,
   def playCard(pos_card: Int): Unit = {
     if (section_board.isDefined) {
       hand_cards.draw_Card(pos_card).get.playYourSelf(section_board.get)
+      notify(new CardPlayedNotification(this))
     } else {
       boardNotFoundError("The player doesn't have a Board, add the player to a Board")
     }
@@ -120,6 +121,13 @@ class Player(private val name: String,
    */
   def set_Section(newSection: ISection): Unit = {
     section_board = Some(newSection)
+  }
+
+  /**
+   * Method to notify to the game controller that this player has passed turn
+   */
+  def passTurn(): Unit = {
+    notify(new PassTurnNotification(this))
   }
 
   override def equals(obj: Any): Boolean = {

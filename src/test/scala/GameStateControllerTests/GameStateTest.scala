@@ -1,11 +1,13 @@
 package cl.uchile.dcc
+package GameStateControllerTests
 
-import cl.uchile.dcc.gwent.Card.ICard
-import cl.uchile.dcc.gwent.Card.Weather.ClearWeatherCard
-import cl.uchile.dcc.gwent.Deck.Deck
-import cl.uchile.dcc.gwent.Game.GameController
-import cl.uchile.dcc.gwent.Game.State.{EndState, GameState, RoundState, StartState, TurnState}
-import cl.uchile.dcc.gwent.{IPlayer, Player}
+import gwent.Card.ICard
+import gwent.Card.Weather.ClearWeatherCard
+import gwent.Deck.Deck
+import gwent.Game.GameController
+import gwent.Game.State.*
+import gwent.{IPlayer, Player}
+
 import munit.FunSuite
 import org.junit.Assert
 

@@ -19,5 +19,6 @@ trait IPlayer extends IObservable{
   def get_Name(): String
   def get_Section(): String
   def get_HandCard(): Option[ICard]
+  def passTurn(): Unit
   private[gwent] def set_Section(newSection: ISection): Unit
 }
