@@ -5,7 +5,7 @@ import gwent.Game.State.{GameState, StartState}
 
 import cl.uchile.dcc.gwent.Board.Board
 import cl.uchile.dcc.gwent.Deck.Deck
-import cl.uchile.dcc.gwent.{IPlayer, Player}
+import cl.uchile.dcc.gwent.{Computer, IPlayer, Player}
 import cl.uchile.dcc.gwent.Observer_Observable.IObserver
 import cl.uchile.dcc.gwent.Observer_Observable.Notifications.INotification
 
@@ -30,7 +30,7 @@ class GameController() extends IObserver{
   /* Player 1*/
   private var player1: Option[IPlayer] = None
   /* Computer*/
-  private var computer: Option[IPlayer] = None
+  private var computer: Option[Computer] = None
 
   /**
    *  Constructor to when the game controller is initialize with a player 1
@@ -66,7 +66,7 @@ class GameController() extends IObserver{
    *  Private method to add a computer player, does the same as addPlayer but with a computer player
    * @param nP the computer player to be added
    */
-  private[Game] def addIA(nP: IPlayer): Unit = {
+  private[Game] def addIA(nP: Computer): Unit = {
     computer = Some(nP)
     nP.registerObserver(this)
     board.addPlayer(nP)

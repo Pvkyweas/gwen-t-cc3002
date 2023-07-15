@@ -2,14 +2,14 @@ package cl.uchile.dcc
 package gwent.Game.State
 
 import gwent.Game.GameController
-import gwent.IPlayer
+import gwent.{Computer, IPlayer}
 
 /**
  * A class that represents the turn state of the controller, this turn belongs to a computer
  * @param controller The controller that has this state
  * @param computer The computer owner of the turn
  */
-class ComputerTurnState(controller: GameController, private val computer: IPlayer) extends TurnState(controller, computer){
+class ComputerTurnState(controller: GameController, private val computer: Computer) extends TurnState(controller, computer){
   /**
    * Method for the states that are reached several times,
    * it serves so that they do the actions that correspond to them
@@ -36,7 +36,7 @@ class ComputerTurnState(controller: GameController, private val computer: IPlaye
    * Transitions to the next state, since this is the computer's turn, it transitions to RoundState
    * @param pNextTurn The next turn's player (computer)
    */
-  override def passTurn(pNextTurn: Option[IPlayer]): Unit = {
+  override def passTurn(pNextTurn: Option[Computer]): Unit = {
     new RoundState(controller)
   }
 }

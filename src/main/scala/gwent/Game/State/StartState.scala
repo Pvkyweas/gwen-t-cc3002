@@ -4,7 +4,7 @@ package gwent.Game.State
 import gwent.Game.GameController
 
 import cl.uchile.dcc.gwent.Deck.Deck
-import cl.uchile.dcc.gwent.{IPlayer, Player}
+import cl.uchile.dcc.gwent.{Computer, IPlayer, Player}
 
 /** A class that represent the initial state, the start state.
  *
@@ -44,9 +44,9 @@ class StartState(controller: GameController) extends GameState(controller){
    *
    * @return Computer player
    */
-  private def createIA(): IPlayer = {
+  private def createIA(): Computer = {
     val iaDeck: Deck = controller.createStandardDeck()
-    new Player("Computadora", 2, iaDeck)
+    new Computer("Computadora", 2, iaDeck)
   }
 
   /**

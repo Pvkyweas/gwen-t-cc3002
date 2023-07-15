@@ -3,7 +3,7 @@ package gwent.Game.State
 
 import gwent.Game.GameController
 
-import cl.uchile.dcc.gwent.IPlayer
+import cl.uchile.dcc.gwent.{Computer, IPlayer}
 
 /**
  *  A class that represents the turn state of the controller, this turn belongs to a player
@@ -37,6 +37,6 @@ class TurnState(controller: GameController, private val player: IPlayer) extends
    * Transitions to the next turn that corresponds to the computer
    * @param pNextTurn The next turn's player (computer)
    */
-  override def passTurn(pNextTurn: Option[IPlayer]): Unit = {new ComputerTurnState(controller, pNextTurn.get)}
+  override def passTurn(pNextTurn: Option[Computer]): Unit = {new ComputerTurnState(controller, pNextTurn.get)}
 
 }

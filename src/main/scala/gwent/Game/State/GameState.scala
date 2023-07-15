@@ -4,7 +4,7 @@ package gwent.Game.State
 import gwent.Game.GameController
 
 import cl.uchile.dcc.gwent.Exceptions.{InvalidTransitionException, WrongStateException}
-import cl.uchile.dcc.gwent.IPlayer
+import cl.uchile.dcc.gwent.{Computer, IPlayer}
 
 import scala.collection.mutable.ListBuffer
 
@@ -28,7 +28,7 @@ class GameState(protected val controller: GameController) {
 
   def playCard(p:IPlayer): Unit = {stateError()}
 
-  def passTurn(pNextTurn: Option[IPlayer]): Unit = {stateError()}
+  def passTurn(pNextTurn: Option[Computer]): Unit = {stateError()}
 
   def startTurns(p: IPlayer): Unit = {transitionError("Turn")}
 
