@@ -138,7 +138,12 @@ class GameController() extends IObserver{
    * To know if a player reached 0 gems
    * @return True if the noGemsList has a player
    */
-  private[Game] def aPlayerLost(): Boolean = (noGemsList.nonEmpty)
+  private[Game] def aPlayerLost(): Boolean = noGemsList.nonEmpty
+
+  /**
+   * Method to reset the board, delete all cards in it
+   */
+  private[Game] def clearBoard(): Unit = board.clear()
 
   /**
    * Add a player with 0 gems to noGemsList

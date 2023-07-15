@@ -20,4 +20,5 @@ def totalForce(): Int
 private[Board] def set_side(s: String): Unit
 private[Board] def set_wZone(z: WeatherZone): Unit
 def get_side(): String
+def clear(): Unit
 }

@@ -103,4 +103,13 @@ class Section() extends ObserverObservable with ISection{
   def totalForce(): Int = {
     mZone.totalForce() + rZone.totalForce() + sZone.totalForce()
   }
+
+  /**
+   * Method to delete all cards in all unity zones
+   */
+  def clear(): Unit = {
+    mZone.clear()
+    rZone.clear()
+    sZone.clear()
+  }
 }

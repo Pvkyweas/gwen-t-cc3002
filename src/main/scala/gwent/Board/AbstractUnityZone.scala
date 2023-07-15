@@ -54,4 +54,9 @@ abstract class AbstractUnityZone[C<:ICardUnity](private val cardsOnZone:ListBuff
     cardsOnZone.foreach(c => total += c.get_Force())
     total
   }
+
+  /**
+   * Method to delete all cards in zone
+   */
+  def clear(): Unit = {cardsOnZone.clear()}
 }

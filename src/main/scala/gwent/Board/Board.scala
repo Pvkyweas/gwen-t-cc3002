@@ -128,4 +128,12 @@ class Board(){
     else if (s1force < s2force) {List(Section1.get_side())}
     else  {List(Section1.get_side(), Section2.get_side())}
   }
+
+  /**
+   * Method to delete all card in board
+   */
+  def clear(): Unit = {
+    Section1.clear()
+    Section2.clear()
+  }
 }

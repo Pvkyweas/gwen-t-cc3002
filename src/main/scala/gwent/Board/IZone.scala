@@ -8,4 +8,5 @@ import scala.collection.mutable.ListBuffer
 trait IZone[C<:ICard] {
   def add_Card(Card:C): Unit
   def totalForce(): Int
+  def clear(): Unit
 }

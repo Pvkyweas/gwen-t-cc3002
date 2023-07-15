@@ -37,4 +37,9 @@ class WeatherZone extends Observable with IZone[ICardWeather]{
    * @return 0 because weather zone has no force
    */
   def totalForce(): Int = 0
+
+  /**
+   * Reset the cardSlot to a ClearWeatherCard
+   */
+  def clear(): Unit = cardSlot= new ClearWeatherCard("Soleado")
 }
