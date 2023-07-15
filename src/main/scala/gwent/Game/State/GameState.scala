@@ -6,6 +6,8 @@ import gwent.Game.GameController
 import cl.uchile.dcc.gwent.Exceptions.{InvalidTransitionException, WrongStateException}
 import cl.uchile.dcc.gwent.IPlayer
 
+import scala.collection.mutable.ListBuffer
+
 /**
  *  A class that represent all states of a game controller
  * @param controller The controller that has this state
@@ -20,7 +22,7 @@ class GameState(protected val controller: GameController) {
    */
   def getState: String = {""}
 
-  def end: Unit = { transitionError("End") }
+  def end(listWithLossers: ListBuffer[IPlayer]): Unit = { transitionError("End") }
 
   def start: Unit = {transitionError("Turn")}
 

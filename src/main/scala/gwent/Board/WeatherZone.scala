@@ -31,4 +31,10 @@ class WeatherZone extends Observable with IZone[ICardWeather]{
 
   /* This method returns the card in cardSlot */
   def getCard: ICardWeather = cardSlot
+
+  /**
+   * To know the force of this zone
+   * @return 0 because weather zone has no force
+   */
+  def totalForce(): Int = 0
 }

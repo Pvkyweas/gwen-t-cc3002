@@ -100,7 +100,7 @@ class GameController() extends IObserver{
   /**
    * Method to end the game, transitions to EndState
    */
-  def endGame: Unit = {state.end}
+  def endGame: Unit = {state.end(noGemsList)}
 
   /**
    * Method to tell to its state that a player has played a card
@@ -124,7 +124,27 @@ class GameController() extends IObserver{
    */
   def update(): Unit = {state.update()}
 
-  def playerLoss(whoLoss: IPlayer): Unit = {}
+  /**
+   * Method to indicate to the players that a section lost
+   */
+  private[Game] def discountGems(): Unit = {
+    for (section <- board.getSectionWithLessForce()) {
+      player1.foreach(p => if(p.get_Section() == section) p.lostRound())
+      computer.foreach(c => if(c.get_Section() == section) c.lostRound())
+    }
+  }
+
+  /**
+   * To know if a player reached 0 gems
+   * @return True if the noGemsList has a player
+   */
+  private[Game] def aPlayerLost(): Boolean = (noGemsList.nonEmpty)
+
+  /**
+   * Add a player with 0 gems to noGemsList
+   * @param whoLoss The player who loss all of its gems
+   */
+  def playerLoss(whoLoss: IPlayer): Unit = {noGemsList.addOne(whoLoss)}
 
   /**
    * Method to create a standard deck

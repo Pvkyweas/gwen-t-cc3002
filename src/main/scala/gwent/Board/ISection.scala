@@ -16,6 +16,7 @@ def addOnWeather(c: ICardWeather): Unit
 def getRangeCard: ListBuffer[RangeCard]
 def getMeleeCard: ListBuffer[MeleeCard]
 def getSiegeCard: ListBuffer[SiegeCard]
+def totalForce(): Int
 private[Board] def set_side(s: String): Unit
 private[Board] def set_wZone(z: WeatherZone): Unit
 def get_side(): String

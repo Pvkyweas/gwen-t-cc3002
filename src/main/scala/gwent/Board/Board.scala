@@ -116,4 +116,16 @@ class Board(){
       Section2.getSiegeCard
     }
   }
+
+  /**
+   * To know which section has less force
+   * @return List with the side (or both sides) with less force
+   */
+  def getSectionWithLessForce(): List[String] = {
+    val s1force = Section1.totalForce()
+    val s2force =Section2.totalForce()
+    if (s1force > s2force) {List(Section2.get_side())}
+    else if (s1force < s2force) {List(Section1.get_side())}
+    else  {List(Section1.get_side(), Section2.get_side())}
+  }
 }

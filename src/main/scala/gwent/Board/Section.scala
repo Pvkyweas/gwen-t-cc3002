@@ -96,4 +96,11 @@ class Section() extends ObserverObservable with ISection{
   /* Returns a listbuffer with siege cards */
   def getSiegeCard: ListBuffer[SiegeCard] = {sZone.get_Card}
 
+  /**
+   * To know the total value of force of this section
+   * @return The sum of the force of all unity zones
+   */
+  def totalForce(): Int = {
+    mZone.totalForce() + rZone.totalForce() + sZone.totalForce()
+  }
 }

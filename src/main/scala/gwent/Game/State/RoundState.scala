@@ -5,6 +5,8 @@ import gwent.Game.GameController
 
 import cl.uchile.dcc.gwent.IPlayer
 
+import scala.collection.mutable.ListBuffer
+
 class RoundState(controller: GameController) extends GameState(controller){
 
   override def getState: String = {"Round"}
@@ -19,7 +21,13 @@ class RoundState(controller: GameController) extends GameState(controller){
    *             -if nobody has 0 gems -> next turn (player1's turn)
    */
   override def update(): Unit = {
-    controller.startTurns
+
+    controller.discountGems()
+
+    controller.aPlayerLost()
+
+    if (!controller.aPlayerLost()) {controller.startTurns}
+    else {controller.endGame}
   }
 
   /**
@@ -32,6 +40,6 @@ class RoundState(controller: GameController) extends GameState(controller){
   /**
    * Method to transition to end game
    */
-  override def end: Unit = {new EndState(controller)}
+  override def end(listWithLossers: ListBuffer[IPlayer]): Unit = {new EndState(controller, listWithLossers)}
 
 }

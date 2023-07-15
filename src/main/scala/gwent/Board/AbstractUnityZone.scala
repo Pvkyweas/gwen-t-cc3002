@@ -44,4 +44,14 @@ abstract class AbstractUnityZone[C<:ICardUnity](private val cardsOnZone:ListBuff
   def get_Card: ListBuffer[C] = {
     ListBuffer(cardsOnZone.toList: _*)
   }
+
+  /**
+   *  To know the force of this zone
+   * @return the sum of the force of all the cards
+   */
+  def totalForce(): Int = {
+    var total = 0
+    cardsOnZone.foreach(c => total += c.get_Force())
+    total
+  }
 }
