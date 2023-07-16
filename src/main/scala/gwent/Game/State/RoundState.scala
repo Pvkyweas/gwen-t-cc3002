@@ -7,6 +7,10 @@ import cl.uchile.dcc.gwent.IPlayer
 
 import scala.collection.mutable.ListBuffer
 
+/**
+ * A class that represent the state between turns, the round state
+ * @param controller The controller that has this state
+ */
 class RoundState(controller: GameController) extends GameState(controller){
 
   override def getState: String = {"Round"}

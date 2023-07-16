@@ -7,7 +7,12 @@ import cl.uchile.dcc.gwent.IPlayer
 
 import scala.collection.mutable.ListBuffer
 
-class EndState(controller: GameController,lossers: ListBuffer[IPlayer]) extends GameState(controller){
+/**
+ * A class that represent the final state, the end game state
+ * @param controller The controller that has this state
+ * @param losers List with players that reach 0 gems
+ */
+class EndState(controller: GameController, losers: ListBuffer[IPlayer]) extends GameState(controller){
 
   override def getState: String = {"End"}
 }
