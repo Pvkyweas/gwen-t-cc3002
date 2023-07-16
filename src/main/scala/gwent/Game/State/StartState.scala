@@ -6,6 +6,8 @@ import gwent.Game.GameController
 import cl.uchile.dcc.gwent.Deck.Deck
 import cl.uchile.dcc.gwent.{Computer, IPlayer, Player}
 
+import scala.io.StdIn
+
 /** A class that represent the initial state, the start state.
  *
  * @param controller whose is the state
@@ -50,11 +52,21 @@ class StartState(controller: GameController) extends GameState(controller){
   }
 
   /**
-   *  Private method to create the player 1 when this is not defined
+   * Private method to create the player 1 when this is not defined
    * @return The player 1
    */
   private def createPlayer(): IPlayer = {
     val playerDeck: Deck = controller.createStandardDeck()
-    new Player("player", 2, playerDeck)
+
+    // Ask for the name desired
+    println("Ingresar el nombre que deseas utilizar: ")
+    val input = StdIn.readLine()
+    if (input.nonEmpty) {
+      new Player(input, 2, playerDeck)
+    }
+    // If the input is empty, use the default name
+    else {
+      new Player("player", 2, playerDeck)
+    }
   }
 }

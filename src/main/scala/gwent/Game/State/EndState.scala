@@ -14,5 +14,8 @@ import scala.collection.mutable.ListBuffer
  */
 class EndState(controller: GameController, losers: ListBuffer[IPlayer]) extends GameState(controller){
 
+  if (losers.size == 2) println("Empate")
+  else println(s"Ha perdido ${losers.head.get_Name()}")
+
   override def getState: String = {"End"}
 }

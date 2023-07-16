@@ -23,7 +23,7 @@ class Computer(private val name: String,
     // The visitor to know what card is a weather card
     val visitor: KnowTypeVisitor = new KnowTypeVisitor()
     // Filter
-    val weatherCards = cardlist.filterNot((c: ICard) => {
+    val weatherCards = cardlist.filter((c: ICard) => {
       c.accept(visitor)
       visitor.getResult() == "weather"
     })

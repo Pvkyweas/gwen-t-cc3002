@@ -33,7 +33,7 @@ import scala.collection.generic.IsSeq
  */
 class Player(private val name: String,
              private var gem_counter: Int = 2,
-             private val deck_cards: Deck) extends Observable with IPlayer {
+             private val deck_cards: Deck) extends Observable with IPlayer{
 
   /* Cards in hand*/
   protected val hand_cards: HandDeck = new HandDeck()
@@ -131,6 +131,11 @@ class Player(private val name: String,
    */
   def passTurn(): Unit = {
     notify(new PassTurnNotification(this))
+  }
+
+  override def Print(): Unit = {
+    println(s"Cartas en mazo: ${numCards_deck()}, gemas: $gem_counter")
+    hand_cards.Print()
   }
 
   override def equals(obj: Any): Boolean = {

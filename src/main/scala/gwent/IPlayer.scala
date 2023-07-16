@@ -8,7 +8,7 @@ import cl.uchile.dcc.gwent.Card.Unity.ICardUnity
 import cl.uchile.dcc.gwent.Card.Weather.ICardWeather
 import cl.uchile.dcc.gwent.Observer_Observable.IObservable
 
-trait IPlayer extends IObservable{
+trait IPlayer extends IObservable with IPrintable{
   def playCard(pos_card: Int): Unit
   def drawCard(num_cards: Int): Unit
   def lostRound(): Unit

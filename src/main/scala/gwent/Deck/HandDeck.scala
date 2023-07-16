@@ -2,6 +2,8 @@ package cl.uchile.dcc
 package gwent.Deck
 
 import cl.uchile.dcc.gwent.Card.ICard
+import cl.uchile.dcc.gwent.IPrintable
+
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
@@ -15,7 +17,7 @@ import scala.util.Random
  * @since 1.1
  * @version 1.0
  */
-class HandDeck extends AbstractDeck {
+class HandDeck extends AbstractDeck with IPrintable {
   /* The list in which the cards will be stored*/
   private val cards: ListBuffer[ICard] = ListBuffer()
 
@@ -66,6 +68,15 @@ class HandDeck extends AbstractDeck {
   override def getList(): List[ICard] = {
     val copyList = cards.clone()
     copyList.toList
+  }
+
+  override def Print(): Unit = {
+    val listToprint = getList()
+    var i = 0
+    for(c <- listToprint){
+      i+=1
+      println(s"$i => Jugar carta: ${c.get_Name()}, fuerza: ${c.get_Force()}, effecto: ${c.get_Effect()}")
+    }
   }
 
   override def equals(obj: Any): Boolean = {

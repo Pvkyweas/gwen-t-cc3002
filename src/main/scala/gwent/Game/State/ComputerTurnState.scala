@@ -27,19 +27,13 @@ class ComputerTurnState(controller: GameController, private val computer: Comput
     else opponentForce = controller.askSectionForce("Sección superior")
 
     // Own force in section
-    var ownForce: Int = controller.askSectionForce(computer.get_Section())
+    val ownForce: Int = controller.askSectionForce(computer.get_Section())
 
     // shuffle its Deck
     computer.shuffle()
 
     // To draw cards
-    val amount: Int = controller.askCanDraw(computer)
-    if (amount > 0){
-      // Obtain how many cards the computer has
-      val numCards: Int = computer.numCards_hand()
-      if (10 - numCards >= amount) computer.drawCard(amount)
-      else if (numCards != 10) computer.drawCard(10 - numCards)
-    }
+    drawCardIfCan(computer)
 
     // total force
     val totalForce: Int = ownForce + computer.getForceHand()
