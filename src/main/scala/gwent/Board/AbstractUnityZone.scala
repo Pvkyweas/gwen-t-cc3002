@@ -59,4 +59,15 @@ abstract class AbstractUnityZone[C<:ICardUnity](private val cardsOnZone:ListBuff
    * Method to delete all cards in zone
    */
   def clear(): Unit = {cardsOnZone.clear()}
+
+  /**
+   * Method to print the cards in the zone
+   * @param zone Name of the zone
+   */
+  protected def PrintCards(zone: String): Unit = {
+    println(s" ========== $zone ========== ")
+    for (c <- this.get_Card) {
+      println(s" carta: ${c.get_Name()} - fuerza: ${c.get_Force()}")
+    }
+  }
 }

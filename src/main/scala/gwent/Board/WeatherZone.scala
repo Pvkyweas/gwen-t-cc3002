@@ -42,4 +42,8 @@ class WeatherZone extends Observable with IZone[ICardWeather]{
    * Reset the cardSlot to a ClearWeatherCard
    */
   def clear(): Unit = cardSlot= new ClearWeatherCard("Soleado")
+
+  def Print(): Unit = {
+    println(s"Zona de clima: ${cardSlot.get_Name()}")
+  }
 }

@@ -27,6 +27,10 @@ class TurnState(controller: GameController, private val player: IPlayer) extends
    *            it depends on whose turn it is
    */
   override def update(): Unit = {
+
+    // Print the cards on board
+    controller.Print()
+
     // shuffle its Deck
     player.shuffle()
 

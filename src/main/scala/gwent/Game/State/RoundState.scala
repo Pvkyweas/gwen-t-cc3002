@@ -32,7 +32,10 @@ class RoundState(controller: GameController) extends GameState(controller){
 
     controller.clear()
 
-    if (!controller.aPlayerLost()) {controller.startTurns}
+    if (!controller.aPlayerLost()) {
+      println(" ------------  Cambio de ronda  ------------")
+      controller.startTurns
+    }
     else {controller.endGame}
   }
 

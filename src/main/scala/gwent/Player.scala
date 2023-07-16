@@ -134,7 +134,7 @@ class Player(private val name: String,
   }
 
   override def Print(): Unit = {
-    println(s"Cartas en mazo: ${numCards_deck()}, gemas: $gem_counter")
+    println(s"Cartas en mazo: ${numCards_deck()}, gemas: $gem_counter, sección: ${get_Section()}")
     hand_cards.Print()
   }
 

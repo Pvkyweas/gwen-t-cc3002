@@ -13,4 +13,7 @@ import gwent.Card.Unity.MeleeCard
  */
 class MeleeZone extends AbstractUnityZone[MeleeCard]{
 
+  def Print(): Unit = {
+    PrintCards("Zona Melee")
+  }
 }

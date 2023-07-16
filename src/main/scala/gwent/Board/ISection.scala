@@ -5,10 +5,11 @@ import gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
 
 import cl.uchile.dcc.gwent.Card.ICard
 import cl.uchile.dcc.gwent.Card.Weather.ICardWeather
+import cl.uchile.dcc.gwent.IPrintable
 
 import scala.collection.mutable.ListBuffer
 
-trait ISection {
+trait ISection extends IPrintable{
 def addOnMelee(c: MeleeCard): Unit
 def addOnRange(c: RangeCard): Unit
 def addOnSiege(c: SiegeCard): Unit

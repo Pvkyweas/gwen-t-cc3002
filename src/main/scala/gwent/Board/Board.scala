@@ -1,7 +1,7 @@
 package cl.uchile.dcc
 package gwent.Board
 
-import gwent.IPlayer
+import gwent.{IPlayer, IPrintable}
 
 import cl.uchile.dcc.gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
 import cl.uchile.dcc.gwent.Card.ICard
@@ -19,7 +19,7 @@ import scala.collection.mutable.ListBuffer
  * @since 1.2.3
  * @version 1.1
  */
-class Board(){
+class Board() extends IPrintable{
 
   /* Section for one of the two players, will be use for the player 1*/
   private val Section1: Section = new Section()
@@ -151,5 +151,11 @@ class Board(){
       value = Section2.totalForce()
     }
     value
+  }
+
+  def Print(): Unit = {
+    wZone.Print()
+    Section1.Print()
+    Section2.Print()
   }
 }

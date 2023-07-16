@@ -13,4 +13,7 @@ import gwent.Card.Unity.RangeCard
  */
 class RangeZone extends AbstractUnityZone[RangeCard] {
 
+  def Print(): Unit = {
+    PrintCards("Zona Rango")
+  }
 }

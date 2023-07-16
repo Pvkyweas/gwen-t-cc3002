@@ -21,6 +21,10 @@ class ComputerTurnState(controller: GameController, private val computer: Comput
    * it depends on whose turn it is
    */
   override def update(): Unit = {
+
+    // Print the cards on board
+    controller.Print()
+
     var opponentForce: Int = 0
     // Ask the force of the opponent
     if (computer.get_Section() == "Sección superior") opponentForce = controller.askSectionForce("Sección inferior")

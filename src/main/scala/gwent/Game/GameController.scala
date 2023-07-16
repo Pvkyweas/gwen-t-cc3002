@@ -5,7 +5,7 @@ import gwent.Game.State.{GameState, StartState}
 
 import cl.uchile.dcc.gwent.Board.Board
 import cl.uchile.dcc.gwent.Deck.Deck
-import cl.uchile.dcc.gwent.{Computer, IPlayer, Player}
+import cl.uchile.dcc.gwent.{Computer, IPlayer, IPrintable, Player}
 import cl.uchile.dcc.gwent.Observer_Observable.IObserver
 import cl.uchile.dcc.gwent.Observer_Observable.Notifications.INotification
 
@@ -14,7 +14,7 @@ import scala.collection.mutable.ListBuffer
 /**
  * A class that represent the Controller of the game, this class has the behaviour of the game
  */
-class GameController() extends IObserver{
+class GameController() extends IObserver with IPrintable{
   /* Variable that represent the state of the game, starts being a StartState*/
   private[Game] var state: GameState = new StartState(this)
 
@@ -197,4 +197,8 @@ class GameController() extends IObserver{
 
   // Observer's method
   def getNotification(content: INotification): Unit = {content.readToController(this)}
+
+  def Print(): Unit = {
+    board.Print()
+  }
 }

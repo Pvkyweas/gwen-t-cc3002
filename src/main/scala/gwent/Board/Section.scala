@@ -112,4 +112,11 @@ class Section() extends ObserverObservable with ISection{
     rZone.clear()
     sZone.clear()
   }
+
+  def Print(): Unit = {
+    println(s" ========== $whichSide ========== ")
+    mZone.Print()
+    rZone.Print()
+    sZone.Print()
+  }
 }

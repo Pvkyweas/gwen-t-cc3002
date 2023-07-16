@@ -13,4 +13,7 @@ import gwent.Card.Unity.SiegeCard
  */
 class SiegeZone extends AbstractUnityZone[SiegeCard]{
 
+  def Print(): Unit = {
+    PrintCards("Zona Asedio")
+  }
 }
