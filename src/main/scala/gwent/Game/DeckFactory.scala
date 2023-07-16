@@ -10,6 +10,7 @@ import cl.uchile.dcc.gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCa
 import cl.uchile.dcc.gwent.Card.Weather.{BitingFrostWeatherCard, ClearWeatherCard, ICardWeather, ImpenetrableFogWeatherCard, TorrentialRainWeatherCard}
 import cl.uchile.dcc.gwent.Exceptions.InvalidAmountCardDeckException
 
+import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
 /**
@@ -30,6 +31,7 @@ class DeckFactory {
     new MoralBoosterEffect,
     new CloseBondEffect
   )
+  private val noneEffect: IEffect = new NoneEffect
 
   /* Map with the possibles names and forces for cards*/
   private val cardsCombination: Map[String, (String, Int)] = Map(
@@ -49,6 +51,9 @@ class DeckFactory {
     "s4"-> ("Onagro", 18),
     "s5"-> ("Obús", 18)
   )
+
+  /* Map with cards already created */
+  private val createdCards: mutable.Map[String, ICardUnity] = mutable.Map()
 
   /** Method to create a Deck with the amount of cards desired
    *
@@ -90,25 +95,41 @@ class DeckFactory {
    */
   private def createCards(q: Int, qEffectM: Int, qEffectR: Int, qEffectS: Int): ListBuffer[ICardUnity] = {
     val list_result: ListBuffer[ICardUnity] = ListBuffer()
-    for (i <- 1 to q) {
-        var combination: Option[(String, Int)] = cardsCombination.get("m" + (Random.nextInt(5)+1).toString)
-        var values: (String, Int) = combination.get
-        if (i < qEffectM) list_result.addOne(new MeleeCard(values._1, Random.shuffle(listEffect).head, values._2))
-        else list_result.addOne(new MeleeCard(values._1, new NoneEffect, values._2))
-    }
-    for (i <- 1 to q) {
-      var combination: Option[(String, Int)] = cardsCombination.get("r" + (Random.nextInt(5)+1).toString)
-      var values: (String, Int) = combination.get
-      if (i < qEffectM) list_result.addOne(new RangeCard(values._1, Random.shuffle(listEffect).head, values._2))
-      else list_result.addOne(new RangeCard(values._1, new NoneEffect, values._2))
-    }
-    for (i <- 1 to q) {
-      var combination: Option[(String, Int)] = cardsCombination.get("s" + (Random.nextInt(5)+1).toString)
-      var values: (String, Int) = combination.get
-      if (i < qEffectM) list_result.addOne(new SiegeCard(values._1, Random.shuffle(listEffect).head, values._2))
-      else list_result.addOne(new SiegeCard(values._1, new NoneEffect, values._2))
-    }
+    addCards(q, qEffectM, "m", list_result)
+    addCards(q, qEffectR, "r", list_result)
+    addCards(q, qEffectS, "s", list_result)
     list_result
+  }
+
+  /**
+   *  Method to add random cards to a ListBuffer, if the card doesn't exist then add to the map with all cards
+   * @param q Amount of cards to create
+   * @param qEffect Amount to know how many cards has an effect
+   * @param tpe To know if it has to create melee, range or siege card
+   * @param list List to add the created cards
+   */
+  private def addCards(q: Int, qEffect: Int,tpe: String , list: ListBuffer[ICardUnity]): Unit = {
+    for (i <- 1 to q) {
+      val combination: (String, Int) = cardsCombination(tpe + (Random.nextInt(5) + 1).toString)
+      val effect: IEffect = noneEffect
+      if (i < qEffect) {
+        val effect: IEffect = Random.shuffle(listEffect).head
+      }
+      val key = combination._1 + "-" + combination._2 + "-" + effect.get_effect()
+      if (!createdCards.contains(key)) {
+        var newC: ICardUnity = new MeleeCard("",noneEffect, 1) // creates a card that will be replaced
+        if (tpe == "m") {
+          newC = new MeleeCard(combination._1, effect, combination._2)
+        }
+        else if (tpe == "r") {
+          newC = new RangeCard(combination._1, effect, combination._2)
+        } else {
+          newC = new SiegeCard(combination._1, effect, combination._2)
+        }
+        createdCards += (key -> newC)
+      }
+      list.addOne(createdCards(key))
+    }
   }
 
   /** method to decompose an integer value into 3 integer values that add up to the original value
