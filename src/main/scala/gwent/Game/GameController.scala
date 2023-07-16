@@ -29,8 +29,10 @@ class GameController() extends IObserver{
 
   /* Player 1*/
   private var player1: Option[IPlayer] = None
+  private var p1CanDraw: Int = 0 // How many cards can draw p1
   /* Computer*/
   private var computer: Option[Computer] = None
+  private var cCanDraw: Int = 0 // How many cards can draw computer
 
   /**
    *  Constructor to when the game controller is initialize with a player 1
@@ -78,6 +80,8 @@ class GameController() extends IObserver{
   private[Game] def initialDraw(): Unit = {
     player1.foreach(p => p.drawCard(10))
     computer.foreach(c => c.drawCard(10))
+    p1CanDraw = 3
+    cCanDraw = 3
   }
 
   /**
@@ -142,8 +146,41 @@ class GameController() extends IObserver{
 
   /**
    * Method to reset the board, delete all cards in it
+   * and reset the amount of cards can draw each player
    */
-  private[Game] def clearBoard(): Unit = board.clear()
+  private[Game] def clear(): Unit = {
+    board.clear()
+    p1CanDraw = 3
+    cCanDraw = 3
+  }
+
+  /**
+   * Method to know the force of a specific section
+   * @param s side of the section that want to know its force
+   * @return Value of the force
+   */
+  private[Game] def askSectionForce(s: String): Int = {board.getForceOfSection(s)}
+
+  /**
+   * As each player can only draw 3 cards for each round, this is used to know how many cards
+   * the player still can draw
+   * @param p player who draw
+   * @param amount amount of cards drawn
+   */
+  def someDraw(p: IPlayer, amount: Int): Unit = {
+    if (p.equals(player1.get)) p1CanDraw -= amount
+    else if (p.equals(computer.get)) cCanDraw -= amount
+  }
+
+  /**
+   * To know how many cards can draw a player
+   * @param p player who wants to know
+   * @return the amount of cards that the player can draw
+   */
+  def askCanDraw(p: IPlayer): Int = {
+    if (p.equals (player1.get) ) p1CanDraw
+    else cCanDraw
+  }
 
   /**
    * Add a player with 0 gems to noGemsList

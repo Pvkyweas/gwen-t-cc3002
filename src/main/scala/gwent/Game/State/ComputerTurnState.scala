@@ -20,7 +20,37 @@ class ComputerTurnState(controller: GameController, private val computer: Comput
    * -Is pass -> turn of the next player o RoundState,
    * it depends on whose turn it is
    */
-  override def update(): Unit = {}
+  override def update(): Unit = {
+    var opponentForce: Int = 0
+    // Ask the force of the opponent
+    if (computer.get_Section() == "Sección superior") opponentForce = controller.askSectionForce("Sección inferior")
+    else opponentForce = controller.askSectionForce("Sección superior")
+
+    // Own force in section
+    var ownForce: Int = controller.askSectionForce(computer.get_Section())
+
+    // shuffle its Deck
+    computer.shuffle()
+
+    // To draw cards
+    val amount: Int = controller.askCanDraw(computer)
+    if (amount > 0){
+      // Obtain how many cards the computer has
+      val numCards: Int = computer.numCards_hand()
+      if (10 - numCards >= amount) computer.drawCard(amount)
+      else if (numCards != 10) computer.drawCard(10 - numCards)
+    }
+
+    // total force
+    val totalForce: Int = ownForce + computer.getForceHand()
+
+    // Decide what to do
+    if (computer.numCards_hand() != 0) {
+      if (totalForce > opponentForce) computer.playRandomCard()
+      else computer.playRandomWeather()
+    }
+    else computer.passTurn()
+  }
 
   /**
    * Method that transitions to the turn state of the same player, 

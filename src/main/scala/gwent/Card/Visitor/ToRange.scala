@@ -1,5 +1,7 @@
 package cl.uchile.dcc
-package gwent.Card.Effect.Operations
+package gwent.Card.Visitor
+
+import gwent.Card.Effect.Operations.{IOperation, NoOperation}
 import gwent.Card.ICard
 import gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
 

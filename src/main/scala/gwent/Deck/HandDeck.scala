@@ -63,7 +63,7 @@ class HandDeck extends AbstractDeck {
    *
    * @return List of cards
    */
-  override protected def getList(): List[ICard] = {
+  override def getList(): List[ICard] = {
     val copyList = cards.clone()
     copyList.toList
   }

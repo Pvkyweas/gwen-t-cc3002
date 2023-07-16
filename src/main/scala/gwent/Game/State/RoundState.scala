@@ -26,7 +26,7 @@ class RoundState(controller: GameController) extends GameState(controller){
 
     controller.aPlayerLost()
 
-    controller.clearBoard()
+    controller.clear()
 
     if (!controller.aPlayerLost()) {controller.startTurns}
     else {controller.endGame}

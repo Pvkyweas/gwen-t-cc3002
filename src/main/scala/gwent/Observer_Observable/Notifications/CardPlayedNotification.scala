@@ -13,7 +13,7 @@ class CardPlayedNotification(content: IPlayer) extends AbstractNotification {
   /** Method to tell to the game controller that a player has played a card
    * this method call the method playCard of game controller
    *
-   * @param game_controller who has played a card
+   * @param game_controller who will be notified that someone has played a card
    */
   override def readToController(game_controller: GameController): Unit = {game_controller.playCard(content)}
 }

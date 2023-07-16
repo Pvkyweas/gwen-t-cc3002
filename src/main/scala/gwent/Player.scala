@@ -9,7 +9,7 @@ import gwent.Board.{Board, ISection}
 import cl.uchile.dcc.gwent.Card.Unity.ICardUnity
 import cl.uchile.dcc.gwent.Card.Weather.ICardWeather
 import cl.uchile.dcc.gwent.Exceptions.BoardNotFoundException
-import cl.uchile.dcc.gwent.Observer_Observable.Notifications.{CardPlayedNotification, NoGemsNotification, PassTurnNotification}
+import cl.uchile.dcc.gwent.Observer_Observable.Notifications.{CardPlayedNotification, DrawNotification, NoGemsNotification, PassTurnNotification}
 import cl.uchile.dcc.gwent.Observer_Observable.Observable
 
 import scala.collection.generic.IsSeq
@@ -36,7 +36,7 @@ class Player(private val name: String,
              private val deck_cards: Deck) extends Observable with IPlayer {
 
   /* Cards in hand*/
-  private val hand_cards: HandDeck = new HandDeck()
+  protected val hand_cards: HandDeck = new HandDeck()
 
   /* Section in which the player will play their cards*/
   private var section_board: Option[ISection] = None
@@ -74,7 +74,10 @@ class Player(private val name: String,
    * @param num_cards number of cards to draw
    */
   def drawCard(num_cards: Int): Unit = {
+    if (deck_cards.get_Size() != 0) {
       hand_cards.add_multipleCard(deck_cards.draw_multipleCard(num_cards))
+      notify(new DrawNotification(this, num_cards))
+    }
   }
 
   /** subtract 1 from the gem counter, if the gem_counter is 0 then notify to the game controller */

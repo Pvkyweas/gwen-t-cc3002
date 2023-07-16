@@ -63,5 +63,11 @@ class ControllerPlayerInteractionTest extends FunSuite{
     assert(control.getState == "End")
   }
 
-  test("update de computer turn hace cosas"){}
+  test("update de computer turn realiza las acciones que le corresponden y transiciona a ComputerTurn o Round"){
+    control.startGame
+    control.passTurn // Pasa a el turno de computer
+    control.update() // Hace sus cosas (robar cartas si puede y jugarlas si puede)
+    // Computer turn puede pasar a Computer turn o Round, pero la probabilidad de que pase a Round es muy baja
+    assert(control.getState == "Turn of: Computadora" || control.getState == "Round")
+  }
 }

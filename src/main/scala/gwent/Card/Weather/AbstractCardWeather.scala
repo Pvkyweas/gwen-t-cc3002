@@ -4,8 +4,8 @@ package gwent.Card.Weather
 import gwent.Card.ICard
 import gwent.Board.{AbstractUnityZone, Board, ISection, IZone, MeleeZone, RangeZone, SiegeZone}
 import gwent.Card.Effect.IEffect
-
 import cl.uchile.dcc.gwent.Card.Unity.{ICardUnity, MeleeCard, RangeCard, SiegeCard}
+import cl.uchile.dcc.gwent.Card.Visitor.ICardVisitor
 import cl.uchile.dcc.gwent.IPlayer
 
 import scala.collection.mutable.ListBuffer
@@ -38,6 +38,20 @@ abstract class AbstractCardWeather(private val name: String, private val effect:
    * @tparam C Type of the cards on the zone, it can be MeleeCard, RangeCard or SiegeCard
    */
   def applyYourEffect[C<:ICardUnity](where: AbstractUnityZone[C]): Unit = {effect.apply(this, where.get_Card)}
+
+  /** Method to accept a visitor object
+   * this be used to know if a card is a weather card
+   *
+   * @param visitor Visitor object
+   */
+  def accept(visitor: ICardVisitor): Unit = ???
+
+  /**
+   * Return the force of the card, in this case is always 0
+   * @param showBruteForce Type of force, unused by weather card
+   * @return 0
+   */
+  def get_Force(showBruteForce: Boolean): Int = 0
 
   override def equals(obj: Any): Boolean = {
     if (this.getClass.getName == obj.getClass.getName) {

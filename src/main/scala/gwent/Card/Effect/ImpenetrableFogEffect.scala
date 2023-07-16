@@ -3,7 +3,8 @@ package gwent.Card.Effect
 
 import gwent.Card.Unity.{MeleeCard, RangeCard, SiegeCard}
 
-import cl.uchile.dcc.gwent.Card.Effect.Operations.{IOperation, ResetForce, SetForce, ToRange}
+import cl.uchile.dcc.gwent.Card.Effect.Operations.{IOperation, ResetForce, SetForce}
+import cl.uchile.dcc.gwent.Card.Visitor.ToRange
 import cl.uchile.dcc.gwent.Card.Weather.ICardWeather
 
 import scala.collection.mutable.ListBuffer

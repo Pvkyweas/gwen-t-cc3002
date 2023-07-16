@@ -5,8 +5,7 @@ import gwent.Card.Unity.ICardUnity
 import gwent.Board.{AbstractUnityZone, Board, ISection, IZone}
 import gwent.Card.Effect.IEffect
 import gwent.Card.ICard
-
-import cl.uchile.dcc.gwent.Card.Effect.Operations.ICardVisitor
+import cl.uchile.dcc.gwent.Card.Visitor.ICardVisitor
 import cl.uchile.dcc.gwent.IPlayer
 
 import scala.collection.mutable.ListBuffer

@@ -1,7 +1,8 @@
 package cl.uchile.dcc
-package gwent.Card.Effect.Operations
-
+package gwent.Card.Visitor
 import gwent.Card.Unity.{MeleeCard, RangeCard, SiegeCard}
+
+import cl.uchile.dcc.gwent.Card.Weather.ICardWeather
 
 import scala.collection.mutable.ListBuffer
 
@@ -41,4 +42,10 @@ abstract class AbstractCardVisitor extends ICardVisitor {
   def visitSiege(card: SiegeCard): Unit = {
     sieges.addOne(card)
   }
+
+  /**
+   *  Method to visit weather card, this does nothing
+   * @param card the visited weather card
+   */
+  def visitWeather(card: ICardWeather): Unit = {}
 }

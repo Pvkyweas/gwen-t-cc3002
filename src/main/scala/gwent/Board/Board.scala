@@ -123,7 +123,7 @@ class Board(){
    */
   def getSectionWithLessForce(): List[String] = {
     val s1force = Section1.totalForce()
-    val s2force =Section2.totalForce()
+    val s2force = Section2.totalForce()
     if (s1force > s2force) {List(Section2.get_side())}
     else if (s1force < s2force) {List(Section1.get_side())}
     else  {List(Section1.get_side(), Section2.get_side())}
@@ -135,5 +135,21 @@ class Board(){
   def clear(): Unit = {
     Section1.clear()
     Section2.clear()
+  }
+
+  /**
+   * Method to know the force on a specific section
+   * @param s Section which want to know its force, its a string
+   * @return The value of the force
+   */
+  def getForceOfSection(s: String): Int = {
+    var value = 0
+    if (s == "Sección superior") {
+      value = Section1.totalForce()
+    }
+    else if (s == "Sección inferior") {
+      value = Section2.totalForce()
+    }
+    value
   }
 }

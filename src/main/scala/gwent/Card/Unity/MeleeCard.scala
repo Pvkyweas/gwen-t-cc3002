@@ -4,7 +4,7 @@ package gwent.Card.Unity
 import gwent.Card.Effect.IEffect
 
 import cl.uchile.dcc.gwent.Board.ISection
-import cl.uchile.dcc.gwent.Card.Effect.Operations.ICardVisitor
+import cl.uchile.dcc.gwent.Card.Visitor.ICardVisitor
 
 import scala.collection.mutable.ListBuffer
 
