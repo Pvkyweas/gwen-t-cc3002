@@ -44,7 +44,7 @@ abstract class AbstractCardWeather(private val name: String, private val effect:
    *
    * @param visitor Visitor object
    */
-  def accept(visitor: ICardVisitor): Unit = ???
+  def accept(visitor: ICardVisitor): Unit = {visitor.visitWeather(this)}
 
   /**
    * Return the force of the card, in this case is always 0
