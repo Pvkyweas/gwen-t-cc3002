@@ -70,15 +70,11 @@ Cuando un jugador quiere jugar una carta, se siguen los siguiente pasos:
 2. Las cartas llamaran al jugador y utilizaran el metodo sobrecargado playMe del jugador pasandose a si mismas como input, si la carta es de clima (AbstractCardWeather) entonces el jugador llamara al metodo playOnBoard y pasara como input el parametro Board, si es una carta de unidad (ICardUnity) entonces llamara al metodo playOnSection y pasara su sección como parametro.
 3. Las cartas llamaran al metodo correspondiente de la sección o el tablero según corresponda para agregarse, addOnW para las de clima y addOnMelee, addOnRange o addOnSiege para las de unidad.
 
-### Diagrama UML de la implementación
-
-![UML](https://github.com/dcc-cc3002/gwen-t-Pvkyweas/assets/112279911/b3011171-5543-4069-a310-382c606444b4)
-
 ### Diagrama de estados
 
-![image](https://github.com/dcc-cc3002/gwen-t-Pvkyweas/assets/112279911/27d3470a-c296-4c52-ab7f-ee2c8ba83cc1)
+![image](https://github.com/dcc-cc3002/gwen-t-Pvkyweas/assets/112279911/288f67fc-3adc-48d0-8f89-53ff7ea5f4cc)
 
-* InicioPartida: Le indican a cada jugador que robe 10 cartas y da comienzo a la primera ronda.
+* InicioPartida: Le indican a cada jugador que robe 10 cartas y da comienzo a la primera ronda al pasar al turno del jugador 1.
 * estadoRonda:
   1. Revisa quien tiene más fuerza en el tablero.
   2. Quien tenga menos fuerza le indica que perdio la ronda (en caso de empate, ambos pierden).
@@ -88,9 +84,26 @@ Cuando un jugador quiere jugar una carta, se siguen los siguiente pasos:
   2. Se pueden jugar cartas o pasar turno, si juega una carta vuelve a iniciar su turno, si pasa turno entonces comienza el turno del siguiente jugador.
 * FinPartida: Se indica quien gana o si hubo empate.
 
+El turno de la computadora (ComputerTurnState) puede hacer las mismas cosas que un turno normal pero siguiendo el comportamiento de la computadora.
+
 ### GameController
 
-El controlador del juego tiene el sistema de estados y esta suscrito al jugador.
+El controlador del juego tiene el sistema de estados y esta suscrito a los jugadores. Puede ser iniciado con un jugador o sin este, cuando se agrega un jugador, el controlador se suscribe a este. Hice que el controlador tuviera los metodos para avanzar en el juego (como indicar cuando un jugador pierde una gema, hacer que los jugadores roben las 10 cartas al inicio de la partida, etc.) los cuales en su mayoria serian privados y solo llamados por los estados, esto por que fue la forma más simple de evitar posibles errores.
+
+Agregue un metodo llamado update para los estados que lo requieran como lo son los turnos y la ronda, esto debido a que estos estados realizan varias acciones y no siempre viene uno despues del otro (por ej.: despues de un turno puede venir otro turno o una ronda), de esta forma es más simple hacer funcionar el jueguito.
+
+### Computadora
+Para la computadora, cree un turno especial llamado ComputerTurnState, esto debido a que el turno de la computadora tiene un comportamiento especifico y no tiene interacción con el jugador. De igual forma, cree una clase llamada Computer que hereda de Player para implementar metodos adicionales que son necesarios para la computadora, tales como el jugar una carta aleatoria o una carta de clima aleatoria.
+
+### Print de cosas importantes
+Hice un trait llamado IPrintable para indicar que clases tienen un metodo para hacer print (Print() <- no se me ocurrio una mejor forma de llamarlo xd) esto para imprimir en la consola cosas que son relevantes para el jugador tales como: 
+
+* Indicar cuantas gemas le quedan al jugador
+* Saber que sección le corresponde al jugador
+* Que cartas se encuentran en el tablero
+* Que cartas se pueden jugar
+* Cuando hay un cambio de ronda
+* Quien pierde
 
 ### Observadores y notificaciones
 
@@ -98,9 +111,6 @@ Las clases observadores y observables funcionan igual que fueron mencionados en 
 
 Para lo que son las notificaciones, considerando que para reutilizar las clases de observadores y observer creadas, hice que cada notificación fuese un objeto y estas tendrian un metodo para que se "lean" a los observadores, de esta forma me ahorro crear un metodo para cada tipo de notificacion y cada tipo de observador y complejizar el metodo getNotification. Actualmente los unicos observadores que hacen algo con las notificaciones son el GameController y las zonas.
 
-**NOTA**: 
-1. Para lo que son los estados, supongo que la creación de mazos y las cosas que arman la partida (como crear al jugador y el tablero) se realizaran antes al inicio de la partida.
-2. No modifique las zonas de unidad para que fuesen listas dentro de las secciones por que no se si en el futuro las utilizaré para algo y de todas formas ya funcionan bien, además ya 
-   apliqué lo de los observadores que si se deseara añadir un efecto que aplique desde una zona de unidad a otra, seria crear el efecto y ponerlo en una carta. (Claramente no me dio flojera 
-   cambiar la implementación actual).
-3. Quizas si termine cambiando lo del punto 2 si no terminó haciendo nada útil.
+### Diagrama UML de la implementación
+
+![TareaMemes](https://github.com/dcc-cc3002/gwen-t-Pvkyweas/assets/112279911/0535ad8e-b554-45db-8845-58dee42bdf18)
