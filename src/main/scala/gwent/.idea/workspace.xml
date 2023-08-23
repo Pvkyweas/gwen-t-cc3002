@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1f37b634-4cf5-48e2-8002-e9a30efa2395" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/checkstyle-idea.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/checkstyle-idea.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/git_toolbox_prj.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/git_toolbox_prj.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/libraries/sbt__junit_junit_4_13_2_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/libraries/sbt__junit_junit_4_13_2_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/libraries/sbt__org_hamcrest_hamcrest_core_1_3_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/libraries/sbt__org_hamcrest_hamcrest_core_1_3_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/libraries/sbt__org_scala_lang_scala_library_2_13_10_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/libraries/sbt__org_scala_lang_scala_library_2_13_10_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/libraries/sbt__org_scala_sbt_test_interface_1_0_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/libraries/sbt__org_scala_sbt_test_interface_1_0_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/libraries/sbt__org_scalameta_junit_interface_0_7_29_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/libraries/sbt__org_scalameta_junit_interface_0_7_29_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/libraries/sbt__org_scalameta_munit_3_0_7_29_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/libraries/sbt__org_scalameta_munit_3_0_7_29_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/modules/gwent-build.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/modules/gwent-build.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/modules/gwent.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/modules/gwent.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/sbt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/sbt.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/scala_compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/scala_compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/scala_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/scala_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../build.sbt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../build.sbt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../project/build.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../project/build.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../project/plugins.sbt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../project/plugins.sbt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board/AbstractUnityZone.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Board/AbstractUnityZone.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board/Board.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Board/Board.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board/ISection.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Board/ISection.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board/IZone.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Board/IZone.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board/MeleeZone.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Board/MeleeZone.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board/RangeZone.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Board/RangeZone.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board/Section.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Board/Section.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board/SiegeZone.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Board/SiegeZone.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board/WeatherZone.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Board/WeatherZone.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Effect/BitingFrostEffect.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Effect/BitingFrostEffect.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Effect/ClearWeatherEffect.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Effect/ClearWeatherEffect.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Effect/CloseBondEffect.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Effect/CloseBondEffect.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Effect/IEffect.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Effect/IEffect.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Effect/ImpenetrableFogEffect.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Effect/ImpenetrableFogEffect.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Effect/MoralBoosterEffect.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Effect/MoralBoosterEffect.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Effect/NoneEffect.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Effect/NoneEffect.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Effect/TorrentialRainEffect.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Effect/TorrentialRainEffect.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/ICard.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/ICard.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Unity/AbstractCardUnity.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Unity/AbstractCardUnity.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Unity/ICardUnity.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Unity/ICardUnity.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Unity/MeleeCard.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Unity/MeleeCard.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Unity/RangeCard.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Unity/RangeCard.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Unity/SiegeCard.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Unity/SiegeCard.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Weather/AbstractCardWeather.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Weather/AbstractCardWeather.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Weather/BitingFrostWeatherCard.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Weather/BitingFrostWeatherCard.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Weather/ClearWeatherCard.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Weather/ClearWeatherCard.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Weather/ImpenetrableFogWeatherCard.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Weather/ImpenetrableFogWeatherCard.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Card/Weather/TorrentialRainWeatherCard.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Card/Weather/TorrentialRainWeatherCard.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Deck/AbstractDeck.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Deck/AbstractDeck.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Deck/Deck.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Deck/Deck.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Deck/HandDeck.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Deck/HandDeck.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IPlayer.scala" beforeDir="false" afterPath="$PROJECT_DIR$/IPlayer.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Player.scala" beforeDir="false" afterPath="$PROJECT_DIR$/Player.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../test/scala/CardTests/BasicCardTest.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../../../test/scala/CardTests/BasicCardTest.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../test/scala/CardTests/CardApplyEffectTest.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../../../test/scala/CardTests/CardApplyEffectTest.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../test/scala/DeckTest.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../../../test/scala/DeckTest.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../test/scala/PlayCardOnBoardTest.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../../../test/scala/PlayCardOnBoardTest.scala" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../test/scala/PlayerTest.scala" beforeDir="false" afterPath="$PROJECT_DIR$/../../../test/scala/PlayerTest.scala" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectId" id="2QUk2yzFvfA1uPiJpAC50BPzaec" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1f37b634-4cf5-48e2-8002-e9a30efa2395" name="Changes" comment="" />
+      <created>1685415344627</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685415344627</updated>
+      <workItem from="1685415345835" duration="13000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
